@@ -390,7 +390,7 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-window.APP = { mode: <?!= JSON.stringify(mode) ?>, url: <?!= JSON.stringify(appUrl) ?> };
+/*BOOT*/
 window.APP = window.APP || { mode: (location.hash === "#student" ? "student" : "teacher"), url: "" };
 /* GitHub + Google: paste your Apps Script Web app URL (ends in /exec) between the quotes to switch on live phone voting. */
 window.API_URL = window.API_URL || "https://script.google.com/a/macros/christuniversity.in/s/AKfycbxfFZSEkOjWvI9Szq0_Mfe8aDFCbZNOAZyVF7VJHOSChfioNrAI6cVpz7M7QzS2CLp7kQ/exec";
