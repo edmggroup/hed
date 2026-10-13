@@ -131,6 +131,12 @@ input[type=text],input[type=number],select,textarea{font:inherit;color:var(--ink
 .lots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .lot{position:relative;border:0;border-radius:18px;padding:14px 12px 12px;background:var(--paper);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:transform .15s}
 .lot:hover:not([disabled]){transform:translateY(-3px) rotate(-1deg)}
+.lot.back{background:linear-gradient(150deg,#1B63A8,#082F57);color:#fff;justify-content:center;min-height:120px}
+.lot.back b{font-family:var(--display);font-size:2.8rem;line-height:1;color:var(--gold-hi)}
+.lot.back small{color:#C9D8EC;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.72rem}
+.lot.back::before{content:"";position:absolute;inset:7px;border:1.5px dashed rgba(244,194,78,.45);border-radius:12px;pointer-events:none}
+.lot.flip{animation:flipin .65s cubic-bezier(.2,.8,.2,1)}
+@keyframes flipin{0%{transform:perspective(600px) rotateY(90deg) scale(.9)}60%{transform:perspective(600px) rotateY(-8deg) scale(1.04)}100%{transform:none}}
 .lot b{font-family:var(--display);font-size:1.12rem;line-height:1.1}
 .lot small{color:var(--muted);font-size:.8rem;line-height:1.25}
 .lot.on{outline:3px solid var(--gold)}
@@ -230,6 +236,123 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
 .spot .line{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:start;font-size:clamp(1.1rem,2.4vw,1.5rem)}
 .spot .line b{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;font-family:var(--display);font-size:1.7rem}
 :fullscreen body,:fullscreen{background:var(--bg)}
+
+.setup2{background:var(--sky);border-radius:20px;padding:18px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px}
+@media (max-width:760px){.setup2{grid-template-columns:1fr}}
+.setup2 .scol{display:flex;flex-direction:column;gap:10px;min-width:0}
+.teamedit{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.trow{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 6px 4px 10px}
+.trow i{width:14px;height:14px;border-radius:50%;flex:0 0 auto}
+.trow input{border:0;padding:7px 4px;background:transparent;min-width:0}
+.trow button{border:0;background:transparent;font-size:1.2rem;line-height:1;color:var(--muted);padding:4px 8px;border-radius:8px}
+.trow button:hover{background:var(--rose);color:var(--red)}
+.chips2{display:flex;gap:8px;flex-wrap:wrap}
+.chips2 button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font-weight:600;font-variant-numeric:tabular-nums}
+.chips2 button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#1d1503}
+.inline2{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;flex-wrap:wrap}
+.inline2 input{width:140px}
+.bidrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bidrow .raise{display:contents}
+.custombid{display:flex;gap:8px;align-items:center}
+.custombid input{width:150px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:7px 10px}
+.custombid input::placeholder{color:#C9D8EC}
+.present .custombid input{padding:5px 8px;width:130px}
+.present .setup2{position:absolute;z-index:5;left:20px;right:20px;top:62px;box-shadow:var(--shadow);max-height:calc(100% - 80px);overflow:auto}
+.live .connectbox:not(.force){display:none!important}
+#livechip{cursor:pointer}
+/* ---------- projector mode: everything on one screen ---------- */
+html,body{margin:0}
+.present .block .kicker{display:none}
+.present .block .leader{font-size:.9rem}
+.present .teams{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}
+.present .block .call{font-size:1.1rem;min-height:1.2em}
+.present .block>.row:last-of-type{margin-top:auto}
+@media (max-height:780px){
+  .present .side>.joincard:not(.live-only){display:none}
+  .present #lotImg img{width:40px;height:40px}
+  .present .block .lotname{font-size:1.35rem}
+  .present .block .bid{font-size:2.1rem}
+  .present .block{gap:6px;padding:12px 16px}
+  .present .team .tn{font-size:.85rem}
+  .present .raise button{padding:6px 9px;font-size:.88rem}
+  .present .gavel{display:none}
+  .present #lotDesc{display:none}
+  .present .teams{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+  .present .team{padding:3px 8px}
+  .present .team .w{font-size:.95rem}
+  .present .raise{gap:6px}
+  .present .custombid .btn{padding:5px 10px}
+}
+body.present{overflow:hidden;padding-inline:14px}
+.present .wrap{max-width:none;height:100vh;height:100dvh;padding-block:10px;gap:10px;display:flex;flex-direction:column}
+.present header.top{flex:0 0 auto}
+.present .seal{width:38px;height:38px;border-radius:11px}
+.present .brand small{display:none}
+.present .brand h1{font-size:1.35rem}
+.present .doors{flex:0 0 auto;gap:8px}
+.present .door{padding:6px 12px;border-radius:14px;box-shadow:none;border-width:2px}
+.present .door .ic{width:34px;height:34px;border-radius:10px}
+.present .door .ic img{width:24px;height:24px}
+.present .door b{font-size:1.05rem}
+.present .door span{display:none}
+.present .hint,.present .wrap>p.muted{display:none!important}
+.present .stage{flex:1 1 auto;min-height:0;padding:14px 20px;gap:10px;border-radius:20px;overflow:hidden;position:relative}
+.present .head{flex:0 0 auto;align-items:center}
+.present .head p,.present .head .kicker{display:none}
+.present .head h2{font-size:1.7rem}
+/* poll */
+.present section[data-tab="poll"] .qpick button{padding:4px 11px;font-size:.85rem}
+.present .wctools{font-size:.82rem}
+.present .wctools select{padding:3px 8px}
+.present .qbuild{flex:0 0 auto}
+.present .poll-layout{flex:1 1 auto;min-height:0;grid-template-columns:minmax(0,3fr) minmax(220px,1fr)}
+.present .screen{min-height:0;padding:16px 22px;gap:8px}
+.present .screen .q{font-size:clamp(1.3rem,2.6vw,2.2rem)}
+.present .wcbox{height:auto;min-height:0;flex:1 1 auto}
+.present .bars{min-height:0;gap:8px}
+.present .pbar .track{height:26px}
+.present .side{min-height:0;overflow:hidden;gap:10px}
+.present .joincard{padding:12px;gap:6px}
+.present .joincard #qr svg{width:min(150px,22vh)!important;height:min(150px,22vh)!important}
+.present #joinUrl{font-size:.72rem!important}
+.present .addbox{padding:12px}
+/* auction */
+.present .wallets{flex:0 0 auto;gap:8px}
+.present .wallet{padding:6px 12px;gap:3px;box-shadow:none;border:1px solid var(--line)}
+.present .wallet .amt{font-size:1.15rem}
+.present .wallet .muted{display:none}
+.present .auction{flex:1 1 auto;min-height:0;grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr)}
+.present .auction>div:first-child{min-height:0;display:flex;flex-direction:column}
+.present .lots{flex:1 1 auto;min-height:0;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:8px}
+.present .lot{padding:6px;gap:2px;justify-content:center;box-shadow:none;border:1px solid var(--line)}
+.present .lot img.e{width:min(40px,6vh);height:min(40px,6vh)}
+.present .lot b{font-size:.98rem}
+.present .lot.back{min-height:0}
+.present .lot.back b{font-size:2rem}
+.present .lot small:not(:last-child){display:none}
+.present .lot.sold::after{font-size:.78rem;top:50%}
+.present .history{display:none}
+.present .block{min-height:0;padding:14px 18px;gap:8px;overflow:hidden}
+.present .block .lotname{font-size:1.6rem}
+.present #lotImg img{width:52px;height:52px}
+.present .block .bid{font-size:clamp(2rem,6vh,3.2rem)}
+.present .block .kicker{font-size:.68rem}
+.present .team{padding:5px 8px}
+.present .team .w{font-size:1.05rem}
+.present .raise button{padding:7px 11px}
+.present .gavel img{width:40px;height:40px}
+.present #aSetup{position:absolute;z-index:5;left:20px;right:20px;top:62px;box-shadow:var(--shadow)}
+.present #aResults{position:absolute;inset:60px 16px 16px;z-index:6;background:var(--card);border-radius:18px;padding:14px;overflow:auto;box-shadow:var(--shadow)}
+/* exit */
+.present .exit{flex:1 1 auto;min-height:0}
+.present .ticket{min-height:0;padding:14px 18px;gap:8px;overflow:hidden}
+.present .ticket .tline{grid-template-columns:48px minmax(0,1fr);gap:10px}
+.present .ticket .num{width:48px;height:48px;font-size:1.7rem;border-radius:14px}
+.present .ticket textarea{min-height:0;height:min(64px,8vh);margin-top:3px;padding:7px 10px}
+.present .moods button{width:64px;padding:4px}
+.present .moods img{width:26px;height:26px}
+.present .wall{min-height:0;padding:16px;gap:10px;overflow:hidden}
+.present .notes{overflow:hidden;min-height:0}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -241,7 +364,7 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
   <header class="top">
     <div class="brand">
       <div class="seal" id="seal"></div>
-      <div><small>Holistic Education · Session 2 · Self-Control</small><h1>Self-Control Studio</h1></div>
+      <div><small>Holistic Education - Self Determination and Self Control</small><h1>Self-Control Studio</h1></div>
     </div>
     <div class="tools">
       <span class="livechip" id="livechip"><i></i><span id="livetext">Classroom mode</span></span>
@@ -292,8 +415,16 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
       <div class="side teacher-only">
         <div class="joincard live-only" style="flex-direction:column">
           <div class="kicker">Join on your phone</div>
-          <div class="qr" id="qr"></div>
+          <button class="qr" id="qr" type="button" title="Show big QR" style="border:0;cursor:zoom-in"></button>
           <div class="muted" id="joinUrl" style="word-break:break-all;font-size:.85rem"></div>
+          <div class="row"><button class="btn small" id="qrBig" type="button">Show big QR</button><button class="btn ghost small" id="qrEdit" type="button">Change link</button></div>
+          <form id="qrForm" class="row" hidden style="flex-wrap:nowrap;width:100%"><input type="text" id="qrInput" aria-label="Join link"><button class="btn small" type="submit">Save</button></form>
+        </div>
+        <div class="joincard connectbox" id="connectBox">
+          <div class="kicker">Phone voting (optional)</div>
+          <p style="font-size:.88rem">Paste your Google Apps Script link (ends in <b>/exec</b>) once. This computer remembers it and phones connect through the QR code.</p>
+          <form id="apiForm" class="row" style="flex-wrap:nowrap;width:100%"><input type="text" id="apiInput" placeholder="https://script.google.com/macros/s/…/exec" aria-label="Apps Script link"><button class="btn small" type="submit">Connect</button></form>
+          <button class="btn ghost small" type="button" id="apiForget" hidden>Disconnect this computer</button>
         </div>
         <div class="addbox offline-only" id="addBox">
           <b>Type what students call out</b>
@@ -312,29 +443,42 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
   <section class="stage" data-tab="auction" hidden>
     <div class="head">
       <div><div class="kicker">Group game · 20 min</div><h2>The Values Auction</h2>
-      <p>Each team gets ₹1,000. Pick a value, take bids, and bang the gavel. When the money runs out, you find out what you really care about.</p></div>
-      <div class="row"><button class="btn ghost small" id="aSetupToggle">Teams & money</button><button class="btn small" id="aResultsBtn">Results</button></div>
+      <p>Each team gets <b id="budgetTxt">₹1,000</b>. Pick a value, take bids, and bang the gavel. When the money runs out, you find out what you really care about.</p></div>
+      <div class="row"><button class="btn gold small" id="aNext" title="Reveal next value (N)">Reveal next value</button><label class="toggle teacher-only" title="Only for you: show every value face up"><input type="checkbox" id="aPeek"> Peek</label><button class="btn ghost small" id="aSetupToggle">Teams & money</button><button class="btn small" id="aResultsBtn">Results</button></div>
     </div>
-    <div class="setup" id="aSetup" hidden>
-      <label>Number of teams<select id="aTeams"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
-      <label>Money per team (₹)<select id="aMoney"><option>500</option><option selected>1000</option><option>2000</option></select></label>
-      <label>Opening bid (₹)<select id="aOpen"><option>50</option><option selected>100</option><option>200</option></select></label>
-      <div class="row" style="align-items:flex-end"><button class="btn gold" id="aNew">Start new auction</button></div>
-    </div>
+    <form class="setup2" id="aSetup" hidden>
+      <div class="scol">
+        <b>Teams</b>
+        <div id="teamEdit" class="teamedit"></div>
+        <button class="btn ghost small" type="button" id="teamAdd">+ Add team</button>
+      </div>
+      <div class="scol">
+        <b>Money per team</b>
+        <div class="chips2" id="moneyChips"></div>
+        <label class="inline2">Or type any amount ₹<input type="number" id="moneyCustom" min="100" step="50" placeholder="e.g. 7500"></label>
+        <b style="margin-top:8px">Opening bid</b>
+        <div class="chips2" id="openChips"></div>
+        <label class="inline2">Or type ₹<input type="number" id="openCustom" min="10" step="10" placeholder="auto"></label>
+        <p class="muted" style="font-size:.85rem" id="setupSummary"></p>
+        <p style="font-size:.85rem;font-weight:600;color:var(--teal)">Changes show on screen straight away.</p>
+        <div class="row"><button class="btn ghost small" type="submit">Reset auction (clear all sales)</button><button class="btn gold small" type="button" id="aSetupClose">Done</button></div>
+      </div>
+    </form>
     <div class="wallets" id="wallets"></div>
     <div class="auction">
       <div><div class="lots" id="lots"></div><div class="history" id="history"></div></div>
       <div class="block" id="block">
         <div class="gavel" id="gavel"></div>
         <div class="kicker" style="color:var(--gold-hi)">On the block</div>
-        <div class="row" style="flex-wrap:nowrap;gap:14px"><div id="lotImg"></div><div><div class="lotname" id="lotName">Pick a value</div><div class="leader" id="lotDesc">Tap any card on the left</div></div></div>
+        <div class="row" style="flex-wrap:nowrap;gap:14px"><div id="lotImg"></div><div><div class="lotname" id="lotName">Pick a value</div><div class="leader" id="lotDesc">Press “Reveal next value” or tap a ? card</div></div></div>
         <div><div class="bid" id="bidAmt">₹0</div><div class="leader" id="leader">No bids yet</div></div>
         <div class="kicker" style="color:#C9D8EC">1. Who is bidding?</div>
         <div class="teams" id="teamBtns"></div>
         <div class="kicker" style="color:#C9D8EC">2. Raise the bid</div>
-        <div class="raise" id="raise"></div>
-        <div class="row" style="justify-content:space-between"><div class="call" id="call"></div><label class="toggle" style="color:#C9D8EC"><input type="checkbox" id="autoG"> Auto-gavel</label></div>
-        <div class="row"><button class="btn gold" id="goingBtn">Going once…</button><button class="btn ghost small" id="undoBtn" style="color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)">Pass / no sale</button></div>
+        <div class="bidrow"><div class="raise" id="raise"></div>
+        <form class="custombid" id="customBid"><input type="number" id="cbAmt" placeholder="Any amount ₹" aria-label="Type a bid amount"><button class="btn small gold" type="submit">Bid</button></form></div>
+        <div class="call" id="call"></div>
+        <div class="row"><button class="btn gold" id="goingBtn">Going once…</button><button class="btn ghost small" id="undoBtn" style="color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)">Pass / no sale</button><label class="toggle" style="color:#C9D8EC;margin-left:auto"><input type="checkbox" id="autoG"> Auto-gavel</label></div>
         <div class="stamp" id="stamp" hidden><div id="stampText">SOLD!</div></div>
       </div>
     </div>
@@ -354,7 +498,7 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
     <div class="head">
       <div><div class="kicker">Wrap-up · 5 min</div><h2>Exit Ticket</h2>
       <p>Three things, two tricks, one temptation. Then tell us how you feel.</p></div>
-      <div class="row"><button class="btn gold small live-only" id="exPush">Send to phones</button></div>
+      <div class="row"><button class="btn ghost small live-only" type="button" onclick="document.getElementById('qrOverlay').hidden=false">Show join QR</button><button class="btn gold small live-only" id="exPush">Send to phones</button></div>
     </div>
     <div class="exit">
       <form class="ticket" id="exitForm">
@@ -380,28 +524,2333 @@ kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--line);border
     <div id="sBody"><h2>Waiting for your teacher…</h2><p class="muted">Keep this page open. Questions appear here automatically.</p></div>
   </section>
 
-  <div class="hint teacher-only"><span>Shortcuts:</span><span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> switch activity</span><span><kbd>S</kbd> start poll</span><span><kbd>Space</kbd> going once / twice / sold</span><span><kbd>Esc</kbd> pass</span><span><kbd>P</kbd> spotlight</span><span><kbd>F</kbd> full screen</span></div>
+  <div class="hint teacher-only"><span>Shortcuts:</span><span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> switch activity</span><span><kbd>S</kbd> start poll</span><span><kbd>Space</kbd> going once / twice / sold</span><span><kbd>N</kbd> reveal next value</span><span><kbd>Esc</kbd> pass</span><span><kbd>P</kbd> spotlight</span><span><kbd>F</kbd> full screen</span><span class="live-only" style="display:inline"><kbd>Q</kbd> big QR</span></div>
   <p class="muted offline-only teacher-only" style="font-size:.88rem">Running in classroom mode. Phone voting and the live ticket wall switch on when this page runs from Google Apps Script.</p>
 </div>
 <div class="toast" id="toast" role="status"></div>
+<div class="spot" id="qrOverlay" hidden><div class="card" style="align-items:center;text-align:center;max-width:620px">
+  <div class="kicker">Scan to join · Session 2</div>
+  <div id="qrHuge" style="background:#fff;padding:14px;border-radius:18px;width:min(70vh,82vw);max-width:520px"></div>
+  <div id="qrHugeUrl" class="muted" style="word-break:break-all"></div>
+  <button class="btn gold" id="qrClose" type="button">Close</button></div></div>
 <div class="spot" id="spot" hidden><div class="card" role="dialog" aria-label="Spotlight ticket">
   <div class="row" style="justify-content:space-between"><div class="kicker">Spotlight ticket</div><div class="row"><button class="btn small" id="spotNext">Another</button><button class="btn ghost small" id="spotClose">Close</button></div></div>
   <div id="spotBody"></div></div></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(row * cellSize, col * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define([], factory);
+  } else if (typeof exports === 'object') {
+      module.exports = factory();
+  }
+}(function () {
+    return qrcode;
+}));
+</script>
 <script>
 /*BOOT*/
 window.APP = window.APP || { mode: (location.hash === "#student" ? "student" : "teacher"), url: "" };
 /* GitHub + Google: paste your Apps Script Web app URL (ends in /exec) between the quotes to switch on live phone voting. */
-window.API_URL = window.API_URL || "https://script.google.com/a/macros/christuniversity.in/s/AKfycbxfFZSEkOjWvI9Szq0_Mfe8aDFCbZNOAZyVF7VJHOSChfioNrAI6cVpz7M7QzS2CLp7kQ/exec";
+window.API_URL = window.API_URL || "";
 const ICONS = {"1f300": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0iTTM1Ljc4MiAyNC41MThhMS42OTkgMS42OTkgMCAwIDAtLjgyMS0xLjAxNmMtLjgwMi0uNDM2LTEuODc5LS4xMTYtMi4zMTYuNjgzYTEzLjk3NSAxMy45NzUgMCAwIDEtOC4zNzIgNi43NTcgMTQuMDk2IDE0LjA5NiAwIDAgMS0xMC42OTgtMS4xNDQgMTAuODMgMTAuODMgMCAwIDEtNS4yNDItNi40OTNjLS43NC0yLjUxNC0uNDk1LTUuMDE2LjU1Mi03LjAzM2E5LjczOSA5LjczOSAwIDAgMCAuMTY0IDQuOTA4IDkuNjk5IDkuNjk5IDAgMCAwIDQuNzAxIDUuODIzIDExLjg0IDExLjg0IDAgMCAwIDguOTc5Ljk2MSAxMS43MTYgMTEuNzE2IDAgMCAwIDcuMDI2LTUuNjcyIDE0LjIxNyAxNC4yMTcgMCAwIDAgMS4xNjUtMTAuODk4IDE0LjIyNSAxNC4yMjUgMCAwIDAtNi44ODMtOC41MjkgMTcuNTM1IDE3LjUzNSAwIDAgMC0xMy4yOTktMS40MTlBMTcuMzU4IDE3LjM1OCAwIDAgMCAuMzMyIDkuODQzYTEuNzEgMS43MSAwIDAgMCAuNjgxIDIuMzE3Yy44MDQuNDM5IDEuODg0LjExNyAyLjMxOS0uNjgyYTEzLjk1OSAxMy45NTkgMCAwIDEgOC4zNzEtNi43NTUgMTQuMTIgMTQuMTIgMCAwIDEgMTAuNjk5IDEuMTQyIDEwLjgzMyAxMC44MzMgMCAwIDEgNS4yMzkgNi40OTVjLjc0MSAyLjUxNC40OTYgNS4wMTctLjU1MiA3LjAzM2E5Ljc1MSA5Ljc1MSAwIDAgMC0uMTYyLTQuOTExIDkuNzMgOS43MyAwIDAgMC00LjcwMi01LjgyNCAxMS44NTYgMTEuODU2IDAgMCAwLTguOTgtLjk1OUExMS43MTYgMTEuNzE2IDAgMCAwIDYuMjIgMTMuMzdhMTQuMjE4IDE0LjIxOCAwIDAgMC0xLjE2NSAxMC44OTcgMTQuMjIgMTQuMjIgMCAwIDAgNi44ODMgOC41MjkgMTcuNDc5IDE3LjQ3OSAwIDAgMCA4LjM0MSAyLjE0MWMxLjY2OSAwIDMuMzM3LS4yNDIgNC45NTgtLjcyYTE3LjM1MSAxNy4zNTEgMCAwIDAgMTAuNDA2LTguMzk5Yy4yMTktLjM5OS4yNjktLjg2Mi4xMzktMS4zek0xNi43ODQgMTQuMDAyYy4zNzMtLjExLjc1OC0uMTY2IDEuMTQzLS4xNjZhNC4wNjMgNC4wNjMgMCAwIDEgMy44NzUgMi45MDEgNC4wNDkgNC4wNDkgMCAwIDEtMy44NzkgNS4xODYgNC4wNjQgNC4wNjQgMCAwIDEtMy44NzUtMi45MDIgNC4wNDcgNC4wNDcgMCAwIDEgMi43MzYtNS4wMTl6Ii8+PC9zdmc+", "1f354": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0Q5OUU4MiIgZD0iTTE4IDIwLjQxMWMtOS4zNzEgMC0xNi45NjctLjIyNS0xNi45NjcgNi40MjdDMS4wMzMgMzMuNDg3IDguNjI5IDM1IDE4IDM1YzkuMzcxIDAgMTYuOTY3LTEuNTEzIDE2Ljk2Ny04LjE2MiAwLTYuNjUxLTcuNTk2LTYuNDI3LTE2Ljk2Ny02LjQyN3oiLz48cGF0aCBmaWxsPSIjNjYyMTEzIiBkPSJNMzQuNDcgMjAuOTE2UzI2LjI1MSAxOS45MzIgMTggMTkuODljLTguMjUxLjA0Mi0xNi40NyAxLjAyNi0xNi40NyAxLjAyNkMuNzE3IDI3LjM5IDcuNDY3IDMwLjA1NyAxOCAzMC4wNTdzMTcuMjgzLTIuNjY3IDE2LjQ3LTkuMTQxeiIvPjxwYXRoIGZpbGw9IiNGRkNDNEQiIGQ9Im0zMy44ODYgMTguMzI4LTMxLjg1NS42NDZjLTEuMSAwLTIuMDIxIDIuMjI5LS44NTQgMi44MTIgOC43MDggMi43MDggMTUuNzA4IDUuNDQ4IDE1LjcwOCA1LjQ0OC45NjIuNTMyIDEuMjg3LjUzNCAyLjI1LjAwMyAwIDAgOS42NjYtMy44NjggMTUuODc1LTUuNDkzLjg4MS0uMjMtLjAyNS0zLjQxNi0xLjEyNC0zLjQxNnoiLz48cGF0aCBmaWxsPSIjNzdCMjU1IiBkPSJNMzQuNzI1IDE4LjQxMmMtMS45LTEuNzUxLTEuNzktLjgxOS0zLjI0Ni0xLjIzLS41NTMtLjE1Ni00LjUxLTUuMjcxLTEzLjUyOS01LjI3MWgtLjAyYy05LjAxOSAwLTEyLjk3NiA1LjExNS0xMy41MjkgNS4yNzEtMS40NTYuNDExLTEuMzQ2LS41MjEtMy4yNDYgMS4yMy0uODcyLjgwNC0xLjEwOCAxLjIyMi0uMTg4IDEuNDMgMS4zODYuMzEzIDEuMjYgMS4xNTIgMi4yNTMgMS40NDQgMS4yMDIuMzUzIDEuNjk2LS4yOTIgMy42MzQtLjAyOCAxLjY1My4yMjUgMS43NjEgMi4zNjkgMy40MjkgMi4zNjlzMS42NjgtLjggMy4zMzUtLjggMi42NTMgMi4xNDYgNC4zMjEgMi4xNDYgMi42NTMtMi4xNDYgNC4zMjEtMi4xNDZjMS42NjggMCAxLjY2OC44IDMuMzM1LjggMS42NjggMCAxLjc3Ni0yLjE0NCAzLjQyOS0yLjM2OSAxLjkzOC0uMjYzIDIuNDMzLjM4MSAzLjYzNC4wMjguOTkzLS4yOTIuODY3LTEuMTMgMi4yNTMtMS40NDQuOTIyLS4yMDcuNjg3LS42MjYtLjE4Ni0xLjQzeiIvPjxwYXRoIGZpbGw9IiNERDJFNDQiIGQ9Ik0zNC4wNzcgMTYuNTJjMCAyLjk4NC03LjE5OCA0LjM5My0xNi4wNzcgNC4zOTNTMS45MjMgMTkuNTA0IDEuOTIzIDE2LjUyYzAtNS40MDMuOTY2LTUuNDAzIDE2LjA3Ny01LjQwM3MxNi4wNzcuMDAxIDE2LjA3NyA1LjQwM3oiLz48cGF0aCBmaWxsPSIjRDk5RTgyIiBkPSJNMTggLjUyNEM4LjYyOS41MjQgMS4wMzMgNC45MTUgMS4wMzMgMTEuNTY2YzAgNi4xMjUgNy41OTYgNi4zNzUgMTYuOTY3IDYuMzc1czE2Ljk2Ny0uMjUgMTYuOTY3LTYuMzc1QzM0Ljk2NyA0LjkxNCAyNy4zNzEuNTI0IDE4IC41MjR6Ii8+PHBhdGggZmlsbD0iI0ZGRThCNiIgZD0iTTEwLjc4NCAzLjY5NWExLjA2OSAxLjA2OSAwIDEgMC0xLjE1MiAxLjgwMmMuNDk4LjMxOSAxLjc2LjU1NyAyLjA3OS4wNTkuMzE4LS40OTgtLjQyOS0xLjU0My0uOTI3LTEuODYxem05LjczNC0xLjAzNWMtLjU2Mi4xODItMS41NDkgMS4wMDYtMS4zNjYgMS41NjguMTgzLjU2MiAxLjQ2NC42NDggMi4wMjYuNDY2YTEuMDY5IDEuMDY5IDAgMCAwLS42Ni0yLjAzNHptMTAuOTA5IDcuMDM1Yy0uNDUyLS4zOC0xLjU4NS4yMjUtMS45NjYuNjc3YTEuMDcgMS4wNyAwIDAgMCAxLjYzOCAxLjM3NmMuMzgxLS40NTMuNzgxLTEuNjczLjMyOC0yLjA1M3ptLTMuNjQzLTVhMS4wNyAxLjA3IDAgMCAwLTEuMTUyIDEuODAzYy40OTguMzE5IDEuNzYuNTU3IDIuMDc4LjA1OS4zMTktLjQ5OS0uNDI4LTEuNTQ0LS45MjYtMS44NjJ6bS0xNSA3YTEuMDcgMS4wNyAwIDAgMC0xLjQ3OC4zMjYgMS4wNjggMS4wNjggMCAwIDAgLjMyNiAxLjQ3NmMuNDk4LjMxOSAxLjc2LjU1OCAyLjA3OC4wNTkuMzE5LS40OTgtLjQyOC0xLjU0My0uOTI2LTEuODYxem0zLjA0Ni00LjgwOGMtLjMzNi40ODYtLjYyIDEuNzM5LS4xMzMgMi4wNzUuNDg2LjMzNiAxLjU1Ny0uMzc0IDEuODkzLS44NmExLjA3IDEuMDcgMCAwIDAtMS43Ni0xLjIxNXptNy45NTQgNC44MDhhMS4wNyAxLjA3IDAgMCAwLTEuNDc4LjMyNiAxLjA2OCAxLjA2OCAwIDAgMCAuMzI2IDEuNDc2Yy40OTguMzE5IDEuNzYuNTU4IDIuMDc4LjA1OS4zMTktLjQ5OC0uNDI4LTEuNTQzLS45MjYtMS44NjF6TTQuOTQ4IDcuODA4Yy0uMzk0LjQ0MS0uODMzIDEuNjQ4LS4zOTIgMi4wNDIuNDM5LjM5NCAxLjU5MS0uMTc0IDEuOTg1LS42MTVhMS4wNyAxLjA3IDAgMSAwLTEuNTkzLTEuNDI3eiIvPjwvc3ZnPg==", "1f381": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZERDg4OCIgZD0iTTMzIDMxYzAgMi4yLTEuOCA0LTQgNEg3Yy0yLjIgMC00LTEuOC00LTRWMTRjMC0yLjIgMS44LTQgNC00aDIyYzIuMiAwIDQgMS44IDQgNHYxN3oiLz48cGF0aCBmaWxsPSIjRkREODg4IiBkPSJNMzYgMTFjMCAyLjItMS44IDQtNCA0SDRjLTIuMiAwLTQtMS44LTQtNHMxLjgtNCA0LTRoMjhjMi4yIDAgNCAxLjggNCA0eiIvPjxwYXRoIGZpbGw9IiNGQ0FCNDAiIGQ9Ik0zIDE1aDMwdjJIM3oiLz48cGF0aCBmaWxsPSIjREEyRjQ3IiBkPSJNMTkgM2gtMmEzIDMgMCAwIDAtMyAzdjI5aDhWNmEzIDMgMCAwIDAtMy0zeiIvPjxwYXRoIGZpbGw9IiNEQTJGNDciIGQ9Ik0xNiA3YzEuMSAwIDEuMjYzLS41MTYuMzYxLTEuMTQ3TDkuNjM5IDEuMTQ3YTEuNzk1IDEuNzk1IDAgMCAwLTIuNjMxLjU4OUw0Ljk5MiA1LjI2NEM0LjQ0NiA2LjIxOSA0LjkgNyA2IDdoMTB6bTQgMGMtMS4xIDAtMS4yNjMtLjUxNi0uMzYxLTEuMTQ3bDYuNzIzLTQuNzA2YTEuNzk2IDEuNzk2IDAgMCAxIDIuNjMxLjU4OWwyLjAxNiAzLjUyN0MzMS41NTQgNi4yMTkgMzEuMSA3IDMwIDdIMjB6Ii8+PC9zdmc+", "1f393": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzMxMzczRCIgZD0iTTI0IDE0SDEycy01IDYtNSAxMCAxMSAxMSAxMSAxMSAxMS03IDExLTExLTUtMTAtNS0xMHoiLz48cGF0aCBmaWxsPSIjMjkyRjMzIiBkPSJNMTkuNjQgMS4yOGMtLjkwMS0uNzA0LTIuMzc3LS43MDQtMy4yNzggMEwxLjYzOSAxMi43NzZjLS45MDEuNzA0LS45MDEgMS44NTYgMCAyLjU2bDE0LjcyMiAxMS40OTVjLjkwMi43MDQgMi4zNzcuNzA0IDMuMjc4IDBsMTQuNzIyLTExLjQ5NWMuOTAyLS43MDQuOTAyLTEuODU2IDAtMi41NkwxOS42NCAxLjI4eiIvPjxwYXRoIGZpbGw9IiMzOTQxNDYiIGQ9Ik0xOS42NCAxLjI4Yy0uOTAxLS43MDQtMi4zNzctLjcwNC0zLjI3OCAwTDEuNjM5IDEyLjc3NmMtLjkwMS43MDQtLjkwMSAxLjg1NiAwIDIuNTZsMTQuNzIyIDExLjQ5NWMuOTAxLjcwNCAyLjM3Ny43MDQgMy4yNzggMGwxNC43MjMtMTEuNDk1Yy45MDEtLjcwNC45MDEtMS44NTYgMC0yLjU2TDE5LjY0IDEuMjh6Ii8+PHBhdGggZmlsbD0iI0ZDQUI0MCIgZD0iTTggMjVzLTIgMi0yIDN2NnMwIDIgMiAyIDItMiAyLTJ2LTZjMC0xLTItMy0yLTN6Ii8+PGNpcmNsZSBjeD0iOCIgY3k9IjI2IiByPSIzIiBmaWxsPSIjRkREODg4Ii8+PHBhdGggZmlsbD0iI0ZDQUI0MCIgZD0iTTguMDAxIDI3YTEgMSAwIDAgMS0xLTF2LTMuOTU4Yy0uMDQyLS42MzQuMTg3LTIuMDM2IDEuMzE3LTIuODg0bDkuMDIyLTcuOTFhMSAxIDAgMCAxIDEuMzE4IDEuNTA0bC05LjA4IDcuOTU4QzguOTc0IDIxLjE2NiA5IDIxLjk4MiA5IDIxLjk5TDkuMDAyIDI2YTEgMSAwIDAgMS0xLjAwMSAxeiIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTMiIHI9IjMiIGZpbGw9IiMzMTM3M0QiLz48L3N2Zz4=", "1f39f": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0VBNTk2RSIgZD0iTTI2Ljc1MSA4LjAwN2E0LjY3MiA0LjY3MiAwIDAgMCA1LjA0NiAxLjAzMmwzLjYxMyAzLjYxMWMuNzM3Ljc0LjczOCAxLjkzOC0uMDA0IDIuNjhMMTUuMzE5IDM1LjQwNWExLjkgMS45IDAgMCAxLTIuNjgxIDBsLTMuNjA2LTMuNjEyQTQuNjg2IDQuNjg2IDAgMCAwIDggMjYuNzQ2YTQuNjc2IDQuNjc2IDAgMCAwLTUuMDQ3LTEuMDMybC0yLjM1OS0yLjM2YTEuODkzIDEuODkzIDAgMCAxIDAtMi42OEwyMC42NzguNTk2YTEuODkxIDEuODkxIDAgMCAxIDIuNjc5LjAwMmwyLjM2MSAyLjM2MWE0LjY3NiA0LjY3NiAwIDAgMCAxLjAzMyA1LjA0OHoiLz48cGF0aCBmaWxsPSIjQkUxOTMxIiBkPSJtNS40MiAxOC41MjctMi4xNDkgMi4xNDhhMS44OTggMS44OTggMCAwIDAtLjAwMyAyLjY4bC41NDIuNTQxYTUuNjY4IDUuNjY4IDAgMCAxIDUuNDgyIDEuNDY4IDUuNjY4IDUuNjY4IDAgMCAxIDEuNDY3IDUuNDgxbDEuODc4IDEuODgzYTEuODk4IDEuODk4IDAgMCAwIDIuNjgyLS4wMDJsMi4xODktMi4xODdMNS40MiAxOC41Mjd6bTEzLjUyMSAxMC41OCAxMC4xNTgtMTAuMTUyTDE3LjAwOCA2Ljk0MyA2Ljg1NCAxNy4wOTVsMTIuMDg3IDEyLjAxMnptMS45OS0xMy45OTNjMi4yNDUgMi4yMjggMi43NDUgNS4zNTYgMS4xMjEgNi45ODktMS42MjcgMS42MzUtNC43NjIgMS4xNTEtNy4wMDEtMS4wNzUtMi4yMzktMi4yMjgtMi43MzgtNS4zNTgtMS4xMTQtNi45OTEgMS42MjUtMS42MyA0Ljc1NS0xLjE1IDYuOTk0IDEuMDc3em0xMS44LTIuNDY0LTEuODgxLTEuODgxYTUuNjcgNS42NyAwIDAgMS01LjQ4My0xLjQ2OCA1LjY2OCA1LjY2OCAwIDAgMS0xLjQ3LTUuNDg0bC0uNTQxLS41NDZhMS45IDEuOSAwIDAgMC0yLjY3OC4wMDNMMTguNDQyIDUuNTFsMTIuMDkyIDEyLjAxMSAyLjE5Ni0yLjE5NWMuNzQtLjczNy43NC0xLjkzNi4wMDEtMi42NzZ6Ii8+PC9zdmc+", "1f3af": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiIGZpbGw9IiNERDJFNDQiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSIxMy41IiBmaWxsPSIjRkZGIi8+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMTAiIGZpbGw9IiNERDJFNDQiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSI2IiBmaWxsPSIjRkZGIi8+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMyIgZmlsbD0iI0REMkU0NCIvPjxwYXRoIGQ9Im0xOC4yNCAxOC4yODIgMTMuMTQ0IDExLjc1NHMtMi42NDcgMy4zNzYtNy44OSA1LjEwOUwxNy41NzkgMTguNDJsLjY2MS0uMTM4eiIgb3BhY2l0eT0iLjIiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJNMTguMjk0IDE5YS45OTQuOTk0IDAgMCAxLS43MDQtMS42OTlsLjU2My0uNTYzYS45OTUuOTk1IDAgMCAxIDEuNDA4IDEuNDA3bC0uNTY0LjU2M2EuOTg3Ljk4NyAwIDAgMS0uNzAzLjI5MnoiLz48cGF0aCBmaWxsPSIjNTVBQ0VFIiBkPSJNMjQuMDE2IDYuOTgxYy0uNDAzIDIuMDc5IDAgNC42OTEgMCA0LjY5MWw3LjA1NC03LjM4OGMuMjkxLTEuNDU0LS41MjgtMy45MzItMS43MTgtNC4yMzgtMS4xOS0uMzA2LTQuMDc5LjgwMy01LjMzNiA2LjkzNXptNS4wMDMgNS4wMDNjLTIuMDc5LjQwMy00LjY5MSAwLTQuNjkxIDBsNy4zODgtNy4wNTRjMS40NTQtLjI5MSAzLjkzMi41MjggNC4yMzggMS43MTguMzA2IDEuMTktLjgwMyA0LjA3OS02LjkzNSA1LjMzNnoiLz48cGF0aCBmaWxsPSIjM0E4N0MyIiBkPSJNMzIuNzk4IDQuNDg1IDIxLjE3NiAxNy41ODdjLS4zNjIuMzYyLTEuNjczLjg4Mi0yLjUxLjA0Ni0uODM2LS44MzYtLjQxOS0yLjA4LS4wNTctMi40NDNMMzEuODE1IDMuNTAxcy42NzYtLjYzNSAxLjE1OS0uMTUyLS4xNzYgMS4xMzYtLjE3NiAxLjEzNnoiLz48L3N2Zz4=", "1f3c5": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0ibTE4IDgtNy04SDBsMTQgMTcgMTEuNTIxLTQuNzV6Ii8+PHBhdGggZmlsbD0iIzNCODhDMyIgZD0ibTI1IDAtNyA4IDUuMzkgNy4zMTIgMS4yMjctMS40ODlMMzYgMHoiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJNMjMuMjYgMTYuMDI2Yy4wOC0uMjE3LjEzMS0uNDQ4LjEzMS0uNjkzYTIgMiAwIDAgMC0yLTJoLTYuNjY3YTIgMiAwIDAgMC0yIDJjMCAuMjQ1LjA1LjQ3Ni4xMzEuNjkzLTMuMjU4IDEuODI2LTUuNDY0IDUuMzA3LTUuNDY0IDkuMzA3QzcuMzkxIDMxLjIyNCAxMi4xNjYgMzYgMTguMDU4IDM2YzUuODkxIDAgMTAuNjY3LTQuNzc2IDEwLjY2Ny0xMC42NjctLjAwMS00LTIuMjA2LTcuNDgxLTUuNDY1LTkuMzA3eiIvPjxjaXJjbGUgY3g9IjE4LjA1OCIgY3k9IjI1LjMzMyIgcj0iOCIgZmlsbD0iI0ZGRDk4MyIvPjxwYXRoIGZpbGw9IiNGRkFDMzMiIGQ9Ik0yMS4yNzggMzAuNjM0YS42OTkuNjk5IDAgMCAxLS40MDYtLjEzMUwxOCAyOC40NDRsLTIuODcxIDIuMDU5YS42OTcuNjk3IDAgMCAxLTEuMDcxLS43NzdsMS4wNzEtMy40NTYtMi44NDUtMi4wMDVhLjY5OC42OTggMCAwIDEgLjQwOS0xLjI1OWwzLjUyNC0uMDA1IDEuMTIyLTMuMzdhLjY5Ny42OTcgMCAwIDEgMS4zMjQgMGwxLjEwMyAzLjM3IDMuNTQyLjAwNWEuNjk3LjY5NyAwIDAgMSAuNDA5IDEuMjU5bC0yLjg0NiAyLjAwNSAxLjA3MSAzLjQ1NmEuNjk1LjY5NSAwIDAgMS0uNjY0LjkwOHoiLz48L3N2Zz4=", "1f3c6": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTUuMTIzIDVoNkMxMi4yMjcgNSAxMyA0Ljg5NiAxMyA2VjRjMC0xLjEwNC0uNzczLTItMS44NzctMmgtOGMtMiAwLTMuNTgzIDIuMTI1LTMgNSAwIDAgMS43OTEgOS4zNzUgMS45MTcgOS45NThDMi4zNzMgMTguNSA0LjE2NCAyMCA2LjA4MSAyMGg2Ljk1OGMxLjEwNSAwLS4wMzktMS44OTYtLjAzOS0zdi0yYzAgMS4xMDQtLjc3MyAyLTEuODc3IDJoLTRjLTEuMTA0IDAtMS44MzMtMS4wNDItMi0yUzMuNTM5IDcuNjY3IDMuNTM5IDcuNjY3QzMuMjA2IDUuNzUgNC4wMTggNSA1LjEyMyA1em0yNS44MTIgMGgtNkMyMy44MzEgNSAyMiA0Ljg5NiAyMiA2VjRjMC0xLjEwNCAxLjgzMS0yIDIuOTM1LTJoOGMyIDAgMy41ODQgMi4xMjUgMyA1IDAgMC0xLjYzMyA5LjQxOS0xLjc3MSAxMC0uMzU0IDEuNS0yLjA0MiAzLTQgM2gtNy4xNDZDMjEuOTE0IDIwIDIyIDE4LjEwNCAyMiAxN3YtMmMwIDEuMTA0IDEuODMxIDIgMi45MzUgMmg0YzEuMTA0IDAgMS44MzQtMS4wNDIgMi0yczEuNTg0LTcuMzMzIDEuNTg0LTcuMzMzQzMyLjg1MSA1Ljc1IDMyLjA0IDUgMzAuOTM1IDV6TTIwLjgzMiAyMmMwLTYuOTU4LTIuNzA5IDAtMi43MDkgMHMtMy02Ljk1OC0zIDAtMy4yOTEgMTAtMy4yOTEgMTBoMTIuMjkyYy0uMDAxIDAtMy4yOTItMy4wNDItMy4yOTItMTB6Ii8+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTI5LjEyMyA2LjU3N2MwIDYuNzc1LTYuNzcgMTguMTkyLTExIDE4LjE5Mi00LjIzMSAwLTExLTExLjQxNy0xMS0xOC4xOTIgMC01LjE5NSAxLTYuMzE5IDMtNi4zMTkgMS4zNzQgMCA2LjAyNS0uMDI3IDgtLjAyN2w3LS4wMDFjMi45MTctLjAwMSA0IC42ODQgNCA2LjM0N3oiLz48cGF0aCBmaWxsPSIjQzE2OTRGIiBkPSJNMjcgMzNjMCAxLjEwNC4yMjcgMi0uODc3IDJoLTE2QzkuMDE4IDM1IDkgMzQuMTA0IDkgMzN2LTFjMC0xLjEwNCAxLjE2NC0yIDIuMjA2LTJoMTMuOTE3YzEuMDQyIDAgMS44NzcuODk2IDEuODc3IDJ2MXoiLz48cGF0aCBmaWxsPSIjQzE2OTRGIiBkPSJNMjkgMzQuNjI1YzAgLjc2LjE2NSAxLjM3NS0xLjI1MiAxLjM3NUg4LjQ5OEM3LjIwNiAzNiA3IDM1LjM4NSA3IDM0LjYyNXYtLjI1QzcgMzMuNjE1IDcuNzM4IDMzIDguNDk4IDMzaDE5LjI1Yy43NTkgMCAxLjI1Mi42MTUgMS4yNTIgMS4zNzV2LjI1eiIvPjwvc3ZnPg==", "1f3d4": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzI5MkYzMyIgZD0iTTE5LjA4MyAzNS41IDEyLjI1IDEyLjI5MnMtMS40Mi43NjEtMi42MDQgMS42MzdjLS4zMTMuMjMxLTEuOTc3IDIuNzktMi4zMTIgMy4wNC0xLjc2MiAxLjMxNS0zLjU1MiAyLjg0MS0zLjc5MiAzLjE2N0MzLjA4MyAyMC43NiAwIDM2IDAgMzZsMTkuMDgzLS41eiIvPjxwYXRoIGZpbGw9IiM0QjU0NUQiIGQ9Im0zMiAzNS01LjUtMTkuNzVMMTggNC41NDJsLTUuMzczIDQuMTkzLS45NzEgMS4xNzJDMTEuMjUgMTAuNjg4IDEwIDE1LjI1IDEwIDE1LjI1TDguNzUgMjAgMy4yNTIgMzAuMDU0LjkxNyAzNC43OTEgMzIgMzV6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTMuMjUyIDMwLjA1NHM3Ljg3My0xMC43ODMgNy44OTQtMTEuMzg4QzExLjE2NyAxOC4wNjIgMTAgMTUuMjUgMTAgMTUuMjVMOC43NSAyMCAzLjI1MiAzMC4wNTR6Ii8+PHBhdGggZmlsbD0iIzI5MkYzMyIgZD0iTTEyIDM0aDJsMi0xNS43NSAxLjIzNC0xLjc5NyAzLjU3OC01LjIzNC4wOTQtMS40NjktMy4yODcgNC40NTRMMTUgMTcuNzUybC0yLjM4OCA3LjM2MkwxMiAyN2wtMS43OTEgMy4xMzRMOCAzNHptMTIuMDU5LTE3LjYxNi0xLjk2NSA1Ljg5N0wyMSAyNmwyLjc5MiA3LjYyNSAzLjU1Mi0uMDYyUzIzIDI2LjYyNSAyMyAyNmMwLS4xMi42MjUtMi42ODcuNjI1LTIuNjg3bDEuMDk0LTQuNTMxTDI1IDE3LjI1bC0uOTQxLS44NjZ6Ii8+PHBhdGggZmlsbD0iI0YxRjFGMSIgZD0ibTI0LjA1OSAxNi4zODQtMS43NzgtLjY2NS0xLjUzMS44NzUtMS4zMjgtMS4wNjMtMi4xODguOTIyIDMuNTc4LTUuMjM0em0yLjg3MSA3LjM3OS0xLjcxMS0xLjM4OC0xLjU5NC45MzggMS4wOTQtNC41MzIgMS40MzcgMi4yODJ6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTIyLjA5NCAyMi4yODEgMjEgMjZsLS4yNS0yLjQxN3pNMTIgMjdsLTEuNzkxIDMuMTM0LjM1My0yLjQzMXMuNjgyLS41NzguOTM4LS45MTFjLjI1NS0uMzMzIDEuMTEyLTEuNjc4IDEuMTEyLTEuNjc4TDEyIDI3em0zLjIwOC0xMSAyLjQxMS0xLjc5NkwxNSAxNy43NTJ6Ii8+PHBhdGggZmlsbD0iIzI5MkYzMyIgZD0iTTM2IDM2cy0uMzg0LTMuODQ1LS44NTQtNy4wODNjLS4zNjktMi41NDMtMi43NTctNi4zMDMtNC4wOTktNy4xMTVsLTEuMjM0LTMuNTM2LTIuMDIzLTUuMTAyLTIuMjU4LTIuMjg5LTEuODQ0LTEuNjI2LS41MDUtLjYyMUwxOCA0LjU0MmwyLjI4OSA1LjAwNy41MjQgMS42NyAzLjI0NiA1LjE2NS42NiAyLjM5NyAxLjQzOCAyLjI4MS43NzQgMi43MDFMMjggMjcuNSAyNiAzNGwxMCAyeiIvPjxwYXRoIGZpbGw9IiM1QzkwM0YiIGQ9Ik0zMy43MDggMzIuNDM4Yy0xLjM0NSAwLTQuOTU4LjU2Mi01LjQ1OC41NjItMiAwLTQuMjUtMS43NS01LjI1LTEuNzVTMTkuNDA2IDMzIDE3LjQwNiAzM2MtMS42ODggMC0yLjQwNi0uODEyLTQuNzE5LS44MTItLjc0OCAwLTQuMDk2Ljg3MS00LjgxMi43ODFDNi4wNTIgMzIuNzQxIDUuMTE1IDMyIDQuNjU2IDMyIDIgMzIgMCAzNiAwIDM2aDM2cy0uODc1LTMuNTYyLTIuMjkyLTMuNTYyeiIvPjxwYXRoIGZpbGw9IiNGMUYxRjEiIGQ9Im0xMi42MjcgOC43MzUgMi4xMjMtLjQ4NS42NTYgMS44NDQgMi4xMjUtLjg3NSAyLjc1OC4zM0wxOCAyLjI1eiIvPjxwYXRoIGZpbGw9IiNBOEI2QzAiIGQ9Im0yMy4xODMgOC42MjgtMS40NDMtLjI0My0xLjQ1MSAxLjE2NEwxOCAyLjI1ek0yNy45NTMgMTNsMS44NTkgNS4yNjYtMS43MjktMi44MjgtMS42MTQtMS42MjUtLjkzOC0yLjkzOHptNy4xOTMgMTUuOTE3UzM1IDI1LjAzMiAzMy44NzUgMjMuNzUgMzEgMjEuNzcxIDMxIDIxLjc3MWwxLjQzOCAzLjI3MSAxLjQ1OCAxLjQxNyAxLjI1IDIuNDU4eiIvPjwvc3ZnPg==", "1f451": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0Y0OTAwQyIgZD0iTTE0LjE3NCAxNy4wNzUgNi43NSA3LjU5NGwtMy43MjIgOS40ODF6Ii8+PHBhdGggZmlsbD0iI0Y0OTAwQyIgZD0ibTE3LjkzOCA1LjUzNC02LjU2MyAxMi4zODlIMjQuNXoiLz48cGF0aCBmaWxsPSIjRjQ5MDBDIiBkPSJtMjEuODI2IDE3LjA3NSA3LjQyNC05LjQ4MSAzLjcyMiA5LjQ4MXoiLz48cGF0aCBmaWxsPSIjRkZDQzREIiBkPSJNMjguNjY5IDE1LjE5IDIzLjg4NyAzLjUyM2wtNS44OCAxMS42NjgtLjAwNy4wMDMtLjAwNy0uMDA0LTUuODgtMTEuNjY4TDcuMzMxIDE1LjE5QzQuMTk3IDEwLjgzMyAxLjI4IDguMDQyIDEuMjggOC4wNDJTMyAyMC43NSAzIDMzaDMwYzAtMTIuMjUgMS43Mi0yNC45NTggMS43Mi0yNC45NThzLTIuOTE3IDIuNzkxLTYuMDUxIDcuMTQ4eiIvPjxjaXJjbGUgY3g9IjE3Ljk1NyIgY3k9IjIyIiByPSIzLjY4OCIgZmlsbD0iIzVDOTEzQiIvPjxjaXJjbGUgY3g9IjI2LjQ2MyIgY3k9IjIyIiByPSIyLjQxMiIgZmlsbD0iIzk4MUNFQiIvPjxjaXJjbGUgY3g9IjMyLjg1MiIgY3k9IjIyIiByPSIxLjk4NiIgZmlsbD0iI0REMkU0NCIvPjxjaXJjbGUgY3g9IjkuNDUiIGN5PSIyMiIgcj0iMi40MTIiIGZpbGw9IiM5ODFDRUIiLz48Y2lyY2xlIGN4PSIzLjA2MSIgY3k9IjIyIiByPSIxLjk4NiIgZmlsbD0iI0REMkU0NCIvPjxwYXRoIGZpbGw9IiNGRkFDMzMiIGQ9Ik0zMyAzNEgzYTEgMSAwIDEgMSAwLTJoMzBhMSAxIDAgMSAxIDAgMnptMC0zLjQ4NkgzYTEgMSAwIDEgMSAwLTJoMzBhMSAxIDAgMSAxIDAgMnoiLz48Y2lyY2xlIGN4PSIxLjQ0NyIgY3k9IjguMDQyIiByPSIxLjQwNyIgZmlsbD0iI0ZGQ0M0RCIvPjxjaXJjbGUgY3g9IjYuNzUiIGN5PSI3LjU5NCIgcj0iMS4xOTIiIGZpbGw9IiNGNDkwMEMiLz48Y2lyY2xlIGN4PSIxMi4xMTMiIGN5PSIzLjUyMyIgcj0iMS43ODQiIGZpbGw9IiNGRkNDNEQiLz48Y2lyY2xlIGN4PSIzNC41NTMiIGN5PSI4LjA0MiIgcj0iMS40MDciIGZpbGw9IiNGRkNDNEQiLz48Y2lyY2xlIGN4PSIyOS4yNSIgY3k9IjcuNTk0IiByPSIxLjE5MiIgZmlsbD0iI0Y0OTAwQyIvPjxjaXJjbGUgY3g9IjIzLjg4NyIgY3k9IjMuNTIzIiByPSIxLjc4NCIgZmlsbD0iI0ZGQ0M0RCIvPjxjaXJjbGUgY3g9IjE3LjkzOCIgY3k9IjUuNTM0IiByPSIxLjc4NCIgZmlsbD0iI0Y0OTAwQyIvPjwvc3ZnPg==", "1f465": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0iTTI5IDIwLjcyOXYtMS45NjNjMS0xLjAzIDIuOTE0LTIuODkgMy4zOTEtNS4yNzMuMTQyLjA3OS4wNTUuMTMuMjEzLjEzLjc1OCAwIDEuMjU2LS45ODMgMS4yNTYtMi4xOTcgMC0xLjE5NC0uNjU2LTIuMTYxLTEuMzk5LTIuMTkxLjE0My0uNTE2LjIxMi0xLjIwNi4yMTItMi4wOTIgMC0yLjk1Ni0yLjU0OS02LjUwNS04LjI1My02LjUwNS01LjA2OCAwLTguMjQ0IDMuNTQ5LTguMjQ0IDYuNTA1IDAgLjg1OC4wNTEgMS41NjIuMTQyIDIuMTA3LS42OTcuMTA1LTEuMjQ3IDEuMDMzLTEuMjQ3IDIuMTc1IDAgMS4yMTQuNjE0IDIuMTk3IDEuMzczIDIuMTk3LjE1NyAwLS4wNjktLjA1MS4wNzItLjEzLjQ3NyAyLjM4NCAyLjQ4NCA0LjI0MyAzLjQ4NCA1LjI3NHYxLjg0N2MtNCAuNDkyLTcgMi42MjgtNyA0Ljc2NXYuODFjMCAuODEyLjgyMy44MTIgMS42MzQuODEyaDE4LjczYy44MTMgMCAxLjYzNiAwIDEuNjM2LS44MTJ2LS44MWMwLTIuMDAxLTMtMy45OTctNi00LjY0OXoiLz48cGF0aCBmaWxsPSIjMjY5IiBkPSJNMTcgMjguNzI5di0xLjk2M2MxLTEuMDMgMi45MTQtMi44OSAzLjM5MS01LjI3My4xNDIuMDc5LjA1NS4xMy4yMTMuMTMuNzU4IDAgMS4yNTYtLjk4MyAxLjI1Ni0yLjE5NyAwLTEuMTk0LS42NTYtMi4xNjEtMS4zOTktMi4xOTEuMTQzLS41MTYuMjEyLTEuMjA2LjIxMi0yLjA5MiAwLTIuOTU2LTIuNTQ5LTYuNTA1LTguMjUzLTYuNTA1LTUuMDY5IDAtOC4yNDQgMy41NDktOC4yNDQgNi41MDUgMCAuODU4LjA1MSAxLjU2Mi4xNDIgMi4xMDctLjY5Ny4xMDUtMS4yNDcgMS4wMzMtMS4yNDcgMi4xNzUgMCAxLjIxNC42MTQgMi4xOTcgMS4zNzMgMi4xOTcuMTU3IDAtLjA2OS0uMDUxLjA3Mi0uMTNDNC45OTMgMjMuODc2IDcgMjUuNzM1IDggMjYuNzY2djEuODQ3Yy00IC40OTItNyAyLjYyOC03IDQuNzY1di44MTFDMSAzNSAxLjgyMyAzNSAyLjYzNCAzNWgxOC43M2MuODEzIDAgMS42MzYgMCAxLjYzNi0uODEydi0uODExYzAtMi0zLTMuOTk2LTYtNC42NDh6Ii8+PC9zdmc+", "1f46a": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTMxLjcyLjMwMmMtMS43MDMtLjU1MS01LjcxLS40MDEtNi43MTIuOTAyLTIuNjA1LjA1LTUuNjYgMi40MDQtNi4wNjEgNS41MS0uMzk3IDMuMDc0LjQ4NyA0LjUwMS44MDEgNi44MTIuMzU2IDIuNjE4IDEuODI4IDMuNDU2IDMuMDA1IDMuODA3IDEuNjkzIDIuMjM3IDMuNDkzIDIuMTQxIDYuNTE2IDIuMTQxIDMuMDQzIDAgNS4yNTgtMS4wNTcgNi43My0yLjk5M1YyLjgzNEMzNC45MjUgMS43MzcgMzMuNDg3Ljg3MyAzMS43Mi4zMDJ6Ii8+PHBhdGggZmlsbD0iI0ZGREM1RCIgZD0iTTI2LjA1IDE3Ljc4Nmg1LjA1OXYxMEgyNi4wNXoiLz48cGF0aCBmaWxsPSIjRkZEQzVEIiBkPSJNMzUuMjQ4IDkuMTAzYy0uNTcxLS43OTEtMS4zMDItMS40MjctMi45MDUtMS42NTMuNjAxLjI3NSAxLjE3NyAxLjIyNyAxLjI1MiAxLjc1My4wNzUuNTI2LjE1Ljk1Mi0uMzI2LjQyNi0xLjkwNi0yLjEwNy0zLjk4Mi0xLjI3Ny02LjAzOS0yLjU2NC0xLjQzNy0uODk5LTEuODc1LTEuODkzLTEuODc1LTEuODkzcy0uMTc1IDEuMzI3LTIuMzU0IDIuNjhjLS42MzIuMzkyLTEuMzg1IDEuMjY1LTEuODAzIDIuNTU0LS4zMDEuOTI3LS4yMDcgMS43NTMtLjIwNyAzLjE2NSAwIDEuMTQ1LjI3IDIuMjM1LjczOCAzLjIxOSAxLjIxOCAyLjU1OCAzLjgyMyA0LjM3IDYuODUgNC4zNyAyLjU4NyAwIDQuODY5LTEuMzM1IDYuMjM5LTMuMzE3YTcuNTgzIDcuNTgzIDAgMCAwIDEuMTgxLTIuNzE3di00LjEzOGMtLjE0NC0uODMtLjM4NS0xLjM3OC0uNzUxLTEuODg1eiIvPjxwYXRoIGZpbGw9IiNDMTY5NEYiIGQ9Ik0zMS45NTIgMTcuNzg2aC02Ljc0NnMuODQzIDEuNjg2IDMuMzczIDEuNjg2IDMuMzczLTEuNjg2IDMuMzczLTEuNjg2em0tMi41MjktMi4xMDdoLTEuNjg2YS40MjIuNDIyIDAgMCAxIDAtLjg0NGgxLjY4NmEuNDIyLjQyMiAwIDAgMSAwIC44NDR6Ii8+PHBhdGggZmlsbD0iIzY2MjExMyIgZD0iTTI1LjIwNyAxMi43MjhhLjg0My44NDMgMCAwIDEtLjg0My0uODQzdi0uODQzYS44NDMuODQzIDAgMCAxIDEuNjg2IDB2Ljg0M2EuODQzLjg0MyAwIDAgMS0uODQzLjg0M3ptNi43NDUgMGEuODQzLjg0MyAwIDAgMS0uODQzLS44NDN2LS44NDNhLjg0My44NDMgMCAwIDEgMS42ODYgMHYuODQzYS44NDIuODQyIDAgMCAxLS44NDMuODQzeiIvPjxwYXRoIGZpbGw9IiNGQTc0M0UiIGQ9Ik0yMSAyMmg1cy4xOTggNC43NzMgMi40NzIgNC43NzNTMzEuMDg0IDIyIDMxLjA4NCAyMkgzNnYxNEgxOFYyNC45NzNDMTggMjMgMTkgMjIgMjEgMjJ6Ii8+PHBhdGggZmlsbD0iI0RENTUxRiIgZD0iTTIwLjk4NiAyNmgxLjAyOHYxMGgtMS4wMjh6Ii8+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTguMjcgMTkuNDczYzUuOTAyIDAgOC43MTMtMy45NDkgOC45NjItMTAuNjU2LjE1LTQuMDU3LTIuMjMtNy4xMy02LjUxMS04LjUxNS0xLjcwNC0uNTUxLTUuNzExLS40MDEtNi43MTMuOTAxLTEuMzYyLjAyNi0yLjg0NC42ODYtNC4wMDggMS43NTF2MTMuMzc1Yy41NDguNTQ0IDEuMTg1LjgzNCAxLjc1NCAxLjAwMyAxLjY5NCAyLjIzNyAzLjQ5NCAyLjE0MSA2LjUxNiAyLjE0MXoiLz48cGF0aCBmaWxsPSIjRkZEQzVEIiBkPSJNNC44OTcgMTcuNzg2aDUuMDU5djEwSDQuODk3eiIvPjxwYXRoIGZpbGw9IiNGRkRDNUQiIGQ9Ik0xNC4wOTUgOS4xMDNjLS41NzEtLjc5MS0xLjMwMi0xLjQyNy0yLjkwNS0xLjY1My42MDEuMjc1IDEuMTc3IDEuMjI3IDEuMjUyIDEuNzUzLjA3NS41MjYuMTUuOTUyLS4zMjYuNDI2LTEuOTA2LTIuMTA3LTMuOTgyLTEuMjc3LTYuMDM5LTIuNTY0LTEuNDM2LS44OTktMS44NzQtMS44OTQtMS44NzQtMS44OTRzLS4xNzUgMS4zMjctMi4zNTQgMi42OEMxLjIxNyA4LjI0My40NjQgOS4xMTYuMDQ2IDEwLjQwNWMtLjAyMi4wNjctLjAyOC4xMzItLjA0Ni4xOTh2NC41MDZjLjEyNC41ODcuMzIzIDEuMTQ4LjU3NyAxLjY4IDEuMjE4IDIuNTU4IDMuODIzIDQuMzcgNi44NSA0LjM3IDIuNTg3IDAgNC44NjktMS4zMzUgNi4yMzktMy4zMTdhNy41MSA3LjUxIDAgMCAwIDEuMzQ5LTQuMjcxYzAtMi41NjUtLjI2OC0zLjU2Ni0uOTItNC40Njh6Ii8+PHBhdGggZmlsbD0iI0MxNjk0RiIgZD0iTTEwLjc5OSAxNy43ODZINC4wNTNzLjg0MyAxLjY4NiAzLjM3MyAxLjY4NiAzLjM3My0xLjY4NiAzLjM3My0xLjY4NnpNOC4yNyAxNS42NzlINi41ODRhLjQyMi40MjIgMCAwIDEgMC0uODQ0SDguMjdhLjQyMi40MjIgMCAwIDEgMCAuODQ0eiIvPjxwYXRoIGZpbGw9IiM2NjIxMTMiIGQ9Ik00LjA1NCAxMi43MjhhLjg0My44NDMgMCAwIDEtLjg0My0uODQzdi0uODQzYS44NDMuODQzIDAgMCAxIDEuNjg2IDB2Ljg0M2EuODQzLjg0MyAwIDAgMS0uODQzLjg0M3ptNi43NDUgMGEuODQzLjg0MyAwIDAgMS0uODQzLS44NDN2LS44NDNhLjg0My44NDMgMCAwIDEgMS42ODYgMHYuODQzYS44NDIuODQyIDAgMCAxLS44NDMuODQzeiIvPjxwYXRoIGZpbGw9IiM5OUFBQjUiIGQ9Ik0xNSAyMmgtNXMtLjE5OCA0Ljc3My0yLjQ3MiA0Ljc3M1M0Ljg5NyAyMiA0Ljg5NyAyMkgwdjE0aDE4VjI0Ljk3M0MxOCAyMyAxNyAyMiAxNSAyMnoiLz48cGF0aCBmaWxsPSIjNjY3NTdGIiBkPSJNMTMuOTg2IDI2aDEuMDI4djEwaC0xLjAyOHoiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJNMjAuOTU5IDE1LjA1M2MtMS40NjQtLjQ3NC00LjkwOS0uMzQ1LTUuNzcxLjc3NS0yLjIzOS4wNDMtNC44NjYgMi4wNjctNS4yMTEgNC43MzctLjM0MSAyLjY0My40MTkgMy44Ny42ODkgNS44NTcuMzA2IDIuMjUxIDEuNTcyIDIuOTcxIDIuNTg0IDMuMjczIDEuNDU2IDEuOTIzIDMuMDAzIDEuODQxIDUuNjAyIDEuODQxIDUuMDc0IDAgNy40OTEtMy4zOTUgNy43MDUtOS4xNjIuMTI5LTMuNDg5LTEuOTE3LTYuMTMtNS41OTgtNy4zMjF6Ii8+PHBhdGggZmlsbD0iI0ZGREM1RCIgZD0iTTE2LjA1MyAzMC4wODVoNC4xNDhWMzZoLTQuMTQ4eiIvPjxwYXRoIGZpbGw9IiNGRkRDNUQiIGQ9Ik0yMy44NjEgMjIuNjJjLS40OTEtLjY4LTEuMTItMS4yMjctMi40OTgtMS40MjEuNTE3LjIzNyAxLjAxMiAxLjA1NSAxLjA3NyAxLjUwNy4wNjUuNDUyLjEyOS44MTgtLjI4LjM2Ni0xLjYzOS0xLjgxMS0zLjQyNC0xLjA5OC01LjE5Mi0yLjIwNS0xLjIzNS0uNzczLTEuNjEyLTEuNjI4LTEuNjEyLTEuNjI4cy0uMTUxIDEuMTQxLTIuMDI0IDIuMzA0Yy0uNTQzLjMzNy0xLjE5MSAxLjA4OC0xLjU1IDIuMTk2LS4yNTguNzk3LS4xNzggMS41MDctLjE3OCAyLjcyMSAwIDMuNTQ0IDIuOTIxIDYuNTI0IDYuNTI0IDYuNTI0czYuNTI0LTMuMDA2IDYuNTI0LTYuNTI0Yy0uMDAxLTIuMjA0LS4yMzItMy4wNjUtLjc5MS0zLjg0eiIvPjxwYXRoIGZpbGw9IiNDMTY5NEYiIGQ9Ik0yMS4wMjcgMzAuMDg1aC01LjhzLjcyNSAxLjQ1IDIuOSAxLjQ1IDIuOS0xLjQ1IDIuOS0xLjQ1em0tMi4xNzUtMS40NDloLTEuNDVhLjM2Mi4zNjIgMCAxIDEgMC0uNzI0aDEuNDVhLjM2Mi4zNjIgMCAxIDEgMCAuNzI0eiIvPjxwYXRoIGZpbGw9IiM2NjIxMTMiIGQ9Ik0xNS4wOTEgMjYuNzY0YS44NDIuODQyIDAgMCAxLS44NDMtLjg0M3YtLjg0M2EuODQyLjg0MiAwIDEgMSAxLjY4NiAwdi44NDNhLjg0Mi44NDIgMCAwIDEtLjg0My44NDN6bTYgMGEuODQyLjg0MiAwIDAgMS0uODQzLS44NDN2LS44NDNhLjg0Mi44NDIgMCAxIDEgMS42ODYgMHYuODQzYS44NDIuODQyIDAgMCAxLS44NDMuODQzeiIvPjxwYXRoIGZpbGw9IiM1QzkxM0IiIGQ9Ik0yMy4wOTEgMzNoLTIuODlzLS43MDUgMy0yLjA3NCAzYy0xLjM2OCAwLTIuMDc0LTMtMi4wNzQtM2gtMS45NjJjLS4zNjggMC0uNzE5LjAzMi0xLjA1NS4wODgtMS45NDEuMzI2LTMuMzAxIDEuNTM1LTMuNzU5IDIuOTEyaDE3LjYzMmMtLjUxOC0xLjYwMi0yLjE1OS0zLTMuODE4LTN6Ii8+PC9zdmc+", "1f4a1": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGRDk4MyIgZD0iTTI5IDExLjA2YzAgNi40MzktNSA3LjQzOS01IDEzLjQ0IDAgMy4wOTgtMy4xMjMgMy4zNTktNS41IDMuMzU5LTIuMDUzIDAtNi41ODYtLjc3OS02LjU4Ni0zLjM2MUMxMS45MTQgMTguNSA3IDE3LjUgNyAxMS4wNiA3IDUuMDI5IDEyLjI4NS4xNCAxOC4wODMuMTQgMjMuODgzLjE0IDI5IDUuMDI5IDI5IDExLjA2eiIvPjxwYXRoIGZpbGw9IiNDQ0Q2REQiIGQ9Ik0yMi4xNjcgMzIuNWMwIC44MjgtMi4yMzQgMi41LTQuMTY3IDIuNS0xLjkzMyAwLTQuMTY3LTEuNjcyLTQuMTY3LTIuNSAwLS44MjggMi4yMzMtLjUgNC4xNjctLjUgMS45MzMgMCA0LjE2Ny0uMzI4IDQuMTY3LjV6Ii8+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTIyLjcwNyAxMC4yOTNhLjk5OS45OTkgMCAwIDAtMS40MTQgMEwxOCAxMy41ODZsLTMuMjkzLTMuMjkzYS45OTkuOTk5IDAgMSAwLTEuNDE0IDEuNDE0TDE3IDE1LjQxNFYyNmExIDEgMCAxIDAgMiAwVjE1LjQxNGwzLjcwNy0zLjcwN2EuOTk5Ljk5OSAwIDAgMCAwLTEuNDE0eiIvPjxwYXRoIGZpbGw9IiM5OUFBQjUiIGQ9Ik0yNCAzMWEyIDIgMCAwIDEtMiAyaC04YTIgMiAwIDAgMS0yLTJ2LTZoMTJ2NnoiLz48cGF0aCBmaWxsPSIjQ0NENkREIiBkPSJNMTEuOTk5IDMyYTEgMSAwIDAgMS0uMTYzLTEuOTg2bDEyLTJhLjk5NC45OTQgMCAwIDEgMS4xNS44MjIuOTk5Ljk5OSAwIDAgMS0uODIyIDEuMTVsLTEyIDJhLjkyNy45MjcgMCAwIDEtLjE2NS4wMTR6bTAtNGExIDEgMCAwIDEtLjE2My0xLjk4NmwxMi0yYS45OTUuOTk1IDAgMCAxIDEuMTUuODIyLjk5OS45OTkgMCAwIDEtLjgyMiAxLjE1bC0xMiAyYS45MjcuOTI3IDAgMCAxLS4xNjUuMDE0eiIvPjwvc3ZnPg==", "1f4aa": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0VGOTY0NSIgZD0iTTE1Ljk3NyA5LjM2aDMuNzg5YS43NzcuNzc3IDAgMCAwIC4wNTgtLjY3M2wtMy44NDYtNC43MDVWOS4zNnoiLz48cGF0aCBmaWxsPSIjRkZEQzVEIiBkPSJNMTIuODA0IDIyLjI3N2E5LjE5MiA5LjE5MiAwIDAgMC0uMjA2LS45NzNjLS42Mi0yLjIyMy0xLjE0LTMuMTY0LS45MTgtNS40OTQuMjktMS41ODQuMjczLTQuNzYzIDQuNDgzLTQuMjY4IDEuMTEyLjEzMSAyLjg0My45MjcgMy44MzQuOTEuNTY3LS4wMS45OC0xLjE1NyAxLjAxNy0xLjUzOS4wNTEtLjUyNi0uODY1LTEuNDItMS4yNDgtMS41NTRhOTQuMzUgOTQuMzUgMCAwIDAtMi42ODEtLjgyNGMtMS4wMzktLjMwMS0uOTg1LTEuNzA1LTEuMDUxLTIuMjA1YS41OTcuNTk3IDAgMCAxIC4yOTQtLjU5MWMuMjEtLjEyNC4zNzUtLjAwOC41NzkuMTI1bC44ODUuNjQ4Yy40OTcuNDI2LS44NzQgMS4yNC0uNTAzIDEuMzc2IDAgMCAxLjc1NS42NTkgMi41MDcuNzk2LjQxMi4wNzUgMS44MzQtMS41MjkgMS45MTctMi40Ny4wNjUtLjc0LTMuMzk4LTQuMDgzLTUuODY3LTUuMzgxLS44NjgtLjQ1Ni0xLjM3Ny0uNzIxLTEuOTQ5LS42OTQtLjY4My4wMzItLjg5OC4zMDItMS43NDggMS4wM0M4LjMwMiA0LjQ2IDQuNTY4IDExLjU3NyA0LjAyIDEzLjE1MmMtMi4yNDYgNi40NjEtMi41OTcgOS44NjUtMi42NzcgMTEuNzg4YTIxLjI2IDIxLjI2IDAgMCAwLS4wNzYgMS43NThjLjA2NSAwLTEgNSAwIDZzNS4zMjYgMSA1LjMyNiAxYzEwIDMuOTg5IDI4LjU3IDIuOTQ4IDI4LjU3LTcuMjMzIDAtMTIuMTcyLTE4LjgxMy0xMC41NTctMjIuMzU5LTQuMTg4eiIvPjxwYXRoIGZpbGw9IiNFRjk2NDUiIGQ9Ik0yMC42MyAzMi4wNzhjLTMuMTYtLjMzMi01LjYyOC0xLjg4MS01Ljc2Ny0xLjk3YTEgMSAwIDAgMSAxLjA3NS0xLjY4N2MuMDQuMDI1IDQuMDAzIDIuNDkyIDcuODQ2IDEuNDY3IDIuMTI1LS41NjYgMy44NjctMi4xMTUgNS4xNzctNC42MDFhMSAxIDAgMCAxIDEuNzcuOTMyYy0xLjU4NSAzLjAwNi0zLjc1NCA0Ljg5My02LjQ0NyA1LjYwNi0xLjI1Ny4zMzItMi41MDIuMzc0LTMuNjU0LjI1M3oiLz48L3N2Zz4=", "1f4b0": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZERDg4OCIgZD0iTTMxLjg5OCAyMy45MzhDMzEuMyAxNy4zMiAyOCAxNCAyOCAxNGwtNi04aC04bC02IDhzLTEuNDE5IDEuNDMzLTIuNTY3IDQuMjc1QzMuNDQ0IDE4LjkzNSAyIDIwLjc4OSAyIDIzYTQuOTcgNC45NyAwIDAgMCAxLjYwOSAzLjY1NUE0Ljk0MyA0Ljk0MyAwIDAgMCAzIDI5YzAgMS45NTggMS4xMzYgMy42MzYgMi43NzUgNC40NTZDNy4wNTggMzUuMzc4IDguNzcyIDM2IDEwIDM2aDE2YzEuMzc5IDAgMy4zNzMtLjc3OSA0LjY3OC0zLjMxQzMyLjYwOSAzMS45OTkgMzQgMzAuMTcgMzQgMjhhNC45ODggNC45ODggMCAwIDAtMi4xMDItNC4wNjJ6TTE4IDZjLjU1IDAgMS4wNTgtLjE1OCAxLjUtLjQxNi40NDMuMjU4Ljk1MS40MTYgMS41LjQxNiAxLjY1NyAwIDQtMi4zNDQgNC00IDAgMCAwLTItMi0yLS43ODggMC0xIDEtMiAxcy0xLTEtMy0xLTIgMS0zIDEtMS4yMTEtMS0yLTFjLTIgMC0yIDItMiAyIDAgMS42NTYgMi4zNDQgNCA0IDQgLjU0OSAwIDEuMDU3LS4xNTggMS41LS40MTYuNDQzLjI1OC45NTEuNDE2IDEuNS40MTZ6Ii8+PHBhdGggZmlsbD0iI0JGNjk1MiIgZD0iTTI0IDZhMSAxIDAgMCAxLTEgMUgxM2ExIDEgMCAwIDEgMC0yaDEwYTEgMSAwIDAgMSAxIDF6Ii8+PHBhdGggZmlsbD0iIzY3NzU3RiIgZD0iTTIzLjkwMSAyNC41NDJjMC00LjQ3Ny04LjU4MS00LjE4NS04LjU4MS02Ljg4NiAwLTEuMzA4IDEuMzAxLTEuOTQ3IDIuODExLTEuOTQ3IDIuNTM4IDAgMi45OSAxLjU2OSA0LjEzOSAxLjU2OS44MTMgMCAxLjIwNS0uNDkzIDEuMjA1LTEuMDQ2IDAtMS4yODQtMi4wMjQtMi4yNTYtMy45NjUtMi41OTJWMTIuNGMwLS43NzMtLjY1LTEuNC0xLjQ1NC0xLjQtLjgwNSAwLTEuNDU2LjYyNy0xLjQ1NiAxLjR2MS4yODNjLTIuMTE2LjQ2My0zLjkzNyAxLjg3NS0zLjkzNyA0LjE3NiAwIDQuMjk5IDguNTc5IDQuMTI1IDguNTc5IDcuMTQ1IDAgMS4wNDctMS4xNzggMi4wOTMtMy4xMTEgMi4wOTMtMi45MDEgMC0zLjg2Ny0xLjg4OS01LjA0NS0xLjg4OS0uNTc0IDAtMS4wODcuNDY0LTEuMDg3IDEuMTY0IDAgMS4xMTMgMS45MzggMi40NTEgNC42MDMgMi44MjRsLS4wMDEuMDF2MS4zOThjMCAuNzcyLjY1MiAxLjQgMS40NTYgMS40LjgwNCAwIDEuNDU1LS42MjggMS40NTUtMS40di0xLjM5OGMwLS4wMTctLjAwOC0uMDMtLjAwOS0uMDQ1IDIuMzk4LS40MyA0LjM5OC0xLjkzMiA0LjM5OC00LjYxOXoiLz48L3N2Zz4=", "1f4b5": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzVDOTEzQiIgZD0iTTIgMTFjLTIgMC0yIDItMiAydjIxczAgMiAyIDJoMzJjMiAwIDItMiAyLTJWMTNzMC0yLTItMkgyeiIvPjxwYXRoIGZpbGw9IiNBN0QyOEIiIGQ9Ik0yIDZDMCA2IDAgOCAwIDh2MjBzMCAyIDIgMmgzMmMyIDAgMi0yIDItMlY4czAtMi0yLTJIMnoiLz48Y2lyY2xlIGN4PSIyNSIgY3k9IjE4IiByPSI2LjUiIGZpbGw9IiM3N0IyNTUiLz48cGF0aCBmaWxsPSIjNUM5MTNCIiBkPSJNMzMgMjguNUgzYy0uODI3IDAtMS41LS42NzMtMS41LTEuNVY5YzAtLjgyNy42NzMtMS41IDEuNS0xLjVoMzBjLjgyNyAwIDEuNS42NzMgMS41IDEuNXYxOGMwIC44MjctLjY3MyAxLjUtMS41IDEuNXpNMyA4LjVhLjUuNSAwIDAgMC0uNS41djE4YzAgLjI3NS4yMjUuNS41LjVoMzBjLjI3NSAwIC41LS4yMjUuNS0uNVY5YS41LjUgMCAwIDAtLjUtLjVIM3oiLz48cGF0aCBmaWxsPSIjRkZFOEI2IiBkPSJNMTQgNmg4djI0LjA2MmgtOHoiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJNMTQgMzBoOHY2aC04eiIvPjxwYXRoIGZpbGw9IiM1QzkxM0IiIGQ9Ik0xMS44MSAyMC4wMjNjMC0yLjk3OS01LjQ5My0yLjc4NS01LjQ5My00LjU4NCAwLS44NzEuODMzLTEuMjk2IDEuNzk5LTEuMjk2IDEuNjI1IDAgMS45MTQgMS4wNDQgMi42NSAxLjA0NC41MjEgMCAuNzcyLS4zMjguNzcyLS42OTYgMC0uODU2LTEuMjk2LTEuNTAyLTIuNTM5LTEuNzI2di0uODI1YS45MzIuOTMyIDAgMSAwLTEuODY0IDB2Ljg1M2MtMS4zNTQuMzEtMi41MjEgMS4yNS0yLjUyMSAyLjc4MSAwIDIuODYyIDUuNDkzIDIuNzQ2IDUuNDkzIDQuNzU4IDAgLjY5NS0uNzU0IDEuMzkxLTEuOTkyIDEuMzkxLTEuODU3IDAtMi40NzYtMS4yNTctMy4yMjktMS4yNTctLjM2OCAwLS42OTYuMzA5LS42OTYuNzc1IDAgLjc0MSAxLjI0IDEuNjMxIDIuOTQ3IDEuODgxbC0uMDAxLjAwNHYuOTM0YS45MzMuOTMzIDAgMCAwIDEuODY0IDB2LS45MzRjMC0uMDEtLjAwNS0uMDE5LS4wMDYtLjAyOCAxLjUzNS0uMjg3IDIuODE2LTEuMjg2IDIuODE2LTMuMDc1eiIvPjwvc3ZnPg==", "1f4b8": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzVDOTEzQiIgZD0iTTM1LjYwMiAxNi4yOGMtMi41ODItMy43NjEtNy45MiAxLjc3NC0xNy42NjIgMi44OTktMy42MDcuNDE2LTYuODU3IDMuNDI4LTExLjA0NyAzLjE0MS0xLjcxOC0uMTE4LTQuMTE3LTUuMDYxLTUuOTEzLTQuMjczLS45MjQuNDA2LTEuMzQ4IDEuNzYxLS4zOTggMi43NzlMMTEuMTMgMzMuNDEycy41MzYuNjE4IDIuMzQyLjE5Yy40NDUuMTMxIDcuMTM1LTIuNTUgMTEuMDAzLTcuOTE3LjkyNi0xLjI4NSAyLjAzLTIuMzU1IDMuMTczLTMuMjQ5IDMuNzExLTIuNzQ0IDcuNzQ1LTMuNyA3Ljc0NS0zLjcuNTE2LS40MjYuNjM3LS44NzkuNjA5LTEuMjcyLjAzNC0uNjU2LS40LTEuMTg0LS40LTEuMTg0eiIvPjxwYXRoIGZpbGw9IiNBN0QyOEIiIGQ9Ik0xMS40NzYgMTAuMjc0Yy0zLjc4MyA1LjI1LTEwLjQwOCA3LjczNy0xMC40MDggNy43MzctMS4yMzYgMS4wNDctLjE5MiAyLjI4MS0uMTkyIDIuMjgxbDEwLjQzOCAxMi4zNTlzLjUyMi42MTcgMi4yOC4xODljMCAwIDYuNjI1LTIuNDgyIDEwLjQwNy03LjczMiAzLjg5OS01LjQxIDEwLjkzLTcuMTE4IDEwLjkzLTcuMTE4IDEuMjM1LTEuMDQ3LjE5Mi0yLjI4My4xOTItMi4yODNMMjQuNjg1IDMuMzVzLS41MjItLjYxOC0yLjI4LS4xOTJjMCAwLTcuMDMgMS43MDQtMTAuOTI5IDcuMTE2eiIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTQiIHI9IjUuNSIgZmlsbD0iIzc3QjI1NSIvPjxwYXRoIGZpbGw9IiM1QzkxM0IiIGQ9Ik0xMi44NzMgMzEuOTI5Yy0uODgxIDAtMS4yMDQtLjMyOC0xLjI0OC0uMzc4TDIuMjE2IDIwLjU2OGMtLjAxOC0uMDIxLS40OTUtLjU2Ny0uNDM3LTEuMjYxLjAzNS0uNDIxLjI1My0uNzk2LjY0Ny0xLjExNWwuMDYzLS4wMzhjLjA2MS0uMDI0IDYuMTYzLTIuNTMyIDkuNTgzLTcuMDY1bC4yLjE1LS4yLS4xNWMzLjYxOC00Ljc5NiA5Ljg1OS02Ljg1NCA5LjkyMS02Ljg3NCAxLjc0NS0uNDA2IDIuMzE2LjE3NCAyLjM3Ny4yNDJsOS4yODUgMTEuMDQ0Yy4wMTcuMDE4LjQ5My41NjYuNDM1IDEuMjYxLS4wMzUuNDItLjI1My43OTUtLjY0NyAxLjExNGwtLjA5OS4wNDljLS4wNjEuMDE1LTYuMTI5IDEuNTIzLTkuNjQ0IDYuMTgxLTMuNDk5IDQuNjQtOS42MDcgNy42NDItOS42NjggNy42NzEtLjQ2NC4xMS0uODQ2LjE1Mi0xLjE1OS4xNTJ6bS0uODcxLS43MDdjLjAwMSAwIC40NTIuNDE2IDEuODY1LjA4OC4wMDgtLjAxMSA2LjAwOS0yLjk2MiA5LjQzNi03LjUwNCAzLjQzNy00LjU1NSA5LjIyNS02LjE4MiA5Ljg2Ny02LjM1MS4yNTctLjIyMS4zOTktLjQ2Ni40MjItLjcyOS4wNDItLjQ4LS4zMTItLjg5My0uMzE1LS44OTdMMjMuOTkyIDQuNzg0Yy0uMDAyIDAtLjQ1LS40MTUtMS44NjQtLjA4Ny0uMDQxLjAxNC02LjEzNSAyLjAyNi05LjY1NiA2LjY5My0zLjM2NiA0LjQ2MS05LjIzOSA2Ljk5NS05Ljc1OCA3LjIxMy0uMjY4LjIyNS0uNDE0LjQ3Ni0uNDM3Ljc0NS0uMDQuNDc2LjMxMi44ODcuMzE1Ljg5MWw5LjQxIDEwLjk4M3oiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJtMjEuMjc2IDIyLjE2Ni0uMDA2IDUuOTQuNDk3LjU5Yy45NjktLjg4NCAxLjktMS44NzggMi43MDUtMi45OTZhMTUuODQ0IDE1Ljg0NCAwIDAgMSAyLjgyOC0yLjk4NmwtLjQ4My0uNTc1LTUuNTQxLjAyN3oiLz48cGF0aCBmaWxsPSIjRkZFOEI2IiBkPSJNMjYuNzk4IDIyLjExOCAxNC4yOTIgNy4zMDVjLTEuMDE2LjgzNi0xLjk5MiAxLjgxMS0yLjgyMiAyLjk2NC0uODExIDEuMTI2LTEuNzU1IDIuMTE3LTIuNzM1IDIuOTkxbDEuNDYyIDEuNzMxLS4wMDEuMDAxIDExLjA3NSAxMy4xMTRhMTguNzEgMTguNzEgMCAwIDAgMi43MjUtMy4wMDNjLjgzLTEuMTUyIDEuODA1LTIuMTI2IDIuODItMi45NjJsLS4wMTktLjAyM2guMDAxeiIvPjxwYXRoIGZpbGw9IiM1QzkxM0IiIGQ9Ik0xNC40NzkgMjIuNTU1Yy0xLjU1Ny0xLjg0NC00Ljg1MyAxLjE0OC01Ljc5My4wMzUtLjQ1NS0uNTM5LS4xNjItMS4yMzguNDM2LTEuNzQyIDEuMDA1LS44NSAxLjczLS4zNTUgMi4xODUtLjc0LjMyMy0uMjcyLjMwNi0uNjA1LjExNC0uODM0LS40NDYtLjUyNy0xLjU4Ni0uMjUyLTIuNDcyLjI2bC0uNDMxLS41MWEuNzU0Ljc1NCAwIDAgMC0xLjE1Mi45NzJsLjQ0Ni41MjljLS42NzcuODk4LS45MDcgMi4wOS0uMTA2IDMuMDM3IDEuNDk2IDEuNzcgNC44MzMtMS4xNzIgNS44ODMuMDcyLjM2NC40MzIuMjYyIDEuMjU2LS41MDQgMS45MDItMS4xNDguOTcxLTIuMTg4LjUxNi0yLjY1NS45MS0uMjI4LjE5MS0uMjY5LjU1NS0uMDI2Ljg0NC4zODcuNDU3IDEuNjIuMzU5IDIuODA1LS4zNzkuMDAyLjAwMi4wMDIuMDA0LjAwMi4wMDZsLjQ4Ny41NzZhLjc1NS43NTUgMCAxIDAgMS4xNTMtLjk3NGwtLjQ4Ny0uNTc2Yy0uMDA1LS4wMDYtLjAxMy0uMDEtLjAxOS0uMDE2Ljc5OS0uOTc4IDEuMDY5LTIuMjY3LjEzNC0zLjM3MnoiLz48cGF0aCBmaWxsPSIjRTFFOEVEIiBkPSJNMzIuNDU2IDMyLjU4OGMuMDA5LS4wMDguMDE5LS4wMTQuMDI4LS4wMjEuMDY4LS4wNjguMTIxLS4xNDYuMTgxLS4yMjEuMDQyLS4wNTIuMDg5LS4xMDIuMTI4LS4xNTUuMDM1LS4wNS4wNjQtLjEwMS4wOTYtLjE1MiAxLjQyLTIuMTg3LjQ5LTUuODk1LTIuMzIxLTguNzA3LTIuODEyLTIuODEyLTYuNTIxLTMuNzQyLTguNzA3LTIuMzIxLS4wNTIuMDMxLS4xMDMuMDYtLjE1My4wOTYtLjA1My4wMzktLjEwNC4wODYtLjE1NC4xMjctLjA3NC4wNjEtLjE1Mi4xMTMtLjIyMS4xODItLjAwOS4wMDktLjAxNS4wMTktLjAyMi4wMjgtLjAxMS4wMTEtLjAyNC4wMTgtLjAzNi4wM2wuMDA2LjAwNWMtMSAxLjA2Mi0xLjAxMiAyLjcwNS0uMDA2IDMuNzEyIDEuMDA4IDEuMDA4IDIuNjUuOTk0IDMuNzEzLS4wMDZsLjAxMS4wMTJjLS4wMjEuMDItLjA0NC4wMzMtLjA2NC4wNTMtMS4wNTkgMS4wNTktMS4wODQgMi43NDgtLjA1OSAzLjc3NSAxLjAyNiAxLjAyNSAyLjcxNyAxIDMuNzc1LS4wNTkuMDItLjAyLjAzMy0uMDQzLjA1My0uMDY0bC4wMTEuMDEyYy0xIDEuMDYyLTEuMDEzIDIuNzA1LS4wMDUgMy43MTMgMS4wMDcgMS4wMDYgMi42NDkuOTk0IDMuNzExLS4wMDZsLjAwNi4wMDZjLjAxLS4wMTQuMDE4LS4wMjcuMDI5LS4wMzl6Ii8+PHBhdGggZmlsbD0iI0NDRDZERCIgZD0iTTIxLjI3NyAyNS4yMzFjLjkwNi45MDUgMi4zMjEuOTc5IDMuMzcuMjYxLjQzOS0uNzUuNTY1LTEuNDYzLjU2NS0xLjY4Ni0yLjIwNyAxLjY0Ni00LjE3Ny4wMDktNC42MTgtLjk3LS4xODMuODQ2LjAzOSAxLjc1LjY4MyAyLjM5NXptNy4yOTkgMy44NGMuMjk4LS40MTkuNTI5LS44MjQuNjM3LTEuMDk4LTEuNDA1IDEuMjg4LTQuMDkxLjM0NS00LjkwNS0xLjY5OC0uMzU4Ljk1LS4xNzUgMi4wNDQuNTcxIDIuNzkgMS4wMDIgMS4wMDIgMi42MzQuOTk0IDMuNjk3LjAwNnptMy44NTQgMy41OTUuMDI5LS4wMzZjLjAxLS4wMDguMDItLjAxNC4wMjgtLjAyMi4wNjktLjA2OC4xMjItLjE0Ni4xODEtLjIyLjA0My0uMDUzLjA4OS0uMTAyLjEyOC0uMTU2LjAzNi0uMDQ5LjA2NS0uMTAxLjA5Ny0uMTUyLjA2NS0uMS4xLS4yMTguMTU1LS4zMjQtMi41MjggMS4xMzEtNC40MTUtLjc4OC00Ljk0NC0xLjc0NS0uMjk1LjkxNy0uMTAzIDEuOTQ0LjYwOSAyLjY1NyAxLjAwNiAxLjAwNyAyLjY0OC45OTUgMy43MTEtLjAwNmwuMDA2LjAwNHoiLz48cGF0aCBmaWxsPSIjRTFFOEVEIiBkPSJtMTMuOTU2IDEyLjQ5OC4wMjgtLjAyMmMuMDY5LS4wNjguMTIyLS4xNDYuMTgxLS4yMi4wNDItLjA1Mi4wODgtLjEwMS4xMjctLjE1NS4wMzYtLjA1LjA2NS0uMTAxLjA5Ny0uMTUyIDEuNDItMi4xODcuNDg5LTUuODk2LTIuMzIyLTguNzA3QzkuMjU1LjQzIDUuNTQ3LS41MDEgMy4zNi45MTljLS4wNTEuMDMyLS4xMDMuMDYxLS4xNTMuMDk3LS4wNTQuMDM5LS4xMDMuMDg1LS4xNTUuMTI3LS4wNzQuMDYtLjE1Mi4xMTItLjIyLjE4MS0uMDA5LjAwOS0uMDE1LjAyLS4wMjIuMDI4LS4wMTEuMDEtLjAyNS4wMTktLjAzNi4wM2wuMDA1LjAwNWMtMSAxLjA2Mi0xLjAxMiAyLjcwNS0uMDA1IDMuNzEyIDEuMDA3IDEuMDA3IDIuNjUuOTk1IDMuNzEyLS4wMDVsLjAxMS4wMTFjLS4wMjEuMDE5LS4wNDQuMDMzLS4wNjQuMDUzLTEuMDU5IDEuMDU5LTEuMDg0IDIuNzQ4LS4wNTggMy43NzUgMS4wMjYgMS4wMjcgMi43MTYgMS4wMDEgMy43NzUtLjA1OC4wMi0uMDIuMDMzLS4wNDMuMDUzLS4wNjRsLjAxMS4wMTFjLTEgMS4wNjItMS4wMTMgMi43MDUtLjAwNSAzLjcxMiAxLjAwNyAxLjAwNyAyLjY0OS45OTUgMy43MTEtLjAwNmwuMDA1LjAwNmMuMDExLS4wMTEuMDItLjAyNC4wMzEtLjAzNnoiLz48cGF0aCBmaWxsPSIjQ0NENkREIiBkPSJNMi43NzMgNS4xYy45MDYuOTA2IDIuMzIxLjk4IDMuMzcuMjYuNDM5LS43NS41NjQtMS40NjIuNTY0LTEuNjg1LTIuMjA2IDEuNjQ1LTQuMTc3LjAwNy00LjYxNy0uOTcyLS4xODMuODQ3LjAzOSAxLjc1Mi42ODMgMi4zOTd6bTcuMzAxIDMuODM4Yy4yOTctLjQxOS41MjgtLjgyMi42MzUtMS4wOTYtMS40MDYgMS4yODgtNC4wOTIuMzQ0LTQuOTA1LTEuNjk5LS4zNTguOTUtLjE3NSAyLjA0NC41NyAyLjc5IDEuMDA0IDEuMDAzIDIuNjM3Ljk5NCAzLjcuMDA1em0zLjg1MSAzLjU5N2MuMDExLS4wMTEuMDItLjAyNC4wMy0uMDM2bC4wMjgtLjAyMmMuMDY5LS4wNjguMTIyLS4xNDYuMTgxLS4yMi4wNDItLjA1Mi4wODgtLjEwMS4xMjctLjE1NS4wMzYtLjA1LjA2NS0uMTAxLjA5Ny0uMTUyLjA2NS0uMS4xLS4yMTkuMTU1LS4zMjUtMi41MjggMS4xMzEtNC40MTUtLjc4Ny00Ljk0NC0xLjc0NC0uMjk1LjkxNy0uMTAzIDEuOTQ0LjYwOSAyLjY1NiAxLjAwNyAxLjAwNyAyLjY0OS45OTUgMy43MTEtLjAwNmwuMDA2LjAwNHoiLz48L3N2Zz4=", "1f4c8": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0NDRDZERCIgZD0iTTMxIDJINWEzIDMgMCAwIDAtMyAzdjI2YTMgMyAwIDAgMCAzIDNoMjZhMyAzIDAgMCAwIDMtM1Y1YTMgMyAwIDAgMC0zLTN6Ii8+PHBhdGggZmlsbD0iI0UxRThFRCIgZD0iTTMxIDFINWE0IDQgMCAwIDAtNCA0djI2YTQgNCAwIDAgMCA0IDRoMjZhNCA0IDAgMCAwIDQtNFY1YTQgNCAwIDAgMC00LTR6bTAgMmMxLjEwMyAwIDIgLjg5NyAyIDJ2NGgtNlYzaDR6bS00IDE2aDZ2NmgtNnYtNnptMC0ydi02aDZ2NmgtNnpNMjUgM3Y2aC02VjNoNnptLTYgOGg2djZoLTZ2LTZ6bTAgOGg2djZoLTZ2LTZ6TTE3IDN2NmgtNlYzaDZ6bS02IDhoNnY2aC02di02em0wIDhoNnY2aC02di02ek0zIDVjMC0xLjEwMy44OTctMiAyLTJoNHY2SDNWNXptMCA2aDZ2Nkgzdi02em0wIDhoNnY2SDN2LTZ6bTIgMTRjLTEuMTAzIDAtMi0uODk3LTItMnYtNGg2djZINXptNiAwdi02aDZ2NmgtNnptOCAwdi02aDZ2NmgtNnptMTIgMGgtNHYtNmg2djRjMCAxLjEwMy0uODk3IDItMiAyeiIvPjxwYXRoIGZpbGw9IiNERDJFNDQiIGQ9Ik00Ljk5OCAzM2EyIDIgMCAwIDEtMS43NTktMi45NDhsNy0xM2ExLjk5OSAxLjk5OSAwIDAgMSAzLjE3NS0uNDY2bDYuMDc2IDYuMDc2IDkuNzM4LTE4LjU5YTIgMiAwIDAgMSAzLjU0MyAxLjg1N2wtMTEgMjFhMi4wMDIgMi4wMDIgMCAwIDEtMS40NyAxLjA1IDIuMDE3IDIuMDE3IDAgMCAxLTEuNzE2LS41NjNsLTYuMS02LjA5OS01LjcyNCAxMC42MzFBMiAyIDAgMCAxIDQuOTk4IDMzeiIvPjwvc3ZnPg==", "1f4ca": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0NDRDZERCIgZD0iTTMxIDJINWEzIDMgMCAwIDAtMyAzdjI2YTMgMyAwIDAgMCAzIDNoMjZhMyAzIDAgMCAwIDMtM1Y1YTMgMyAwIDAgMC0zLTN6Ii8+PHBhdGggZmlsbD0iI0UxRThFRCIgZD0iTTMxIDFINWE0IDQgMCAwIDAtNCA0djI2YTQgNCAwIDAgMCA0IDRoMjZhNCA0IDAgMCAwIDQtNFY1YTQgNCAwIDAgMC00LTR6bTAgMmMxLjEwMyAwIDIgLjg5NyAyIDJ2NGgtNlYzaDR6bS00IDE2aDZ2NmgtNnYtNnptMC0ydi02aDZ2NmgtNnpNMjUgM3Y2aC02VjNoNnptLTYgOGg2djZoLTZ2LTZ6bTAgOGg2djZoLTZ2LTZ6TTE3IDN2NmgtNlYzaDZ6bS02IDhoNnY2aC02di02em0wIDhoNnY2aC02di02ek0zIDVjMC0xLjEwMy44OTctMiAyLTJoNHY2SDNWNXptMCA2aDZ2Nkgzdi02em0wIDhoNnY2SDN2LTZ6bTIgMTRjLTEuMTAzIDAtMi0uODk3LTItMnYtNGg2djZINXptNiAwdi02aDZ2NmgtNnptOCAwdi02aDZ2NmgtNnptMTIgMGgtNHYtNmg2djRjMCAxLjEwMy0uODk3IDItMiAyeiIvPjxwYXRoIGZpbGw9IiM1QzkxM0IiIGQ9Ik0xMyAzM0g3VjE2YTIgMiAwIDAgMSAyLTJoMmEyIDIgMCAwIDEgMiAydjE3eiIvPjxwYXRoIGZpbGw9IiMzQjk0RDkiIGQ9Ik0yOSAzM2gtNlY5YTIgMiAwIDAgMSAyLTJoMmEyIDIgMCAwIDEgMiAydjI0eiIvPjxwYXRoIGZpbGw9IiNERDJFNDQiIGQ9Ik0yMSAzM2gtNlYyM2EyIDIgMCAwIDEgMi0yaDJhMiAyIDAgMCAxIDIgMnYxMHoiLz48L3N2Zz4=", "1f4e2": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0JFMTkzMSIgZD0iTTEyLjkwOCAzMC43NWMtLjI3NiAyLjIwOS0yLjI5MSAzLTQuNSAzcy0zLjc3Ni0xLjc5MS0zLjUtNGwxLTljLjI3Ni0yLjIwOSAyLjI5MS00IDQuNS00czYuNDY4IDAgMy41IDQtMSAxMC0xIDEweiIvPjxwYXRoIGZpbGw9IiNDQ0Q2REQiIGQ9Ik0zNS44MjUgMTQuNzVjMCA2LjkwMi0xLjU0NCAxMi41LTMuNDUgMTIuNS0xLjkwNSAwLTIwLjQ1LTUuNTk4LTIwLjQ1LTEyLjUgMC02LjkwMyAxOC41NDUtMTIuNSAyMC40NS0xMi41IDEuOTA2IDAgMy40NSA1LjU5NyAzLjQ1IDEyLjV6Ii8+PGVsbGlwc2UgY3g9IjMyLjM3NSIgY3k9IjE0Ljc1IiBmaWxsPSIjNjY3NTdGIiByeD0iMy40NSIgcnk9IjEyLjUiLz48cGF0aCBmaWxsPSIjREQyRTQ0IiBkPSJtMTcuOTI1IDIxLjc1LTE0LTFjLTUgMC01LTEyIDAtMTJsMTQtMWMtMyAzLTMgMTEgMCAxNHoiLz48ZWxsaXBzZSBjeD0iMzEuMzI1IiBjeT0iMTQuNzUiIGZpbGw9IiM5OUFBQjUiIHJ4PSIxLjUiIHJ5PSI0LjM0OCIvPjwvc3ZnPg==", "1f4f1": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzMxMzczRCIgZD0iTTExIDM2cy00IDAtNC00VjRzMC00IDQtNGgxNHM0IDAgNCA0djI4czAgNC00IDRIMTF6Ii8+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0iTTkgNWgxOHYyNkg5eiIvPjwvc3ZnPg==", "1f501": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzNCODhDMyIgZD0iTTM2IDMyYTQgNCAwIDAgMS00IDRINGE0IDQgMCAwIDEtNC00VjRhNCA0IDAgMCAxIDQtNGgyOGE0IDQgMCAwIDEgNCA0djI4eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0zMC4yIDEwIDIzIDR2NGgtOEM5LjQ3NyA4IDUgMTIuNDc3IDUgMThjMCAxLjQxNC4yOTcgMi43NTguODI3IDMuOTc4bDMuMy0yLjc1QTYgNiAwIDAgMSAxNSAxMmg4djRsNy4yLTZ6bS0uMDI2IDQuMDIzLTMuMzAxIDIuNzVBNiA2IDAgMCAxIDIxIDI0aC04di00bC03LjIgNiA3LjIgNnYtNGg4YzUuNTIyIDAgMTAtNC40NzggMTAtMTBhOS45NjUgOS45NjUgMCAwIDAtLjgyNi0zLjk3N3oiLz48L3N2Zz4=", "1f525": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0Y0OTAwQyIgZD0iTTM1IDE5YTE2Ljk2IDE2Ljk2IDAgMCAwLTEuMDQtNS44NjhjLS40NiA1LjM4OS0zLjMzMyA4LjE1Ny02LjMzNSA2Ljg2OC0yLjgxMi0xLjIwOC0uOTE3LTUuOTE3LS43NzctOC4xNjQuMjM2LTMuODA5LS4wMTItOC4xNjktNi45MzEtMTEuNzk0IDIuODc1IDUuNS4zMzMgOC45MTctMi4zMzMgOS4xMjUtMi45NTguMjMxLTUuNjY3LTIuNTQyLTQuNjY3LTcuMDQyLTMuMjM4IDIuMzg2LTMuMzMyIDYuNDAyLTIuMzMzIDkgMS4wNDIgMi43MDgtLjA0MiA0Ljk1OC0yLjU4MyA1LjIwOC0yLjg0LjI4LTQuNDE4LTMuMDQxLTIuOTYzLTguMzMzQTE2LjkzNiAxNi45MzYgMCAwIDAgMSAxOWMwIDkuMzg5IDcuNjExIDE3IDE3IDE3czE3LTcuNjExIDE3LTE3eiIvPjxwYXRoIGZpbGw9IiNGRkNDNEQiIGQ9Ik0yOC4zOTQgMjMuOTk5Yy4xNDggMy4wODQtMi41NjEgNC4yOTMtNC4wMTkgMy43MDktMi4xMDYtLjg0My0xLjU0MS0yLjI5MS0yLjA4My01LjI5MXMtMi42MjUtNS4wODMtNS43MDgtNmMyLjI1IDYuMzMzLTEuMjQ3IDguNjY3LTMuMDggOS4wODQtMS44NzIuNDI2LTMuNzUzLS4wMDEtMy45NjgtNC4wMDdBMTEuOTY0IDExLjk2NCAwIDAgMCA2IDMwYzAgLjM2OC4wMjMuNzMuMDU1IDEuMDlDOS4xMjUgMzQuMTI0IDEzLjM0MiAzNiAxOCAzNnM4Ljg3NS0xLjg3NiAxMS45NDUtNC45MWMuMDMyLS4zNi4wNTUtLjcyMi4wNTUtMS4wOSAwLTIuMTg3LS41ODQtNC4yMzYtMS42MDYtNi4wMDF6Ii8+PC9zdmc+", "1f528": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0Y0OTAwQyIgZD0iTTI5Ljg3OSAzMy44NzlDMzEuMDQ1IDM1LjA0NSAzMi45IDM1LjEgMzQgMzRzMS4wNDUtMi45NTUtLjEyMS00LjEyMUwxMi4xMjEgOC4xMjFDMTAuOTU1IDYuOTU1IDkuMSA2LjkgOCA4cy0xLjA0NSAyLjk1NS4xMjEgNC4xMjFsMjEuNzU4IDIxLjc1OHoiLz48cGF0aCBmaWxsPSIjNjY3NTdGIiBkPSJNMjIgM3MtNi0zLTExIDJsLTcgN3MtMS0xLTIgMGwtMSAxcy0xIDEgMCAybDQgNHMxIDEgMiAwbDEtMXMxLTEgMC0ybC0uMDc4LS4wNzhjLjc3LS43NDMgMS45MjMtMS41IDMuMDc4LS45MjJsNC00cy0xLTMgMS01IDMtMiA1LTIgMS0xIDEtMXoiLz48L3N2Zz4=", "1f54a": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzVDOTEzQiIgZD0iTS43OTQgMTYuMTEyYzEgMCA1Ljg3NSAxLjM0NCA2LjUgMi4zMTJMNi4wMTMgMTguM3MtMy45MDYtMS4yNS00LjkwNi0xLjI1Yy0xLjAwMSAwLS4zMTMtLjkzOC0uMzEzLS45Mzh6Ii8+PHBhdGggZmlsbD0iIzk5QUFCNSIgZD0iTTExIDJjMSAxIDMgNyAzIDEwcy0yIDYgMiA4IDUuMDAxLTEgNS4wMDEtNVMyMCA3IDE5IDVzLTIgMC0yIDAtMS00LTItNC0xIDItMSAyLTItMi0zLTIgMCAxIDAgMXoiLz48cGF0aCBmaWxsPSIjQ0NENkREIiBkPSJNMTAgMTVjMyAwIDQgNCA2IDRzMS0zIDMtMyAxMC01IDEwLTExIDMtMyAzLTFjMSAwIDIgMS41ODYgMiAzIDAgMSAwIDItMSAzIDEgMCAyIDIgMSAzIDEgMy0xIDYtMyA3IDAgMS0yIDMtNCAyIDAgMC0xIDMtMyAyIDAgMCAzLjA1MiAxLjY4NCA0IDIgMyAxIDcgMSA3IDFzMCAxLTIgMmMwIDAgMSAxIDAgMnMtMiAxLTIgMSAxIDItMiAxLTYtNC02LTQtNSAxLTktMS02LTYtNi04LTMtMS00LTEgMi0yIDMtMmMwIDAgMC0yIDMtMnoiLz48cGF0aCBmaWxsPSIjNUM5MTNCIiBkPSJNNi45NSAxOC4wMTlzNS40MzggMi42MjUgNy45MzggNi42NTZjMS45IDMuMDY0IDIuNzgyIDguNjU2IDIuNzgyIDguNjU2cy4wNDMuNTY0LS45MDctMi4yODFjLTEtMy0yLjIxNy02LjI4OC00LjMxMi04LjE4OC0zLjM0NC0zLjAzMS00Ljc1LTMuNS02LjA2Mi00LjI1LS4zMzItLjE4OS4yMTctLjY4Ny41NjEtLjU5M3oiLz48cGF0aCBmaWxsPSIjNUM5MTNCIiBkPSJNMTYuMTk4IDI4LjU0czIuMDM4LjEwMyAzLjEwNyAyLjEzOWMxLjA2OCAyLjAzNi0uMDUzIDQuOTE0LS4wNTMgNC45MTRzLTIuNzUtMS4yNjgtMy40NjItMi45NDdjLS43MTItMS42OC40MDgtNC4xMDYuNDA4LTQuMTA2em0tMi4xMzMtNC43NzhzMS4yNzQgMS40MzcgMy41NTggMS43MDVjMi4yODQuMjY5IDQuMTIxLTEuMzc5IDQuMTIxLTEuMzc5cy0yLjE0NC0xLjk3LTMuOTY4LTIuMDMzYy0xLjgyMy0uMDY1LTMuNzExIDEuNzA3LTMuNzExIDEuNzA3em0tNC4wNDctMy4xNDhzLTIuMDE1LjMyOS0yLjg1IDIuNDcyLjQyNSA0LjAxLjQyNSA0LjAxIDIuNTM0LS44NDggMy4wNTUtMi41OTdjLjUyMS0xLjc0Ny0uNjMtMy44ODUtLjYzLTMuODg1eiIvPjwvc3ZnPg==", "1f600": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiIGZpbGw9IiNGRkNDNEQiLz48cGF0aCBmaWxsPSIjNjY0NTAwIiBkPSJNMTggMjFjLTMuNjIzIDAtNi4wMjctLjQyMi05LTEtLjY3OS0uMTMxLTIgMC0yIDIgMCA0IDQuNTk1IDkgMTEgOSA2LjQwNCAwIDExLTUgMTEtOSAwLTItMS4zMjEtMi4xMzItMi0yLTIuOTczLjU3OC01LjM3NyAxLTkgMXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNOSAyMnMzIDEgOSAxIDktMSA5LTEtMiA0LTkgNC05LTQtOS00eiIvPjxlbGxpcHNlIGN4PSIxMiIgY3k9IjEzLjUiIGZpbGw9IiM2NjQ1MDAiIHJ4PSIyLjUiIHJ5PSIzLjUiLz48ZWxsaXBzZSBjeD0iMjQiIGN5PSIxMy41IiBmaWxsPSIjNjY0NTAwIiByeD0iMi41IiByeT0iMy41Ii8+PC9zdmc+", "1f610": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTM2IDE4YzAgOS45NDEtOC4wNTkgMTgtMTggMTgtOS45NCAwLTE4LTguMDU5LTE4LTE4QzAgOC4wNiA4LjA2IDAgMTggMGM5Ljk0MSAwIDE4IDguMDYgMTggMTgiLz48ZWxsaXBzZSBjeD0iMTEuNSIgY3k9IjE2LjUiIGZpbGw9IiM2NjQ1MDAiIHJ4PSIyLjUiIHJ5PSIzLjUiLz48ZWxsaXBzZSBjeD0iMjQuNSIgY3k9IjE2LjUiIGZpbGw9IiM2NjQ1MDAiIHJ4PSIyLjUiIHJ5PSIzLjUiLz48cGF0aCBmaWxsPSIjNjY0NTAwIiBkPSJNMjUgMjZIMTFhMSAxIDAgMSAxIDAtMmgxNGExIDEgMCAxIDEgMCAyeiIvPjwvc3ZnPg==", "1f624": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTM2IDE4YzAgOS45NDEtOC4wNTkgMTgtMTggMThTMCAyNy45NDEgMCAxOCA4LjA1OSAwIDE4IDBzMTggOC4wNTkgMTggMTgiLz48cGF0aCBmaWxsPSIjNjY0NTAwIiBkPSJNMjAuMDAxIDEzYTEgMSAwIDAgMS0uOTg3LTEuMTY1QzE5LjQwNyA5LjQ3MSAyMS41ODQgNSAyNyA1YTEgMSAwIDEgMSAwIDJjLTUuMDk1IDAtNS45NzkgNC45NTQtNi4wMTQgNS4xNjVhMSAxIDAgMCAxLS45ODUuODM1em0tNC4wMDIgMGExIDEgMCAwIDEtLjk4NS0uODMzQzE0Ljk3NyAxMS45NTcgMTQuMDU5IDcgOSA3YTEgMSAwIDAgMSAwLTJjNS40MTYgMCA3LjU5MiA0LjQ3MSA3Ljk4NiA2LjgzNUExIDEgMCAwIDEgMTUuOTk5IDEzem0tNC41ODkgNC44OTJjLTIuMzM1IDAtMy44Ny0uOTk3LTMuOTY0LTEuMDZhMSAxIDAgMCAxIDEuMTEtMS42NjRjLjA5OS4wNjQgMi42MDIgMS42MzYgNS45OTgtLjA2MmExIDEgMCAwIDEgLjg5NSAxLjc4OWMtMS40OTUuNzQ2LTIuODY4Ljk5Ny00LjAzOS45OTd6bTEzLjE4MSAwYy0xLjE3MiAwLTIuNTQ1LS4yNTEtNC4wMzgtLjk5OGExIDEgMCAwIDEgLjg5NS0xLjc4OWMzLjQgMS43IDUuODk5LjEyNiA2LjAwNC4wNTlhMS4wMDQgMS4wMDQgMCAwIDEgMS4zODIuMjg5Ljk5Ny45OTcgMCAwIDEtLjI3OCAxLjM3OWMtLjA5Ni4wNjMtMS42MzEgMS4wNi0zLjk2NSAxLjA2ek0yNi4wMDEgMjdhLjk5OC45OTggMCAwIDEtLjgwMS0uNGMtLjAyNS0uMDM0LTIuNzgyLTMuNi03LjItMy42LTQuNDE3IDAtNy4xNzQgMy41NjYtNy4yMDIgMy42MDNhMS4wMDMgMS4wMDMgMCAwIDEtMS40LjE5NEEuOTk4Ljk5OCAwIDAgMSA5LjIgMjUuNGMuMTM1LS4xOCAzLjM2Mi00LjQgOC44LTQuNHM4LjY2NSA0LjIyMSA4LjggNC40YS45OTguOTk4IDAgMCAxLS43OTkgMS42eiIvPjxwYXRoIGZpbGw9IiNGNUY4RkEiIGQ9Ik0xNS4zOTEgMjAuMDhhLjk5Ny45OTcgMCAwIDAtMS4yMzkuMzlsLTUgOEExIDEgMCAwIDAgMTAgMzBoM2EuOTk5Ljk5OSAwIDAgMCAuOTctLjc1OGwyLThhMSAxIDAgMCAwLS41NzktMS4xNjJ6bTExLjQ1NyA4LjM5LTUtOGEuOTk4Ljk5OCAwIDAgMC0xLjgxNy43NzJsMiA4Yy4xMTEuNDQ2LjUxLjc1OC45NjkuNzU4aDNhMSAxIDAgMCAwIC44NDgtMS41M3oiLz48cGF0aCBmaWxsPSIjRTFFOEVEIiBkPSJNMzEuOTgyIDMwLjE3OGMuMDAzLS4wNi4wMTgtLjExNy4wMTgtLjE3OCAwLTEuNjU2LTEuMzQ0LTMtMy0zYTIuOTk2IDIuOTk2IDAgMCAwLTIuNDczIDEuMzA1QTQgNCAwIDEgMCAyNSAzNmEzLjk5NCAzLjk5NCAwIDAgMCAzLjI5LTEuNzMxQTIuOTk1IDIuOTk1IDAgMCAwIDM0IDMzYTIuOTkgMi45OSAwIDAgMC0yLjAxOC0yLjgyMnpNMTEgMjhjLS41NDIgMC0xLjA1Ni4xMS0xLjUyNy4zMDVBMi45OTYgMi45OTYgMCAwIDAgNyAyN2MtMS42NTYgMC0zIDEuMzQ0LTMgMyAwIC4wNjEuMDE0LjExOC4wMTguMTc4QTIuOTkgMi45OSAwIDAgMCAyIDMzYTMgMyAwIDAgMCAzIDMgMi45OTEgMi45OTEgMCAwIDAgMi43MDktMS43MzFBMy45OTYgMy45OTYgMCAwIDAgMTEgMzZhNCA0IDAgMCAwIDAtOHoiLz48L3N2Zz4=", "1f62e": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTM2IDE4YzAgOS45NDEtOC4wNTkgMTgtMTggMThTMCAyNy45NDEgMCAxOCA4LjA1OSAwIDE4IDBzMTggOC4wNTkgMTggMTgiLz48ZWxsaXBzZSBjeD0iMTgiIGN5PSIyNSIgZmlsbD0iIzY2NDUwMCIgcng9IjQiIHJ5PSI1Ii8+PGVsbGlwc2UgY3g9IjEyIiBjeT0iMTMuNSIgZmlsbD0iIzY2NDUwMCIgcng9IjIuNSIgcnk9IjMuNSIvPjxlbGxpcHNlIGN4PSIyNCIgY3k9IjEzLjUiIGZpbGw9IiM2NjQ1MDAiIHJ4PSIyLjUiIHJ5PSIzLjUiLz48L3N2Zz4=", "1f634": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiIGZpbGw9IiNGRkNDNEQiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjI2IiByPSIzIiBmaWxsPSIjNjY0NTAwIi8+PHBhdGggZmlsbD0iIzY2NDUwMCIgZD0iTTE3LjMxMiAxNi42MTJhLjUwMS41MDEgMCAwIDAtLjYxLS4wMTRjLS4wMTIuMDA5LTEuMjYuOTAyLTMuNzAyLjkwMi0yLjQ0MSAwLTMuNjktLjg5My0zLjctLjlhLjUuNSAwIDAgMC0uNzU3LjYwM2MuMDYuMTM1IDEuNSAzLjI5NyA0LjQ1NyAzLjI5NyAyLjk1OCAwIDQuMzk3LTMuMTYyIDQuNDU3LTMuMjk3YS40OTguNDk4IDAgMCAwLS4xNDUtLjU5MXptMTAgMGEuNS41IDAgMCAwLS42MS0uMDE0Yy0uMDEyLjAwOS0xLjI2MS45MDItMy43MDIuOTAyLTIuNDQgMC0zLjY5LS44OTMtMy43LS45YS41LjUgMCAwIDAtLjc1Ny42MDNjLjA2LjEzNSAxLjUgMy4yOTcgNC40NTcgMy4yOTcgMi45NTggMCA0LjM5Ny0zLjE2MiA0LjQ1Ny0zLjI5N2EuNDk4LjQ5OCAwIDAgMC0uMTQ1LS41OTF6Ii8+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTM0LjQzIDEyLjUzNGMuMDA0LS4wNDQuMDIzLS4wNzcuMDIzLS4xMjMgMC0uNzU0LS41NDgtMS4xODgtMS4yMjUtMS4xODhoLTMuNTgybDQuMjc5LTUuOTkzYy4yMDYtLjI4My4yODItLjQ1My4yODItLjgxMSAwLS43MzUtLjY0LS44NDktLjg4NS0uODQ5aC01LjM0OWwtLjAzMi0uNjg4cy0xLjQwOS44MzEtMS41MDMuODg4LS41MDUuMzcyLS41MDUuOTg3YzAgLjc1NC41NDYgMS4xODcgMS4yMjUgMS4xODdoMy4xNDlsLTQuMjYxIDUuOTkzYy0uMDk0LjE1MS0uMjQ0LjQzMy0uMjQ0LjczNSAwIC42MjIuNTA4LjkyNCAxLjExMS45MjRoNi4zMTVjLjI1OCAwIC41MTUtLjA3Ni42ODEtLjE3NmwxLjUwMy0uODg4aC0uOTgyeiIvPjxwYXRoIGZpbGw9IiMyQTY3OTciIGQ9Ik0zMS43NzEgNS4wODRoLTMuMTQ5Yy0uNjc5IDAtMS4yMjUtLjQzMy0xLjIyNS0xLjE4N3MuNTQ2LTEuMTg4IDEuMjI1LTEuMTg4aDYuMTY0Yy4yNDUgMCAuODg1LjExMy44ODUuODQ4IDAgLjM1OC0uMDc2LjUyOC0uMjgyLjgxMWwtNC4yNzkgNS45OTNoMy41ODJjLjY3NyAwIDEuMjI1LjQzMyAxLjIyNSAxLjE4N3MtLjU0OCAxLjE4Ny0xLjIyNSAxLjE4N2gtNi4zMTVjLS42MDMgMC0xLjExMS0uMzAyLTEuMTExLS45MjQgMC0uMzAyLjE1LS41ODQuMjQ0LS43MzVsNC4yNjEtNS45OTJ6Ii8+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTI0Ljg4NiA3LjQ4Yy4wMDMtLjAzMy4wMTgtLjA1OC4wMTgtLjA5MiAwLS41NjQtLjQxLS44ODktLjkxNy0uODg5aC0yLjY4MmwzLjIwMy00LjQ4N2MuMTU2LS4yMTIuMjEyLS4zMzkuMjEyLS42MDYgMC0uNTUtLjQ3OS0uNjM1LS42NjMtLjYzNWgtNC4wMDRsLS4wMjQtLjUxNXMtMS4wNTUuNjIyLTEuMTI1LjY2NWEuODgyLjg4MiAwIDAgMC0uMzc4LjczOWMwIC41NjQuNDA5Ljg4OS45MTcuODg5SDIxLjhsLTMuMTkgNC40ODdjLS4wNy4xMTMtLjE4My4zMjQtLjE4My41NSAwIC40NjYuMzguNjkxLjgzMi42OTFoNC43MjhjLjE5MyAwIC4zODUtLjA1Ny41MS0uMTMybDEuMTI1LS42NjVoLS43MzZ6Ii8+PHBhdGggZmlsbD0iIzJBNjc5NyIgZD0iTTIyLjg5NiAxLjkwM2gtMi4zNTdjLS41MDggMC0uOTE3LS4zMjQtLjkxNy0uODg5IDAtLjU2NC40MDktLjg4OS45MTctLjg4OWg0LjYxNWMuMTg0IDAgLjY2My4wODUuNjYzLjYzNSAwIC4yNjgtLjA1Ny4zOTUtLjIxMS42MDdsLTMuMjAzIDQuNDg3aDIuNjgyYy41MDUgMCAuOTE1LjMyNC45MTUuODg5cy0uNDEuODg5LS45MTcuODg5aC00LjcyOGMtLjQ1MiAwLS44MzItLjIyNi0uODMyLS42OTEgMC0uMjI2LjExMy0uNDM3LjE4My0uNTVsMy4xOS00LjQ4OHoiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJNMTcuNzQxIDEwLjQyNWMuMDAzLS4wMjguMDE1LS4wNDkuMDE1LS4wNzkgMC0uNDgzLS4zNTEtLjc2MS0uNzg1LS43NjFoLTIuMjk1bDIuNzQyLTMuODRjLjEzMi0uMTgxLjE4MS0uMjkuMTgxLS41MTkgMC0uNDcxLS40MS0uNTQ0LS41NjctLjU0NGgtMy40MjdsLS4wMjEtLjQ0MS0uOTYzLjU2OWEuNzU0Ljc1NCAwIDAgMC0uMzI0LjYzM2MwIC40ODMuMzUuNzYxLjc4NS43NjFoMi4wMTdsLTIuNzMgMy44NGMtLjA2LjA5Ny0uMTU3LjI3OC0uMTU3LjQ3MSAwIC4zOTkuMzI2LjU5Mi43MTIuNTkyaDQuMDQ3Yy4xNjUgMCAuMzMtLjA0OS40MzYtLjExM2wuOTYzLS41NjloLS42Mjl6Ii8+PHBhdGggZmlsbD0iIzJBNjc5NyIgZD0iTTE2LjAzNyA1LjY1MkgxNC4wMmMtLjQzNSAwLS43ODUtLjI3OC0uNzg1LS43NjFzLjM1LS43NjEuNzg1LS43NjFoMy45NWMuMTU3IDAgLjU2Ny4wNzMuNTY3LjU0NCAwIC4yMjktLjA0OC4zMzgtLjE4MS41MTlsLTIuNzQyIDMuODRoMi4yOTVjLjQzNCAwIC43ODUuMjc4Ljc4NS43NjFzLS4zNTEuNzYxLS43ODUuNzYxaC00LjA0N2MtLjM4NiAwLS43MTItLjE5My0uNzEyLS41OTIgMC0uMTkzLjA5Ni0uMzc0LjE1Ny0uNDcxbDIuNzMtMy44NHoiLz48L3N2Zz4=", "1f642": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiIGZpbGw9IiNGRkNDNEQiLz48cGF0aCBmaWxsPSIjNjY0NTAwIiBkPSJNMTAuNTE1IDIzLjYyMUMxMC41NiAyMy44IDExLjY4MyAyOCAxOCAyOGM2LjMxOCAwIDcuNDQtNC4yIDcuNDg1LTQuMzc5YS40OTkuNDk5IDAgMCAwLS4yMzctLjU1NC41MDUuNTA1IDAgMCAwLS42LjA3N0MyNC42MjkgMjMuMTYzIDIyLjY5NCAyNSAxOCAyNXMtNi42My0xLjgzNy02LjY0OC0xLjg1NWEuNTAyLjUwMiAwIDAgMC0uNTk4LS4wODEuNS41IDAgMCAwLS4yMzkuNTU3eiIvPjxlbGxpcHNlIGN4PSIxMiIgY3k9IjEzLjUiIGZpbGw9IiM2NjQ1MDAiIHJ4PSIyLjUiIHJ5PSIzLjUiLz48ZWxsaXBzZSBjeD0iMjQiIGN5PSIxMy41IiBmaWxsPSIjNjY0NTAwIiByeD0iMi41IiByeT0iMy41Ii8+PC9zdmc+", "1f6d1": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0REMkU0NCIgZD0ibTEyIDMtOSA4Ljk4NVYyNGw5IDloMTJsOS05VjExLjk4NUwyNCAzeiIvPjxwYXRoIGZpbGw9IiNDQ0Q2REQiIGQ9Ik0yNC44MjcgMUgxMS4xNzNMMSAxMS4xNTZ2MTMuNjcyTDExLjE3MiAzNWgxMy42NTdMMzUgMjQuODI4VjExLjE1NkwyNC44MjcgMXpNMzMgMjRsLTkgOUgxMmwtOS05VjExLjk4NUwxMiAzaDEybDkgOC45ODVWMjR6Ii8+PC9zdmc+", "1f91d": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0VGOTY0NSIgZD0iTTE2LjQyOCAzMC4zMzFhMi4zMSAyLjMxIDAgMCAwIDMuMjE3LS41NjguNzk4Ljc5OCAwIDAgMC0uMTk3LTEuMTE0bC0xLjg1LTEuOTQ5IDQuMjIyIDIuOTU1YTEuNDk3IDEuNDk3IDAgMCAwIDIuMDg5LS4zNjkgMS41IDEuNSAwIDAgMC0uMzY5LTIuMDg5bC0zLjU5Ni0zLjMwNSA1LjM3NSAzLjc2M2ExLjQ5NyAxLjQ5NyAwIDAgMCAyLjA4OS0uMzY5IDEuNSAxLjUgMCAwIDAtLjM2OS0yLjA4OWwtNC43NjYtNC4wNzMgNS44NjQgNC4xMDVhMS40OTcgMS40OTcgMCAwIDAgMi4wODktLjM2OSAxLjUgMS41IDAgMCAwLS4zNjktMi4wODlMNC43MzMgMTEuMTk0bC0zLjQ2NyA1LjUyMWMtLjM4OS42LS4yODMgMS40MTMuMjc2IDEuODkxbDcuNzg2IDYuNjcxYy4zNTUuMzA0LjcyNC41OTEgMS4xMDcuODU5bDUuOTkzIDQuMTk1eiIvPjxwYXRoIGZpbGw9IiNGRkRDNUQiIGQ9Ik0yOS44MDIgMjEuNzUyIDE4LjUgMTMuNjAxbC0uMDU5LS4wOC4wNTMtLjA4LjA1My0uMDUzLjg1NC40NjljLjk1OC42MiAzLjE0NyAxLjUzNiA0LjgwNiAxLjUzNiAxLjEzNSAwIDEuODE1LS40MjUgMi4wMTgtMS4yNTdhMS40MDkgMS40MDkgMCAwIDAtMS4xNTItMS42MjIgNi43ODggNi43ODggMCAwIDEtMi44MDEtMS4wOTFsLS41NTUtLjM3M2MtLjYyNC0uNDIxLTEuMzMxLS44OTgtMS44NTMtMS4yMDYtLjY1LS4zOTQtMS4zNTctLjU4NS0yLjE2My0uNTg1LTEuMTk2IDAtMi40MTEuNDIyLTMuNTg1LjgzbC0xLjI2Ni40MzZhNS4xOCA1LjE4IDAgMCAxLTEuNjk2LjI3MWMtMS41NDQgMC0zLjA1NS0uNTg2LTQuNTE2LTEuMTUybC0uMTQ3LS4wNThhMS4zODkgMS4zODkgMCAwIDAtMS42NzQuNTZMMS4zNSAxNS42NjlhMS4zNTcgMS4zNTcgMCAwIDAgLjI1NyAxLjc2MWw3Ljc4NSA2LjY3MmMuMzUyLjMwMS43MjIuNTg4IDEuMS44NTJsNi4xNjUgNC4zMTZhMiAyIDAgMCAwIDIuNzg2LS40OTEuODAzLjgwMyAwIDAgMC0uMTk2LTEuMTE1bC0xLjgzMy0xLjI4M2EuNDI0LjQyNCAwIDAgMS0uMDgyLS42MTguNDIyLjQyMiAwIDAgMSAuNTY3LS4wNzVsMy45NzkgMi43ODVhMS40IDEuNCAwIDAgMCAxLjYwNi0yLjI5NGwtMy43MjQtMi42MDZhLjQyNC40MjQgMCAwIDEtLjA4Mi0uNjE4LjQyMy40MjMgMCAwIDEgLjU2Ny0uMDc1bDUuMTMyIDMuNTkzYTEuNCAxLjQgMCAwIDAgMS42MDYtMi4yOTRsLTQuODY4LTMuNDA3YS40Mi40MiAwIDAgMS0uMDgxLS42MTguMzc3LjM3NyAwIDAgMSAuNTA2LS4wNjZsNS42NTYgMy45NTlhMS40IDEuNCAwIDAgMCAxLjYwNi0yLjI5NXoiLz48cGF0aCBmaWxsPSIjRUY5NjQ1IiBkPSJNMTYuNTM2IDI3LjkyOWMtLjA3LjI2Ny0uMjA3LjQ5OC0uMzg5LjY4MWwtMS4wMDQuOTk2YTEuNDk0IDEuNDk0IDAgMCAxLTEuNDM3LjM5NiAxLjUgMS41IDAgMCAxLS42ODMtMi41MTJsMS4wMDQtLjk5NmExLjQ5NCAxLjQ5NCAwIDAgMSAxLjQzNy0uMzk2IDEuNTAyIDEuNTAyIDAgMCAxIDEuMDcyIDEuODMxek01Ljk5MiAyMy4wMDhsMS41MDMtMS40OTdhMS41IDEuNSAwIDAgMC0uNDQ0LTIuNDI5IDEuNDk1IDEuNDk1IDAgMCAwLTEuNjc0LjMxbC0xLjUwMyAxLjQ5N2ExLjUgMS41IDAgMCAwIC40NDUgMi40MjkgMS40OTYgMS40OTYgMCAwIDAgMS42NzMtLjMxem01LjIwNC4wNTJhMS41IDEuNSAwIDEgMC0yLjEyMi0yLjExOEw2LjA3MiAyMy45NGExLjUgMS41IDAgMSAwIDIuMTIyIDIuMTE4bDMuMDAyLTIuOTk4em0yLjI1IDNhMS41IDEuNSAwIDAgMC0uOTQ1LTIuNTU1IDEuNDg5IDEuNDg5IDAgMCAwLTEuMTczLjQ0TDkuMzIzIDI1Ljk0YTEuNSAxLjUgMCAwIDAgLjk0NSAyLjU1NmMuNDU1LjAzNi44NzQtLjE0MSAxLjE3My0uNDRsMi4wMDUtMS45OTZ6bTE2LjU1NS00LjEzNy42MjctLjU0Mi02LjkxMy0xMC44NS0xMi4yNyAxLjk4NWExLjUwNyAxLjUwNyAwIDAgMC0xLjIzNSAxLjczN2MuNjU4IDIuNjk1IDYuMDAzLjY5MyA4LjM1NS0uNjAxbDExLjQzNiA4LjI3MXoiLz48cGF0aCBmaWxsPSIjRkZDQzREIiBkPSJNMTYuNTM2IDI2LjkyOWMtLjA3LjI2Ny0uMjA3LjQ5OC0uMzg5LjY4MWwtMS4wMDQuOTk2YTEuNDk0IDEuNDk0IDAgMCAxLTEuNDM3LjM5NiAxLjUgMS41IDAgMCAxLS42ODMtMi41MTJsMS4wMDQtLjk5NmExLjQ5NCAxLjQ5NCAwIDAgMSAxLjQzNy0uMzk2IDEuNTAyIDEuNTAyIDAgMCAxIDEuMDcyIDEuODMxek01Ljk5MiAyMi4wMDhsMS41MDMtMS40OTdhMS41IDEuNSAwIDAgMC0uNDQ0LTIuNDI5IDEuNDk3IDEuNDk3IDAgMCAwLTEuNjc0LjMxbC0xLjUwMyAxLjQ5N2ExLjUgMS41IDAgMCAwIC40NDUgMi40MjkgMS40OTYgMS40OTYgMCAwIDAgMS42NzMtLjMxem01LjIwNC4wNTJhMS41IDEuNSAwIDEgMC0yLjEyMi0yLjExOEw2LjA3MiAyMi45NGExLjUgMS41IDAgMSAwIDIuMTIyIDIuMTE4bDMuMDAyLTIuOTk4em0yLjI1IDNhMS41IDEuNSAwIDAgMC0uOTQ1LTIuNTU1IDEuNDg5IDEuNDg5IDAgMCAwLTEuMTczLjQ0TDkuMzIzIDI0Ljk0YTEuNSAxLjUgMCAwIDAgLjk0NSAyLjU1NmMuNDU1LjAzNi44NzQtLjE0MSAxLjE3My0uNDRsMi4wMDUtMS45OTZ6bTIxLjU1Ny03LjQ1NmExLjQ1IDEuNDUgMCAwIDAgLjI2OS0xLjg4NWwtLjAwMy0uMDA1LTMuNDY3LTYuNTIxYTEuNDg4IDEuNDg4IDAgMCAwLTEuNzk0LS42Yy0xLjk5Mi43NzEtNC4xNzQgMS42NTctNi4yOTIuOTM3bC0xLjA5OC0uMzc3Yy0xLjk0OC0uNjc1LTQuMDY2LTEuNDY2LTYtLjI5NC0uNjk1LjQwOS0xLjczOCAxLjEzMy0yLjQxMSAxLjU4YTYuODczIDYuODczIDAgMCAxLTIuNzYyIDEuMDc2IDEuNTAyIDEuNTAyIDAgMCAwLTEuMjM1IDEuNzM3Yy42MTMgMi41MTIgNS4zLjkwOCA3LjgzOC0uMzY5YS45NjguOTY4IDAgMCAxIDEuMDAyLjA4MWwxMS41ODQgOC40MTYgNC4zNjktMy43NzZ6Ii8+PC9zdmc+", "1f929": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTM2IDE4YzAgOS45NDEtOC4wNTkgMTgtMTggMThTMCAyNy45NDEgMCAxOCA4LjA1OSAwIDE4IDBzMTggOC4wNTkgMTggMTgiLz48cGF0aCBmaWxsPSIjNjY0NTAwIiBkPSJNMTggMjFjLTMuNjIzIDAtNi4wMjctLjQyMi05LTEtLjY3OS0uMTMxLTIgMC0yIDIgMCA0IDQuNTk1IDkgMTEgOSA2LjQwNCAwIDExLTUgMTEtOSAwLTItMS4zMjEtMi4xMzItMi0yLTIuOTczLjU3OC01LjM3NyAxLTkgMXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNOSAyMnMzIDEgOSAxIDktMSA5LTEtMiA0LTkgNC05LTQtOS00eiIvPjxwYXRoIGZpbGw9IiNFOTVGMjgiIGQ9Im0xNS42ODIgNC40MTMtNC41NDIuODAxTDguOC45NjFhMS4yNTIgMS4yNTIgMCAwIDAtMi4zMzEuNDExbC0uNzQ1IDQuNzk3LTQuNTQyLjgwMWExLjI1IDEuMjUgMCAwIDAtLjMxOCAyLjM2MWw0LjA3IDEuOTMyLS43NDggNC44MTJhMS4yNTMgMS4yNTMgMCAwIDAgMS4yMzUgMS40NDJjLjMyNyAwIC42NS0uMTI4Ljg5MS0uMzcybDMuNTEyLTMuNTYxIDQuNTE4IDIuMTQ1YTEuMjUgMS4yNSAwIDAgMCAxLjYzMS0xLjczMUwxMy42MjUgOS43M2wzLjE2NS0zLjIwOGExLjI1MiAxLjI1MiAwIDAgMC0xLjEwOC0yLjEwOXptNC42MzYgMCA0LjU0Mi44MDFMMjcuMi45NjFhMS4yNTEgMS4yNTEgMCAwIDEgMi4zMy40MTFsLjc0NSA0Ljc5NyA0LjU0Mi44MDFjLjUzNi4wOTQuOTQ5LjUyNCAxLjAyMSAxLjA2M3MtLjIxMSAxLjA2My0uNzAzIDEuMjk3bC00LjA3IDEuOTMyLjc0OCA0LjgxMmExLjI1MyAxLjI1MyAwIDAgMS0xLjIzNSAxLjQ0MmMtLjMyNyAwLS42NS0uMTI4LS44OTEtLjM3MmwtMy41MTItMy41NjEtNC41MTggMi4xNDVhMS4yNSAxLjI1IDAgMCAxLTEuNjMxLTEuNzMxbDIuMzQ4LTQuMjY3LTMuMTY1LTMuMjA4YTEuMjUyIDEuMjUyIDAgMCAxLS4yMTctMS40NTkgMS4yNTkgMS4yNTkgMCAwIDEgMS4zMjYtLjY1eiIvPjwvc3ZnPg==", "1f947": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0ibTE4IDgtNy04SDBsMTQgMTcgMTEuNTIxLTQuNzV6Ii8+PHBhdGggZmlsbD0iIzNCODhDMyIgZD0ibTI1IDAtNyA4IDUuMzkgNy4zMTIgMS4yMjctMS40ODlMMzYgMHoiLz48cGF0aCBmaWxsPSIjRkZBQzMzIiBkPSJNMjMuMjA1IDE2LjAyNmMuMDgtLjIxNy4xMzEtLjQ0OC4xMzEtLjY5M2EyIDIgMCAwIDAtMi0yaC02LjY2N2EyIDIgMCAwIDAtMiAyYzAgLjI0NS4wNS40NzYuMTMxLjY5My0zLjI1OCAxLjgyNi01LjQ2NCA1LjMwNy01LjQ2NCA5LjMwN0M3LjMzNSAzMS4yMjQgMTIuMTExIDM2IDE4LjAwMiAzNnMxMC42NjctNC43NzYgMTAuNjY3LTEwLjY2N2MwLTQtMi4yMDYtNy40ODEtNS40NjQtOS4zMDd6Ii8+PHBhdGggZmlsbD0iIzlFNTIwMCIgZD0iTTE5LjQwNCAxOC42aC0xLjcyMWwtMi43MyAyLjEzMmEuNTI4LjUyOCAwIDAgMC0uMTEyLjI4djEuMTc4YzAgLjE4Ni4xNS4zNTQuMzM3LjM1NGgxLjc5NXY4LjQxNGMwIC4xODguMTUuMzU1LjM1NS4zNTVoMi4wNzZjLjE4NiAwIC4zMzYtLjE2OC4zMzYtLjM1NVYxOC45NTRjMC0uMTg2LS4xNDktLjM1NC0uMzM2LS4zNTR6Ii8+PC9zdmc+", "1f948": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0ibTE4IDgtNy04SDBsMTQgMTcgMTEuNTIxLTQuNzV6Ii8+PHBhdGggZmlsbD0iIzNCODhDMyIgZD0ibTI1IDAtNyA4IDUuMzkgNy4zMTIgMS4yMjctMS40ODlMMzYgMHoiLz48cGF0aCBmaWxsPSIjQ0NENkREIiBkPSJNMjMuMjA1IDE2LjAyNmMuMDgtLjIxNy4xMzEtLjQ0OC4xMzEtLjY5M2EyIDIgMCAwIDAtMi0yaC02LjY2N2EyIDIgMCAwIDAtMiAyYzAgLjI0NS4wNS40NzYuMTMxLjY5My0zLjI1OCAxLjgyNi01LjQ2NCA1LjMwNy01LjQ2NCA5LjMwN0M3LjMzNSAzMS4yMjQgMTIuMTExIDM2IDE4LjAwMiAzNnMxMC42NjctNC43NzYgMTAuNjY3LTEwLjY2N2MwLTQtMi4yMDYtNy40ODEtNS40NjQtOS4zMDd6Ii8+PHBhdGggZmlsbD0iIzYyNzA3NyIgZD0iTTIyLjAwMiAyOC45MjFoLTMuNTQzYy44NzgtMS4yMzQgMi40MTItMy4yMzQgMy4wMS00LjMwMS40NDktLjg3OS43MjktMS40MzkuNzI5LTIuNDMgMC0yLjA3Ni0xLjU3LTMuNzc3LTQuMjQ0LTMuNzc3LTIuMjI1IDAtMy43NCAxLjgzMi0zLjc0IDEuODMyLS4xMzEuMTUtLjExMi4zNzQuMDE5LjQ4N2wxLjE0MSAxLjE1OWEuMzYuMzYgMCAwIDAgLjUyMyAwYy4zNTUtLjM5MyAxLjA0Ny0uOTM1IDEuODEzLS45MzUgMS4wNDcgMCAxLjY0Ni42MzUgMS42NDYgMS4zNDYgMCAuNTIzLS4yNDMgMS4wNDctLjQ4NiAxLjQyMS0xLjEwNCAxLjY4Mi0zLjg3MSA1LjQ0MS00Ljk1NSA2Ljg2MnYuMzc0YzAgLjE4OC4xNDkuMzU1LjM1NS4zNTVoNy43MzJhLjM2OC4zNjggMCAwIDAgLjM1NS0uMzU1di0xLjY4MmEuMzY3LjM2NyAwIDAgMC0uMzU1LS4zNTZ6Ii8+PC9zdmc+", "1f949": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzU1QUNFRSIgZD0ibTE4IDgtNy04SDBsMTQgMTcgMTEuNTIxLTQuNzV6Ii8+PHBhdGggZmlsbD0iIzNCODhDMyIgZD0ibTI1IDAtNyA4IDUuMzkgNy4zMTIgMS4yMjctMS40ODlMMzYgMHoiLz48cGF0aCBmaWxsPSIjRkY4QTNCIiBkPSJNMjMuMjA1IDE2LjAyNmMuMDgtLjIxNy4xMzEtLjQ0OC4xMzEtLjY5M2EyIDIgMCAwIDAtMi0yaC02LjY2N2EyIDIgMCAwIDAtMiAyYzAgLjI0NS4wNS40NzYuMTMxLjY5My0zLjI1OCAxLjgyNi01LjQ2NCA1LjMwNy01LjQ2NCA5LjMwN0M3LjMzNSAzMS4yMjQgMTIuMTExIDM2IDE4LjAwMiAzNnMxMC42NjctNC43NzYgMTAuNjY3LTEwLjY2N2MwLTQtMi4yMDYtNy40ODEtNS40NjQtOS4zMDd6Ii8+PHBhdGggZmlsbD0iIzdDNDExOSIgZD0ibTE0LjEyMSAyOS4zNSAxLjE3OC0xLjE3OGEuMzQ1LjM0NSAwIDAgMSAuNDY3LS4wMzhzMS4xNTkuODYxIDIuMDU2Ljg2MWMuODA1IDAgMS42MjgtLjY3MyAxLjYyOC0xLjQ5NnMtLjg0Mi0xLjUxNC0yLjIyNS0xLjUxNGgtLjYzOWEuMzY3LjM2NyAwIDAgMS0uMzU0LS4zNTV2LTEuNTUyYzAtLjIwNi4xNjgtLjM1NS4zNTQtLjM1NWguNjM5YzEuMzA5IDAgMi0uNjM1IDItMS40MzkgMC0uODA1LS42OTEtMS40MDItMS40OTYtMS40MDItLjgyMyAwLTEuMzQ2LjQzLTEuNjI2Ljc0Ny0uMTMyLjE1LS4zNTUuMTUtLjUwNC4wMmwtMS4xNDEtMS4xMjJjLS4xNTEtLjEzMi0uMTMyLS4zNTUgMC0uNDg2IDAgMCAxLjUzMy0xLjY0NiAzLjU3LTEuNjQ2IDIuMTY5IDAgNC4wMzkgMS4zMjggNC4wMzkgMy40MjIgMCAxLjQzOS0xLjA4NSAyLjUwNS0xLjkyNiAyLjg5N3YuMDU3Yy44NzkuMzc0IDIuMjYyIDEuNTMzIDIuMjYyIDMuMTQxIDAgMi4wMzgtMS43NzYgMy41NzItNC4zNTcgMy41NzItMi4zNTQgMC0zLjU1Mi0xLjE2LTMuOTQ0LTEuNjY0LS4xMTMtLjEzNC0uMDkzLS4zNC4wMTktLjQ3eiIvPjwvc3ZnPg==", "1f9e0": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0VBNTk2RSIgZD0iTTI5Ljg5NiAyNi42NjdjLjAwMy4yODMtLjA3LjY1My0uMTQ2Ljk1OC0uNTMxIDIuMTQ1LTIuODg5IDQuNTUyLTYuMjA4IDQuMzMzLTMuMDA4LS4xOTgtNS40NTgtMS42NDItNS40NTgtMy42NjdzMi40NDQtMy42NjcgNS40NTgtMy42NjcgNi4zMzUuMDE4IDYuMzU0IDIuMDQzeiIvPjxwYXRoIGZpbGw9IiNERDJFNDQiIGQ9Ik0yMy41NDIgMjQuOTY0Yy0xLjYxOSAwLTUuMzE0LjQ0OC02LjE2Mi40NDgtMS40OTggMC0yLjcxMy45NC0yLjcxMyAyLjEgMCAuNTU4LjI4NiAxLjA2Mi43NDQgMS40MzggMCAwIDEuMDA2IDEuMDA5IDIuODE4LjUyNS43OTMtLjIxMiAyLjA4My0xLjc4NiA0LjM1NC0yLjAzNiAxLjEzMS0uMTI1IDMuMjUuNzUgNi45NzQuNzcxLjE2LS4zNDQuMTkzLS41ODMuMTkzLS41ODMgMC0yLjAyNy0zLjE5NC0yLjY2My02LjIwOC0yLjY2M3oiLz48cGF0aCBmaWxsPSIjRjRBQkJBIiBkPSJNMjkuNzUgMjcuNjI1czIuMTg0LS40NDMgMy41NDItMi4yMjljMS41ODMtMi4wODMgMS4zNzUtNC4zMTIgMS4zNzUtNC4zMTIgMS42MDQtMy0uNS01LjgxMy0uNS01LjgxM0MzMy45NTggMTIuMTA0IDMyIDEwLjc5MiAzMiAxMC43OTJjLTEuMjcxLTMuMDIxLTQuMDgzLTMuODMzLTQuMDgzLTMuODMzLTIuMjA4LTIuNTgzLTYuMTI1LTIuNS02LjEyNS0yLjVzLTMuNjctMS4zNDUtOC43MDguMTY3Yy0uODMzLjI1LTMuNjI1LjgzMy01LjY2NyAyLjA4M0MuOTgxIDEwLjY0OS40OTQgMTYuNzkzLjU4NCAxNy43OTIgMS4wODMgMjMuMzc1IDUgMjQuMzc1IDcuNSAyNC45NThjLjU4MyAxLjU4MyAyLjcyOSA0LjUgNi41ODMgMy40MTcgNC43NS0uODMzIDYuNzUtMi4yNSA3LjkxNy0yLjI1czQuNDE3IDEuMjUgNy43NSAxLjV6Ii8+PGcgZmlsbD0iI0VBNTk2RSI+PHBhdGggZD0iTTE3LjczNyAxOC42NDhjMi4zMjgtMS4yNTUgMy41OS0xLjEzOCA0LjcwNC0xLjAzNy4zNTQuMDMyLjY4OS4wNTcgMS4wMjguMDU1IDEuOTg0LS4wNDUgMy41OTEtLjg4MSA0LjMwMi0xLjY5YS41MDEuNTAxIDAgMCAwLS43NTItLjY2MWMtLjU0OC42MjQtMS44OTkgMS4zMTMtMy41NzMgMS4zNTEtLjMuMDA5LS42MDEtLjAyMS0uOTEzLS4wNS0xLjE5NS0uMTExLTIuNjc5LS4yNDctNS4yNzEgMS4xNTItLjY2NS4zNTktMS41NzcuNDkyLTIuNTY1LjU5Mi0yLjE5Ny0zLjE3MS0uODc1LTUuOTMzLS40OTctNi41OTEuMDM3LjAwMi4wNzMuMDE0LjExMS4wMTQuNCAwIC44MDItLjA5OCAxLjE2Ni0uMzA0YS41LjUgMCAwIDAtLjQ5Mi0uODcgMS40MjYgMS40MjYgMCAwIDEtMS44OC0uNDY3LjUuNSAwIDAgMC0uODQxLjUzOWMuMjM3LjM3MS41NzEuNjUuOTQ4LjgzNy0uNTIxIDEuMDU4LTEuNTEgMy44NC4zNzIgNi45NTEtMS4zMjQuMTMtMi42NS4zMTctMy42ODguOTg2YTcuMTgyIDcuMTgyIDAgMCAwLTEuODc4IDEuNzkxYy0uNjI5LS4xMDgtMi45MzItLjY3NS0zLjMzNC0zLjIzMS4yNS0uMTk0LjQ1Mi0uNDUuNTc3LS43NjZhLjUuNSAwIDEgMC0uOTMtLjM2OC43NzIuNzcyIDAgMCAxLS40NTQuNDYxLjc3Ny43NzcgMCAwIDEtLjY0My0uMDcuNS41IDAgMCAwLS40ODYuODc0Yy4yODQuMTU4LjU4OC4yMzguODkuMjM4LjAzNyAwIC4wNzItLjAxNy4xMDktLjAxOS40NzYgMi40MTMgMi4zODMgMy40NzMgMy43MzIgMy43OTRhMy42OSAzLjY5IDAgMCAwLS4zMzEgMS4xOTIuNS41IDAgMCAwIC40NTQuNTQybC4wNDUuMDAyYS41LjUgMCAwIDAgLjQ5OC0uNDU2Yy4xMDgtMS4yMTMgMS4yNjUtMi40OCAyLjI5My0zLjE0NS45NjQtLjYyMSAyLjM3NS0uNzUyIDMuNzQxLS44NzkgMS4zMjUtLjEyMSAyLjU3Ny0uMjM3IDMuNTU4LS43Njd6bTEyLjg2Ni0xLjUwNGEuNS41IDAgMCAwIC44NzguNDhjLjAxOS0uMDM0IDEuODQyLTMuNDQ5LTEuNTcxLTUuNzQ0YS41LjUgMCAwIDAtLjU1OC44M2MyLjY0NCAxLjc3OCAxLjMwOSA0LjMyNiAxLjI1MSA0LjQzNHpNOS44NzYgOS4wN2EuNDk3LjQ5NyAwIDAgMCAuNDA2LS4yMDhjMS40NS0yLjAxNyAzLjQ1OC0xLjMyNyAzLjU0My0xLjI5NWEuNS41IDAgMCAwIC4zNDUtLjkzOGMtLjk2LS4zNTYtMy4xNzctLjQ2OC00LjcgMS42NWEuNS41IDAgMCAwIC40MDYuNzkxem0xMy4wNzItMS44ODhjMi4yMjUtLjE4MSAzLjIzNyAxLjQzMiAzLjI4MyAxLjUwOGEuNS41IDAgMCAwIC44NjMtLjUwN2MtLjA1NC0uMDkxLTEuMzQtMi4yMTgtNC4yMjQtMS45OThhLjUuNSAwIDAgMCAuMDc4Ljk5N3ptOS4xNSAxNC42MTFjLS4yNDYtLjAxNC0uNTE3LjE4MS0uNTM5LjQ1Ny0uMDAyLjAxOC0uMTYxIDEuNzE5LTEuOTEgMi4yOTRhLjQ5OS40OTkgMCAwIDAgLjE1Ny45NzUuNDk5LjQ5OSAwIDAgMCAuMTU2LS4wMjVjMi4zNzItLjc3OCAyLjU4Ni0zLjA2NCAyLjU5NC0zLjE2MWEuNTAyLjUwMiAwIDAgMC0uNDU4LS41NHoiLz48cGF0aCBkPSJNNy4zNDcgMTYuOTM0YS41LjUgMCAxIDAgLjk2NS4yNiAxLjQyMyAxLjQyMyAwIDAgMSAxLjY1Mi0xLjAxNC41LjUgMCAwIDAgLjIwNS0uOTc5IDIuMzU0IDIuMzU0IDAgMCAwLTEuMjQ4LjA4NmMtMS4xNjYtMS45OTQtLjkzOS0zLjk2LS45MzYtMy45ODFhLjUwMi41MDIgMCAwIDAtLjQyOS0uNTYyLjUwMy41MDMgMCAwIDAtLjU2Mi40MjdjLS4wMTMuMDk3LS4yOCAyLjMxNiAxLjA2MyA0LjYxNGEyLjM3NiAyLjM3NiAwIDAgMC0uNzEgMS4xNDl6bTExLjE3OS0yLjQ3YTEuMDY5IDEuMDY5IDAgMCAxIDEuNDU1LjAxNS41MDIuNTAyIDAgMCAwIC43MDctLjAxMS41LjUgMCAwIDAtLjAxLS43MDcgMi4wMDQgMi4wMDQgMCAwIDAtLjc5Ny0uNDY1Yy4yOTYtMS4wMTYuMTc5LTEuNDY3LS4wOTYtMi4zMTJhMjAuNiAyMC42IDAgMCAxLS4xNTctLjQ5OGwtLjAzLS4xYy0uMzY0LTEuMjA4LS42MDUtMi4wMDUuMDg3LTMuMTNhLjUuNSAwIDAgMC0uODUyLS41MjRjLS45MjggMS41MDgtLjU4NyAyLjYzNy0uMTkyIDMuOTQ0bC4wMy4xYy4wNTkuMTk0LjExMy4zNjQuMTYzLjUxNy4yNDcuNzYxLjMyMiAxLjAxNi4wMiAxLjkzNmEyLjAyMiAyLjAyMiAwIDAgMC0xLjAxLjUwNC41LjUgMCAwIDAgLjY4Mi43MzF6bTYuMzY1LTIuOTg1YTIgMiAwIDAgMCAuODU5LS4xOTEuNS41IDAgMCAwLS40MjYtLjkwNSAxLjA3MiAxLjA3MiAwIDAgMS0xLjM4NC0uNDU3LjUuNSAwIDEgMC0uODgxLjQ3MmMuMTguMzM2LjQ0OC42MDEuNzYuNzg1LS41MzcgMS4zMDUtLjIzMiAyLjY5MS4wMTcgMy40MjZhLjUuNSAwIDEgMCAuOTQ3LS4zMTljLS4xNjgtLjQ5OC0uNDk0LTEuNzU2LS4wMDItMi44MjYuMDM4LjAwMi4wNzMuMDE1LjExLjAxNXptNC43OTcgOS40MjlhLjQ5Ny40OTcgMCAwIDAtLjUzMS0uNDY3IDEuODI1IDEuODI1IDAgMCAxLTEuOTQ3LTEuNzAzLjUwOS41MDkgMCAwIDAtLjUzMy0uNDY1LjUwMi41MDIgMCAwIDAtLjQ2NS41MzNjLjA0MS41OS4yNjYgMS4xMjIuNjA4IDEuNTU1LS44MDQuOTQ2LTEuODU3IDEuMjE1LTIuNDQ0IDEuMjg0LS41MTkuMDYyLS45NzMuMDA5LTEuNDk4LS4wNTMtLjQ4MS0uMDU1LTEuMDI1LS4xMTgtMS42OTgtLjA5OGwtLjAwNS4wMDFjLS4wMi0uMjg2LS4wODgtLjcwMy0uMzA1LTEuMDVhLjUwMS41MDEgMCAwIDAtLjg0Ny41MzFjLjEzNC4yMTUuMTU5LjU1OC4xNTkuNzI1LS41MDQuMTgxLS45NC40NDctMS4zMzQuNzA0LS43MDQuNDU4LTEuMjU5LjgyLTIuMDk0LjYzMi0uNzU2LS4xNzMtMS41MTMtLjIwOC0yLjE1NS0uMTE4LS4xLS4yNTEtLjI1OC0uNTUxLS41MDItLjc4MmEuNS41IDAgMCAwLS42ODcuNzI3Yy4wODYuMDgxLjE1NC4xOTkuMjA5LjMxNy0xLjEwMy40NTQtMS42NTYgMS4yMTMtMS42ODIgMS4yNWEuNDk5LjQ5OSAwIDAgMCAuNDA3Ljc4OC41MDIuNTAyIDAgMCAwIC40MDYtLjIwNWMuMDA1LS4wMDguNTU0LS43NDMgMS42MzctMS4wNC41Ni0uMTU0IDEuMzYzLS4xNDEgMi4xNDYuMDM3LjIxOS4wNS40MjIuMDY3LjYxOS4wNy4wOTMuMjE4LjEyOS40NzcuMTM0LjU3M2EuNTAxLjUwMSAwIDAgMCAuNDk5LjQ3MmwuMDI3LS4wMDFhLjUuNSAwIDAgMCAuNDczLS41MjMgMy4wMjMgMy4wMjMgMCAwIDAtLjEzLS42ODZjLjQ2MS0uMTY3Ljg2Mi0uNDI4IDEuMjM5LS42NzMuNTcyLS4zNzMgMS4xMTMtLjcyNiAxLjgyLS43NDkuNTkyLS4wMjEgMS4wOC4wMzYgMS41NTEuMDkxLjQ3NC4wNTUuOTQuMDkxIDEuNDU0LjA2MS4wOTEuMjUzLjA4NC41OTEuMDcuNzA0YS41MDMuNTAzIDAgMCAwIC40OTcuNTYzLjUuNSAwIDAgMCAuNDk1LS40MzUgMi44ODMgMi44ODMgMCAwIDAtLjA1OS0uOTgxIDQuNjcgNC42NyAwIDAgMCAyLjM0NS0xLjQ3MSAyLjgwNyAyLjgwNyAwIDAgMCAxLjY1Ni40MTMuNDk5LjQ5OSAwIDAgMCAuNDY1LS41MzF6Ii8+PC9nPjwvc3ZnPg==", "1fa94": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0JFMTkzMSIgZD0iTTMzLjEzOSAyMS40NjRjLjcxOS4zNDEuMzY0IDEuMTU3IDAgMS44NjUtMS43NTUgMy40MTItMTEuNjYxIDEyLjEyMy0xOS43NzYgMTIuMTIzQzYuMjU5IDM1LjQ1Mi41IDI5LjgwNi41IDIzLjMyOWMwLTYuNDc3IDcuOTEtMy4wOTggMTMuMDU2LTYuNTI4IDEuNzE1IDAgMS44NjUtMy43MyAxOS41ODMgNC42NjN6Ii8+PHBhdGggZmlsbD0iIzdGMDMxRSIgZD0iTTMxLjI3NCAyMS40NjRjMy4xMjkgMi4wMTQtMTEuMDMzIDcuMDI3LTE4LjEzOCA3LjAyN0M2LjAzMiAyOC40OTEuNSAyNS45ODIuNSAyMi4zNTJjMC0zLjYzIDUuNzU5LTYuNTczIDEyLjg2My02LjU3MyA3LjEwNSAwIDEyLjMxNiAyLjA4NSAxNy45MTEgNS42ODV6Ii8+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTI5LjQwOSAyMi4zOTZjMi42NTUgMS44LTguNDkyIDYuMjAxLTE2LjA0NiA2LjIwMS03LjAzIDAtMTEuMzUtMi40MzItMTEuMzUtNS40MzIgMC0zIDUuMDgyLTUuNDMyIDExLjM1LTUuNDMyczEyLjMxNiAyLjEzNCAxNi4wNDYgNC42NjN6Ii8+PHBhdGggZD0iTTI0Ljc0NSAyNC4yNjJhLjkzMi45MzIgMCAwIDEtLjIyNS0xLjgzN2MzLjY5OC0uOTI1IDUuMDYxLTEuNzY2IDUuODQ5LTQuOTE3YS45MzQuOTM0IDAgMCAxIDEuODEuNDUyYy0xLjEwNyA0LjQyOC0zLjY4NSA1LjM5My03LjIwNyA2LjI3NGEuOTM0LjkzNCAwIDAgMS0uMjI3LjAyOHoiLz48cGF0aCBmaWxsPSIjRjQ5MDBDIiBkPSJNMjYuNzUgMTIuMTE5YzAgNC4yOTYgMi40OTYgNS44MzMgNC4zNzUgNS44MzNzNC4zNzUtMS41MzggNC4zNzUtNS44MzNjMC00LjI5Ni0xLjk0NC04LjY1MS00LjM3NS0xMS41NjctMi40MzEgMi45MTYtNC4zNzUgNy4yNzEtNC4zNzUgMTEuNTY3eiIvPjxlbGxpcHNlIGN4PSIzMS4xMjUiIGN5PSIxMy41NzciIGZpbGw9IiNGRkNDNEQiIHJ4PSIyLjQzMSIgcnk9IjQuMzc1Ii8+PGVsbGlwc2UgY3g9IjEyLjE2NyIgY3k9IjIyLjgxMyIgZmlsbD0iI0ZGQ0M0RCIgcng9IjYuODA2IiByeT0iMi45MTciLz48L3N2Zz4=", "2601": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0NDRDZERCIgZD0iTTI3IDhhNi45OCA2Ljk4IDAgMCAwLTIuMDE1LjI5OGMuMDA1LS4xLjAxNS0uMTk3LjAxNS0uMjk4YTUuOTk4IDUuOTk4IDAgMCAwLTExLjc4NS0xLjU3M0E1Ljk3NCA1Ljk3NCAwIDAgMCAxMSA2YTYgNiAwIDEgMCAwIDEyIDUuOTk4IDUuOTk4IDAgMCAwIDUuNzg1LTQuNDI4QTUuOTc1IDUuOTc1IDAgMCAwIDE5IDE0Yy4zNzUgMCAuNzQtLjAzOSAxLjA5Ni0uMTA0LS4wNTguMzYtLjA5Ni43MjctLjA5NiAxLjEwNCAwIDMuODY1IDMuMTM1IDcgNyA3czctMy4xMzUgNy03YTcgNyAwIDAgMC03LTd6Ii8+PHBhdGggZmlsbD0iI0UxRThFRCIgZD0iTTMxIDIyYy0uNDY3IDAtLjkxLjA4NS0xLjMzOS4yMDQuMjE2LS41MjYuMzM5LTEuMS4zMzktMS43MDRhNC41IDQuNSAwIDAgMC00LjUtNC41IDQuNDU5IDQuNDU5IDAgMCAwLTIuNzAxLjkyMUE2LjQ5NyA2LjQ5NyAwIDAgMCAxNi41IDEyYTYuNDk3IDYuNDk3IDAgMCAwLTYuMTMxIDQuMzU3QTggOCAwIDEgMCA4IDMyaDIzYzIuNzYyIDAgNS0yLjIzOCA1LTVzLTIuMjM4LTUtNS01eiIvPjwvc3ZnPg==", "2744": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzg4QzlGOSIgZD0iTTE5IDI3LjU4NlY4LjQxNWw0LjgyOC00LjgyOXMuNzA3LS43MDcgMC0xLjQxNWMtLjcwNy0uNzA3LTEuNDE0IDAtMS40MTQgMEwxOSA1LjU4NlYxczAtMS0xLTEtMSAxLTEgMXY0LjU4NmwtMy40MTQtMy40MTVzLS43MDctLjcwNy0xLjQxNCAwYy0uNzA3LjcwOCAwIDEuNDE1IDAgMS40MTVMMTcgOC40MTV2MTkuMTcxbC00LjgyOCA0LjgyOHMtLjcwNy43MDcgMCAxLjQxNCAxLjQxNCAwIDEuNDE0IDBMMTcgMzAuNDE0VjM1czAgMSAxIDEgMS0xIDEtMXYtNC41ODZsMy40MTQgMy40MTRzLjcwNy43MDcgMS40MTQgMCAwLTEuNDE0IDAtMS40MTRMMTkgMjcuNTg2eiIvPjxwYXRoIGZpbGw9IiM4OEM5RjkiIGQ9Ik0zNC42MjIgMjAuODY2Yy0uMjU5LS45NjYtMS4yMjUtLjcwNy0xLjIyNS0uNzA3bC02LjU5NSAxLjc2Ny0xNi42MDMtOS41ODYtMS43NjctNi41OTVzLS4yNTktLjk2Ni0xLjIyNS0uNzA3QzYuMjQgNS4yOTcgNi41IDYuMjYzIDYuNSA2LjI2M2wxLjI1IDQuNjY0LTMuOTcyLTIuMjk0cy0uODY2LS41LTEuMzY2LjM2NmMtLjUuODY2LjM2NiAxLjM2Ni4zNjYgMS4zNjZsMy45NzEgMi4yOTMtNC42NjQgMS4yNDlzLS45NjcuMjU5LS43MDcgMS4yMjVjLjI1OS45NjcgMS4yMjUuNzA4IDEuMjI1LjcwOGw2LjU5Ni0xLjc2NyAxNi42MDMgOS41ODYgMS43NjcgNi41OTZzLjI1OS45NjYgMS4yMjUuNzA3Yy45NjYtLjI2LjcwNy0xLjIyNS43MDctMS4yMjVsLTEuMjUtNC42NjQgMy45NzIgMi4yOTNzLjg2Ny41IDEuMzY3LS4zNjVjLjUtLjg2Ny0uMzY3LTEuMzY3LS4zNjctMS4zNjdsLTMuOTcxLTIuMjkzIDQuNjYzLTEuMjQ5YzAtLjAwMS45NjYtLjI2LjcwNy0xLjIyNnoiLz48cGF0aCBmaWxsPSIjODhDOUY5IiBkPSJtMzMuOTE1IDEzLjkwNy00LjY2NC0xLjI1IDMuOTcyLTIuMjkzcy44NjctLjUwMS4zNjctMS4zNjdjLS41MDEtLjg2Ny0xLjM2Ny0uMzY2LTEuMzY3LS4zNjZsLTMuOTcxIDIuMjkyIDEuMjQ5LTQuNjYzcy4yNTktLjk2Ni0uNzA3LTEuMjI1Yy0uOTY2LS4yNTktMS4yMjUuNzA3LTEuMjI1LjcwN2wtMS43NjcgNi41OTUtMTYuNjA0IDkuNTg5LTYuNTk0LTEuNzY4cy0uOTY2LS4yNTktMS4yMjUuNzA3Yy0uMjYuOTY3LjcwNyAxLjIyNS43MDcgMS4yMjVsNC42NjMgMS4yNDktMy45NzEgMi4yOTNzLS44NjUuNTAxLS4zNjUgMS4zNjdjLjUuODY1IDEuMzY1LjM2NSAxLjM2NS4zNjVsMy45NzItMi4yOTMtMS4yNSA0LjY2M3MtLjI1OS45NjcuNzA3IDEuMjI1Yy45NjcuMjYgMS4yMjYtLjcwNiAxLjIyNi0uNzA2bDEuNzY4LTYuNTk3IDE2LjYwNC05LjU4NSA2LjU5NSAxLjc2OHMuOTY2LjI1OSAxLjIyNS0uNzA3Yy4yNTUtLjk2Ny0uNzEtMS4yMjUtLjcxLTEuMjI1eiIvPjwvc3ZnPg==", "2b50": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTI3LjI4NyAzNC42MjdjLS40MDQgMC0uODA2LS4xMjQtMS4xNTItLjM3MUwxOCAyOC40MjJsLTguMTM1IDUuODM0YTEuOTcgMS45NyAwIDAgMS0yLjMxMi0uMDA4IDEuOTcxIDEuOTcxIDAgMCAxLS43MjEtMi4xOTRsMy4wMzQtOS43OTItOC4wNjItNS42ODFhMS45OCAxLjk4IDAgMCAxLS43MDgtMi4yMDMgMS45NzggMS45NzggMCAwIDEgMS44NjYtMS4zNjNMMTIuOTQ3IDEzbDMuMTc5LTkuNTQ5YTEuOTc2IDEuOTc2IDAgMCAxIDMuNzQ5IDBMMjMgMTNsMTAuMDM2LjAxNWExLjk3NSAxLjk3NSAwIDAgMSAxLjE1OSAzLjU2NmwtOC4wNjIgNS42ODEgMy4wMzQgOS43OTJhMS45NyAxLjk3IDAgMCAxLS43MiAyLjE5NCAxLjk1NyAxLjk1NyAwIDAgMS0xLjE2LjM3OXoiLz48L3N2Zz4="};
 </script>
 <script>
 (function(){
 const $=s=>document.querySelector(s);
 const GAS=!!(window.google&&google.script&&google.script.run);
-const API=(!GAS&&window.API_URL)?window.API_URL:"";
-const LIVE=GAS||!!API;
+const QP=new URLSearchParams(location.search);
+const okApi=u=>/^https:\/\/script\.google\.com\/.+\/exec\/?$/.test(String(u||"").trim());
+let API="";
+if(!GAS){ const q=QP.get("api"); if(okApi(q)){API=q.trim();store("scs_api",API);} else API=(okApi(window.API_URL)&&window.API_URL)||store("scs_api")||""; }
+let LIVE=GAS||!!API;
 const APP=window.APP;
 const img=(c,s)=>'<img class="e" alt="" src="'+(ICONS[c]||"")+'" width="'+(s||40)+'" height="'+(s||40)+'">';
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
@@ -415,15 +2864,17 @@ const voter=store("scs_voter")||(()=>{const id="v"+Math.random().toString(36).sl
 let actx=null;
 function tone(f,d,type){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type=type||"triangle";o.frequency.value=f;g.gain.setValueAtTime(.2,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+d);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+d);}catch(e){}}
 
-if(LIVE){document.body.classList.add("live");$("#livechip").classList.add("on");$("#livetext").textContent="Live · phones can join";}
+function setLive(on,msg){ LIVE=on; document.body.classList.toggle("live",on); $("#livechip").classList.toggle("on",on);
+  $("#livetext").textContent=msg||(on?"Live · phones can join":(API?"Offline · retrying…":"Classroom mode")); }
+setLive(LIVE, (!GAS&&API)?"Connecting…":undefined);
 $("#seal").innerHTML=img("1f3af",34);
 
 /* ---------- doors ---------- */
-const DOORS=[["poll","1f4ca","Live Poll","Word cloud & quick votes","var(--sky)"],["auction","1f528","Values Auction","Bid ₹1,000 on what matters","var(--gold-soft)"],["exit","1f39f","Exit Ticket","3 · 2 · 1 and a mood","var(--mint)"]];
+const DOORS=[["poll","1f4ca","Live Poll","Word cloud & quick votes","var(--sky)"],["auction","1f528","Values Auction","Bid on what matters most","var(--gold-soft)"],["exit","1f39f","Exit Ticket","3 · 2 · 1 and a mood","var(--mint)"]];
 let current="poll";
 DOORS.forEach(d=>{const b=document.createElement("button");b.className="door";b.id="d-"+d[0];b.setAttribute("role","tab");
   b.innerHTML='<div class="ic" style="background:'+d[4]+'">'+img(d[1],36)+'</div><div><b>'+d[2]+'</b><span>'+d[3]+'</span></div>';b.onclick=()=>show(d[0]);$("#doors").appendChild(b);});
-function show(id){current=id;document.querySelectorAll("section.stage[data-tab]").forEach(s=>s.hidden=s.dataset.tab!==id);DOORS.forEach(d=>$("#d-"+d[0]).setAttribute("aria-selected",d[0]===id));store("scs_tab",id);if(id==="exit")loadExits();}
+function show(id){current=id;document.querySelectorAll("section.stage[data-tab]").forEach(s=>s.hidden=s.dataset.tab!==id);DOORS.forEach(d=>$("#d-"+d[0]).setAttribute("aria-selected",d[0]===id));store("scs_tab",id);if(id==="exit")loadExits();if(id==="poll"&&typeof renderPoll==="function"&&pq)setTimeout(()=>{if(!$("#pHide").checked)renderPoll();},60);}
 
 /* =========================================================== POLL */
 const QS=[
@@ -560,32 +3011,81 @@ $("#qbuild").addEventListener("submit",e=>{e.preventDefault(); const t=$("#qbTex
 /* =========================================================== AUCTION */
 const VALUES=[["1f46a","Family","Time and love with the people at home"],["1f4aa","Health","A fit body and a calm mind"],["1f393","Education","Learning, degrees, knowledge"],["1f4c8","Career Growth","Promotions and success at work"],["1f4b0","Money","Savings, security, comfort"],["1f54a","Freedom","Making your own choices"],["1f451","Social Status","Respect and recognition"],["1fa94","Spirituality","Faith, purpose, inner peace"],["1f3d4","Adventure","Travel and new experiences"],["1f91d","Service","Helping others, making a difference"],["1f381","Mystery Box","Bid blind! Revealed after SOLD"]];
 const MYSTERY=["Friendship","Inner Peace","Fame","Creativity","Free Time","Good Sleep"];
-const TEAMC=[["Cauvery","#2F7FD8"],["Godavari","#D9952B"],["Periyar","#1C9C86"],["Vaigai","#C2493B"],["Krishna","#7E5BD6"],["Tunga","#D45C9C"]];
+const TEAMC=[["Cauvery","#2F7FD8"],["Godavari","#D9952B"],["Periyar","#1C9C86"],["Vaigai","#C2493B"],["Krishna","#7E5BD6"],["Tunga","#D45C9C"],["Bhavani","#3E9A3E"],["Netravati","#9A6B2F"]];
+const MONEY=[1000,2000,5000,10000];
+let SET=store("scs_auction")||{names:TEAMC.slice(0,4).map(t=>t[0]),money:1000,open:0};
+function autoOpen(m){ return m<=1000?100:m<=2000?200:m<=5000?500:Math.round(m/20/50)*50; }
+function stepsFor(m){ return m<=1000?[50,100,200,500]:m<=2000?[100,200,500,1000]:m<=5000?[100,250,500,1000]:m<=10000?[250,500,1000,2000]:[500,1000,2500,5000].map(x=>Math.round(x*m/20000/50)*50||50); }
+const money=n=>"₹"+Number(n).toLocaleString("en-IN");
+function renderSetup(){
+  $("#teamEdit").innerHTML="";
+  SET.names.forEach((nm,i)=>{const r=document.createElement("div");r.className="trow";
+    r.innerHTML='<i style="background:'+TEAMC[i][1]+'"></i><input type="text" maxlength="18" aria-label="Team '+(i+1)+' name" value="'+esc(nm)+'"><button type="button" aria-label="Remove team" title="Remove">×</button>';
+    r.querySelector("input").oninput=e=>{SET.names[i]=e.target.value; applyLive();};
+    r.querySelector("button").onclick=()=>{ if(SET.names.length<=2){toast("Keep at least 2 teams");return;}
+      if(A&&A.history.length&&A.teams[i]&&A.teams[i].won.length){toast("That team has already bought values. Reset the auction to remove it.");return;}
+      if(A&&A.history.length){toast("Teams can’t be removed after sales start. Reset the auction first.");return;}
+      SET.names.splice(i,1); renderSetup(); applyLive(); };
+    $("#teamEdit").appendChild(r);});
+  $("#teamAdd").disabled=SET.names.length>=8;
+  $("#moneyChips").innerHTML=MONEY.map(m=>'<button type="button" data-m="'+m+'" aria-pressed="'+(SET.money===m)+'">'+money(m)+'</button>').join("");
+  $("#moneyChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{SET.money=+b.dataset.m;$("#moneyCustom").value="";SET.open=0;renderSetup();applyLive();});
+  if(!MONEY.includes(SET.money)) $("#moneyCustom").value=SET.money;
+  const ao=autoOpen(SET.money), opts=[ao/2,ao,ao*2].map(x=>Math.max(10,Math.round(x/10)*10));
+  $("#openChips").innerHTML='<button type="button" data-o="0" aria-pressed="'+(!SET.open)+'">Auto ('+money(ao)+')</button>'+opts.filter(o=>o!==ao).map(o=>'<button type="button" data-o="'+o+'" aria-pressed="'+(SET.open===o)+'">'+money(o)+'</button>').join("");
+  $("#openChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{SET.open=+b.dataset.o;$("#openCustom").value="";renderSetup();applyLive();});
+  if(SET.open&&!opts.includes(SET.open)) $("#openCustom").value=SET.open;
+  $("#setupSummary").textContent=SET.names.length+" teams · "+money(SET.money)+" each · opening bid "+money(SET.open||ao)+" · raises of "+stepsFor(SET.money).map(money).join(" / ");
+}
+$("#teamAdd").onclick=()=>{ if(SET.names.length>=8)return; SET.names.push(TEAMC[SET.names.length][0]); renderSetup(); applyLive(); const ins=$("#teamEdit").querySelectorAll("input"); ins[ins.length-1].select(); };
+$("#moneyCustom").oninput=e=>{ const v=Math.round(+e.target.value); if(v>=100){SET.money=v;SET.open=0;$("#moneyChips").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.m===v)); $("#setupSummary").textContent=SET.names.length+" teams · "+money(v)+" each · opening bid "+money(autoOpen(v)); applyLive();} };
+$("#moneyCustom").onchange=()=>renderSetup();
+$("#openCustom").onchange=e=>{ const v=Math.round(+e.target.value); SET.open=v>0?Math.min(v,SET.money):0; renderSetup(); applyLive(); };
+$("#openCustom").oninput=e=>{ const v=Math.round(+e.target.value); if(v>0){SET.open=Math.min(v,SET.money); applyLive();} };
+$("#aSetupClose").onclick=()=>{$("#aSetup").hidden=true;};
 let A=null;
-function newAuction(){const n=+$("#aTeams").value, m=+$("#aMoney").value;
-  A={open:+$("#aOpen").value,teams:TEAMC.slice(0,n).map(t=>({name:t[0],color:t[1],wallet:m,won:[]})),lots:VALUES.map(()=>null),cur:null,bid:0,leader:null,sel:null,stage:0};
-  A.history=[]; A.start=m; A.mystery=MYSTERY[Math.floor(Math.random()*MYSTERY.length)];
+function applyLive(){
+  store("scs_auction",SET);
+  if(!A){newAuction();return;}
+  const m=SET.money, names=SET.names.map((n,i)=>(n||"").trim()||TEAMC[i][0]);
+  if(!A.history.length){ const rev=A.revealed, cur=A.cur; newAuction(true); A.revealed=rev; A.cur=cur; }
+  else {
+    while(A.teams.length<names.length){const i=A.teams.length;A.teams.push({name:names[i],color:TEAMC[i][1],wallet:m,won:[]});}
+    A.teams.forEach((t,i)=>{ if(names[i])t.name=names[i]; const spent=t.won.reduce((a,w)=>a+w[1],0); t.wallet=Math.max(0,m-spent); });
+    A.start=m;
+  }
+  A.open=SET.open||autoOpen(m); A.steps=stepsFor(m); $("#budgetTxt").textContent=money(m);
+  if(A.sel!==null&&A.sel>=A.teams.length)A.sel=null;
+  renderLots(); renderBlock(); renderWallets(); renderHistory();
+}
+function newAuction(keepQuiet){
+  const names=SET.names.map((n,i)=>(n||"").trim()||TEAMC[i][0]); const m=SET.money;
+  A={open:SET.open||autoOpen(m),steps:stepsFor(m),teams:names.map((n,i)=>({name:n,color:TEAMC[i][1],wallet:m,won:[]})),lots:VALUES.map(()=>null),cur:null,bid:0,leader:null,sel:null,stage:0};
+  A.history=[]; A.start=m; $("#budgetTxt").textContent=money(m); A.mystery=MYSTERY[Math.floor(Math.random()*MYSTERY.length)];
+  A.revealed=new Set(); A.flip=null;
   $("#aResults").hidden=true; renderLots(); renderBlock(); renderWallets(); renderHistory(); }
-function renderWallets(){ $("#wallets").innerHTML=A.teams.map(t=>'<div class="wallet"><div class="tn"><i style="background:'+t.color+'"></i>'+t.name+'<span class="amt">₹'+t.wallet.toLocaleString("en-IN")+'</span></div><div class="wb"><span style="background:'+t.color+';width:'+(100*t.wallet/A.start)+'%"></span></div><div class="muted" style="font-size:.82rem">'+t.won.length+' value'+(t.won.length===1?"":"s")+' won</div></div>').join(""); }
-function renderHistory(){ const h=A.history; $("#history").innerHTML=h.length? '<div class="row" style="justify-content:space-between"><b>Sale history</b><button class="btn ghost small" id="undoSale">Undo last sale</button></div>'+h.slice().reverse().map(x=>'<div class="hrow">'+img(VALUES[x.lot][0],22)+(x.lot===10?"Mystery Box ("+A.mystery+")":VALUES[x.lot][1])+' → <b style="color:'+A.teams[x.team].color+'">'+A.teams[x.team].name+'</b><span>₹'+x.price+'</span></div>').join("") : '<span class="muted">No sales yet. Tap a value card to start the bidding.</span>';
+function renderWallets(){ $("#wallets").innerHTML=A.teams.map(t=>'<div class="wallet"><div class="tn"><i style="background:'+t.color+'"></i>'+esc(t.name)+'<span class="amt">₹'+t.wallet.toLocaleString("en-IN")+'</span></div><div class="wb"><span style="background:'+t.color+';width:'+(100*t.wallet/A.start)+'%"></span></div><div class="muted" style="font-size:.82rem">'+t.won.length+' value'+(t.won.length===1?"":"s")+' won</div></div>').join(""); }
+function renderHistory(){ const h=A.history; $("#history").innerHTML=h.length? '<div class="row" style="justify-content:space-between"><b>Sale history</b><button class="btn ghost small" id="undoSale">Undo last sale</button></div>'+h.slice().reverse().map(x=>'<div class="hrow">'+img(VALUES[x.lot][0],22)+(x.lot===10?"Mystery Box ("+A.mystery+")":VALUES[x.lot][1])+' → <b style="color:'+A.teams[x.team].color+'">'+esc(A.teams[x.team].name)+'</b><span>'+money(x.price)+'</span></div>').join("") : '<span class="muted">No sales yet. Press “Reveal next value” or tap any ? card to put a value up for bidding.</span>';
   const u=$("#undoSale"); if(u) u.onclick=undoSale; }
 function undoSale(){ const x=A.history.pop(); if(!x)return; const t=A.teams[x.team]; t.wallet+=x.price; t.won.pop(); A.lots[x.lot]=null; renderLots(); renderBlock(); renderWallets(); renderHistory(); toast("Last sale undone"); }
-function renderLots(){$("#lots").innerHTML="";VALUES.forEach((v,i)=>{const b=document.createElement("button");b.className="lot"+(A.lots[i]?" sold":"")+(A.cur===i?" on":"");
-  if(A.lots[i]){const t=A.teams[A.lots[i].team];b.dataset.sold="SOLD · ₹"+A.lots[i].price;b.style.setProperty("--sc",t.color);}
+function renderLots(){$("#lots").innerHTML="";const peek=$("#aPeek")&&$("#aPeek").checked;VALUES.forEach((v,i)=>{const b=document.createElement("button");
+  if(!A.lots[i]&&!A.revealed.has(i)&&!peek){ b.className="lot back"; b.innerHTML='<b>?</b><small>Value '+(i+1)+'</small>'; b.title="Click to reveal"; b.onclick=()=>pickLot(i); $("#lots").appendChild(b); return; }
+  b.className="lot"+(A.lots[i]?" sold":"")+(A.cur===i?" on":"")+(A.flip===i?" flip":"");
+  if(A.lots[i]){const t=A.teams[A.lots[i].team];b.dataset.sold="SOLD · "+money(A.lots[i].price);b.style.setProperty("--sc",t.color);}
   const isMyst=i===10, revealed=isMyst&&A.lots[i];
-  b.innerHTML=img(v[0],52)+'<b>'+(revealed?A.mystery:v[1])+'</b><small>'+(revealed?"Mystery revealed!":v[2])+'</small>'+(A.lots[i]?'<small style="color:'+A.teams[A.lots[i].team].color+';font-weight:700">'+A.teams[A.lots[i].team].name+'</small>':'');
+  b.innerHTML=img(v[0],52)+'<b>'+(revealed?A.mystery:v[1])+'</b><small>'+(revealed?"Mystery revealed!":v[2])+'</small>'+(A.lots[i]?'<small style="color:'+A.teams[A.lots[i].team].color+';font-weight:700">'+esc(A.teams[A.lots[i].team].name)+'</small>':'');
   b.disabled=!!A.lots[i]; b.onclick=()=>pickLot(i); $("#lots").appendChild(b);});}
-function pickLot(i){A.cur=i;A.bid=0;A.leader=null;A.stage=0;$("#call").textContent="";tone(520,.08);renderLots();renderBlock(true);}
+function pickLot(i){ if(!A.revealed.has(i)){A.revealed.add(i);A.flip=i;tone(440,.06);setTimeout(()=>tone(660,.12),120);} else A.flip=null; A.cur=i;A.bid=0;A.leader=null;A.stage=0;$("#call").textContent="";tone(520,.08);renderLots();renderBlock(true);}
 function renderBlock(anim){const v=A.cur===null?null:VALUES[A.cur];
-  $("#lotImg").innerHTML=v?img(v[0],72):img("1f528",72); $("#lotName").textContent=v?v[1]:"Pick a value"; $("#lotDesc").textContent=v?v[2]:"Tap any card on the left";
+  $("#lotImg").innerHTML=v?img(v[0],72):img("1f528",72); $("#lotName").textContent=v?v[1]:"Pick a value"; $("#lotDesc").textContent=v?v[2]:"Press “Reveal next value” or tap a ? card";
   if(anim){$("#lotName").classList.remove("pop");void $("#lotName").offsetWidth;$("#lotName").classList.add("pop");}
   $("#bidAmt").textContent="₹"+A.bid.toLocaleString("en-IN");
-  $("#leader").innerHTML=A.leader===null?(v?"Opening bid ₹"+A.open:"No bids yet"):'Highest: <b style="color:'+A.teams[A.leader].color+'">Team '+A.teams[A.leader].name+'</b>';
+  $("#leader").innerHTML=A.leader===null?(v?"Opening bid "+money(A.open):"No bids yet"):'Highest: <b style="color:'+A.teams[A.leader].color+'">Team '+esc(A.teams[A.leader].name)+'</b>';
   $("#teamBtns").innerHTML="";A.teams.forEach((t,i)=>{const b=document.createElement("button");b.className="team";b.setAttribute("aria-pressed",A.sel===i);
-    b.innerHTML='<div class="tn"><i style="background:'+t.color+'"></i>'+t.name+'</div><div class="w">₹'+t.wallet.toLocaleString("en-IN")+'</div>';
-    b.disabled=!v||t.wallet<Math.max(A.open,A.bid+50); b.onclick=()=>{A.sel=i;renderBlock();}; $("#teamBtns").appendChild(b);});
-  $("#raise").innerHTML="";const steps=A.bid===0?[0,50,100,200]:[50,100,200,500];
-  steps.forEach(s=>{const amt=A.bid===0?A.open+s:A.bid+s;const b=document.createElement("button");b.textContent=(A.bid===0&&s===0)?"Open ₹"+amt:"+₹"+s+" → ₹"+amt;
+    b.innerHTML='<div class="tn"><i style="background:'+t.color+'"></i>'+esc(t.name)+'</div><div class="w">'+money(t.wallet)+'</div>';
+    b.disabled=!v||t.wallet<(A.bid===0?A.open:A.bid+1); b.onclick=()=>{A.sel=i;renderBlock();}; $("#teamBtns").appendChild(b);});
+  $("#raise").innerHTML="";const st=A.steps||[50,100,200,500];const steps=A.bid===0?[0,st[0],st[1],st[2]]:st;
+  steps.forEach(s=>{const amt=A.bid===0?A.open+s:A.bid+s;const b=document.createElement("button");b.textContent=(A.bid===0&&s===0)?"Open "+money(amt):"+"+money(s)+" → "+money(amt);
     b.disabled=!v||A.sel===null||A.teams[A.sel].wallet<amt||(A.sel===A.leader); b.onclick=()=>placeBid(amt); $("#raise").appendChild(b);});
   const gb=$("#goingBtn"); gb.disabled=A.leader===null; gb.textContent=["Going once…","Going twice…","SOLD!"][A.stage];
   $("#gavel").innerHTML=img("1f528",54);}
@@ -612,15 +3112,25 @@ function showResults(){ $("#aResults").hidden=false;
   const sales=A.history.slice(); const spent=A.teams.map(t=>A.start-t.wallet);
   const aw=[];
   if(sales.length){ const top=sales.reduce((a,b)=>b.price>a.price?b:a), low=sales.reduce((a,b)=>b.price<a.price?b:a);
-    aw.push(["1f3c6","Most wanted value",nm(top.lot)+" · ₹"+top.price]); aw.push(["1f4b5","Best bargain",nm(low.lot)+" · ₹"+low.price]);
-    const bs=spent.indexOf(Math.max(...spent)); aw.push(["1f4b8","Biggest spender","Team "+A.teams[bs].name+" · ₹"+spent[bs]]);
-    const sv=A.teams.reduce((a,t,i)=>t.wallet>A.teams[a].wallet?i:a,0); aw.push(["1f4b0","Smart saver","Team "+A.teams[sv].name+" · ₹"+A.teams[sv].wallet+" left"]); }
+    aw.push(["1f3c6","Most wanted value",nm(top.lot)+" · "+money(top.price)]); aw.push(["1f4b5","Best bargain",nm(low.lot)+" · "+money(low.price)]);
+    const bs=spent.indexOf(Math.max(...spent)); aw.push(["1f4b8","Biggest spender","Team "+A.teams[bs].name+" · "+money(spent[bs])]);
+    const sv=A.teams.reduce((a,t,i)=>t.wallet>A.teams[a].wallet?i:a,0); aw.push(["1f4b0","Smart saver","Team "+A.teams[sv].name+" · "+money(A.teams[sv].wallet)+" left"]); }
   $("#awards").innerHTML=aw.map(a=>'<div class="award">'+img(a[0],44)+'<div><small>'+a[1]+'</small><b>'+esc(a[2])+'</b></div></div>').join("");
-  $("#resultCards").innerHTML=A.teams.map(t=>'<div class="rcard"><h3><i style="background:'+t.color+'"></i>Team '+t.name+'</h3><ul>'+(t.won.length?t.won.slice().sort((a,b)=>b[1]-a[1]).map(w=>'<li>'+img(VALUES[w[0]][0],26)+(w[0]===10?A.mystery:VALUES[w[0]][1])+'<span>₹'+w[1]+'</span></li>').join(""):'<li class="muted">Bought nothing. Saving everything is a choice too!</li>')+'</ul><div class="muted">Left in wallet: <b>₹'+t.wallet+'</b></div></div>').join("");
+  $("#resultCards").innerHTML=A.teams.map(t=>'<div class="rcard"><h3><i style="background:'+t.color+'"></i>Team '+esc(t.name)+'</h3><ul>'+(t.won.length?t.won.slice().sort((a,b)=>b[1]-a[1]).map(w=>'<li>'+img(VALUES[w[0]][0],26)+(w[0]===10?A.mystery:VALUES[w[0]][1])+'<span>'+money(w[1])+'</span></li>').join(""):'<li class="muted">Bought nothing. Saving everything is a choice too!</li>')+'</ul><div class="muted">Left in wallet: <b>'+money(t.wallet)+'</b></div></div>').join("");
   $("#aResults").scrollIntoView({behavior:"smooth",block:"start"}); }
 $("#aResultsBtn").onclick=showResults;
-$("#aSetupToggle").onclick=()=>{$("#aSetup").hidden=!$("#aSetup").hidden;};
-$("#aNew").onclick=()=>{newAuction();$("#aSetup").hidden=true;toast("New auction ready");};
+$("#aNext").onclick=()=>{ if(A.leader!==null){toast("Finish this lot first: SOLD or Pass");return;}
+  const i=VALUES.findIndex((_,k)=>!A.lots[k]&&!A.revealed.has(k)); if(i<0){toast("All values are out");return;} pickLot(i); };
+$("#aPeek").onchange=()=>renderLots();
+$("#aSetupToggle").onclick=()=>{ const h=!$("#aSetup").hidden; if(!h){} $("#aSetup").hidden=h; if(!h) renderSetup(); };
+$("#aSetup").addEventListener("submit",e=>{e.preventDefault(); const mc=Math.round(+$("#moneyCustom").value); if(mc>=100)SET.money=mc;
+  SET.names=SET.names.map((n,i)=>(n||"").trim()||TEAMC[i][0]); store("scs_auction",SET); newAuction(); $("#aSetup").hidden=true; toast("Auction reset · "+money(SET.money)+" per team · all values hidden again");});
+$("#customBid").addEventListener("submit",e=>{e.preventDefault(); const v=Math.round(+$("#cbAmt").value);
+  if(A.cur===null){toast("Pick a value first");return;} if(A.sel===null){toast("Tap the team that is bidding");return;}
+  if(A.sel===A.leader){toast("That team already has the highest bid");return;}
+  const min=A.bid===0?A.open:A.bid+1; if(!(v>=min)){toast("Bid must be at least "+money(min));return;}
+  if(v>A.teams[A.sel].wallet){toast("Team "+A.teams[A.sel].name+" only has "+money(A.teams[A.sel].wallet));return;}
+  $("#cbAmt").value=""; placeBid(v); });
 
 /* =========================================================== EXIT */
 const MOODS=[["1f929","Inspired"],["1f600","Happy"],["1f642","Okay"],["1f610","Unsure"]];
@@ -651,20 +3161,46 @@ $("#exitForm").addEventListener("submit",e=>{e.preventDefault();
   if(LIVE) call("saveExit",t).then(done).catch(()=>toast("Couldn’t save. Check the connection and try again."));
   else {localTickets.push(t);done();}});
 
-/* =========================================================== LIVE */
-if(LIVE){
+/* =========================================================== LIVE (background sync) */
+let liveReady=false, hbTimer=null;
+function heartbeat(){ if(GAS||!API)return;
+  Promise.race([call("getCurrent"),new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")),9000))])
+    .then(()=>{ const was=LIVE&&$("#livetext").textContent.startsWith("Live"); setLive(true); if(!was&&APP.mode==="teacher"){renderPoll();toast("Connected to Google · phones can join");} })
+    .catch(()=>{ const was=$("#livetext").textContent.startsWith("Live"); setLive(false,"Offline · retrying…"); if(was&&APP.mode==="teacher"){renderPoll();toast("Lost connection · working offline, will reconnect");} }); }
+function startSync(){ if(GAS)return; clearInterval(hbTimer); if(!API){setLive(false);return;} initLive(); heartbeat(); hbTimer=setInterval(heartbeat,20000); }
+function initLive(){ if(liveReady)return; liveReady=true;
   $("#exPush").onclick=()=>call("setCurrent",{type:"exit",round:"exit-"+Date.now()}).then(()=>toast("Exit ticket is on phones"));
-  const joinUrl=APP.url?APP.url+"?mode=student":location.href.split("#")[0]+"#student";
-  if(window.QRCode){new QRCode($("#qr"),{text:joinUrl,width:150,height:150});} $("#joinUrl").textContent=joinUrl;
+  const autoUrl=()=>APP.url?APP.url+"?mode=student":location.origin+location.pathname+"?api="+encodeURIComponent(API)+"#student";
+  let joinUrl=store("scs_join")||autoUrl();
+  function qrSvg(text){ try{ const q=qrcode(0,"M"); q.addData(text); q.make(); return q.createSvgTag({cellSize:6,margin:2,scalable:true}); }catch(e){ return '<span class="muted">Link too long for a QR code</span>'; } }
+  function drawQR(){ $("#qr").innerHTML=qrSvg(joinUrl); $("#qr").querySelector("svg")&&($("#qr").querySelector("svg").style.cssText="width:160px;height:160px;display:block");
+    $("#joinUrl").textContent=joinUrl; $("#qrHuge").innerHTML=qrSvg(joinUrl); const hs=$("#qrHuge svg"); if(hs)hs.style.cssText="width:100%;height:auto;display:block"; $("#qrHugeUrl").textContent=joinUrl; }
+  drawQR();
+  const bigQR=()=>{ $("#qrOverlay").hidden=false; };
+  $("#qr").onclick=bigQR; $("#qrBig").onclick=bigQR; $("#qrClose").onclick=()=>$("#qrOverlay").hidden=true;
+  $("#qrEdit").onclick=()=>{ $("#qrForm").hidden=!$("#qrForm").hidden; $("#qrInput").value=joinUrl; $("#qrInput").focus(); };
+  $("#qrForm").addEventListener("submit",e=>{ e.preventDefault(); const v=$("#qrInput").value.trim(); joinUrl=v||autoUrl(); store("scs_join",v||null); drawQR(); $("#qrForm").hidden=true; toast("Join link updated"); });
   setInterval(()=>{ if(APP.mode!=="teacher")return;
     if(current==="poll"&&pollRound) call("getResults",pollRound).then(vals=>{ if(pq.type==="word") answers.word=vals.map(String); else {const c=pq.options.map(()=>0);vals.forEach(v=>{if(c[v]!=null)c[v]++;});answers[pq.id]=c;} renderPoll(); }).catch(()=>{});
     if(current==="exit") loadExits(); },2500);
+  window.__redrawQR=()=>{ if(!store("scs_join")) joinUrl=autoUrl(); drawQR(); };
+}
+if(GAS) { $("#connectBox").remove(); initLive(); }
+else {
+  $("#apiInput").value=API;
+  $("#apiForget").hidden=!API;
+  $("#apiForm").addEventListener("submit",e=>{ e.preventDefault(); const v=$("#apiInput").value.trim();
+    if(!okApi(v)){toast("That doesn’t look like an Apps Script link. It should start with https://script.google.com/ and end with /exec");return;}
+    API=v; store("scs_api",v); $("#apiForget").hidden=false; $("#connectBox").classList.remove("force"); setLive(false,"Connecting…"); startSync(); if(window.__redrawQR)window.__redrawQR(); });
+  $("#apiForget").onclick=()=>{ API=""; store("scs_api",null); clearInterval(hbTimer); $("#apiInput").value=""; $("#apiForget").hidden=true; setLive(false); renderPoll(); toast("Disconnected. Classroom mode."); };
+  $("#livechip").onclick=()=>{ if(APP.mode!=="teacher")return; show("poll"); $("#connectBox").classList.toggle("force"); };
+  startSync();
 }
 
 /* =========================================================== STUDENT */
 if(APP.mode==="student"){
   document.body.classList.add("student");document.querySelectorAll("section.stage[data-tab]").forEach(s=>s.hidden=true);$("#studentView").hidden=false;
-  if(!LIVE){$("#sBody").innerHTML='<h2>Phone mode needs the live link</h2><p class="muted">Ask your teacher for the live link.</p>';}
+  if(!GAS&&!API){$("#sBody").innerHTML='<h2>Phone mode needs the live link</h2><p class="muted">Ask your teacher for the live link.</p>';}
   else{let seen=null;const cols=["#2F7FD8","#D9952B","#1C9C86","#C2493B","#7E5BD6"];
     const poll=()=>call("getCurrent").then(cur=>{ if(!cur||cur.round===seen)return; seen=cur.round; const b=$("#sBody");
       if(cur.type==="poll"){ const done=store("scs_done_"+cur.round);
@@ -680,14 +3216,24 @@ if(APP.mode==="student"){
 } else { renderQPick(); renderPoll(); newAuction(); show(store("scs_tab")||"poll"); }
 
 /* keyboard + full screen */
-$("#fsBtn").onclick=()=>{ try{ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(()=>toast("Full screen isn’t available here")); }catch(e){ toast("Full screen isn’t available here"); } };
+function setPresent(on){ document.body.classList.toggle("present",on); $("#fsBtn").textContent=on?"Exit full screen":"Full screen"; store("scs_present",on);
+  setTimeout(()=>{ if(current==="poll"&&pq&&!$("#pHide").checked) renderPoll(); },120); setTimeout(()=>{ if(current==="poll"&&pq&&!$("#pHide").checked) renderPoll(); },700); }
+let wentFs=false;
+$("#fsBtn").onclick=()=>{ const on=!document.body.classList.contains("present"); setPresent(on);
+  try{ if(on){ if(document.fullscreenEnabled&&document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen().then(()=>{wentFs=true;}).catch(()=>toast("Press F11 for true full screen")); } else toast("Press F11 for true full screen"); }
+       else if(document.fullscreenElement) document.exitFullscreen(); }catch(e){ toast("Press F11 for true full screen"); } };
+document.addEventListener("fullscreenchange",()=>{ if(!document.fullscreenElement&&wentFs){ wentFs=false; setPresent(false); } });
 document.addEventListener("keydown",e=>{ if(APP.mode!=="teacher")return; const tag=(e.target.tagName||"").toLowerCase(); if(tag==="input"||tag==="textarea"||tag==="select")return;
   const k=e.key.toLowerCase();
   if(k==="escape"&&!$("#spot").hidden){$("#spot").hidden=true;return;}
+  if(k==="escape"&&!$("#qrOverlay").hidden){$("#qrOverlay").hidden=true;return;}
+  if(k==="escape"&&document.body.classList.contains("present")&&current!=="auction"){setPresent(false);return;}
+  if(k==="q"&&LIVE){$("#qrOverlay").hidden=!$("#qrOverlay").hidden;return;}
   if(k==="1")show("poll"); else if(k==="2")show("auction"); else if(k==="3")show("exit"); else if(k==="f")$("#fsBtn").click();
   else if(current==="poll"&&k==="s"){startPoll();runTimer();}
   else if(current==="auction"&&k===" "){e.preventDefault();if(!$("#goingBtn").disabled)$("#goingBtn").click();}
   else if(current==="auction"&&k==="escape")$("#undoBtn").click();
+  else if(current==="auction"&&k==="n")$("#aNext").click();
   else if(current==="exit"&&k==="p")spotlight(); });
 
 /* confetti */
